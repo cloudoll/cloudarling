@@ -1,0 +1,26 @@
+{
+  "name": "miss-puff",
+  "version": "1.0.0",
+  "description": "云亲 - 我是怕死婆特",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cloudbeer<cloudbeer@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "common-rest-errors": "0.0.8",
+    "common-tools": "^0.0.9",
+    "koa": "^0.21.0",
+    "koa-bodyparser": "^2.0.1",
+    "koa-json": "^1.1.1",
+    "koa-router": "^5.4.0",
+    "koa-static": "^1.5.2",
+    "moment": "^2.13.0",
+    "mysql": "^2.10.2",
+    "request": "^2.72.0",
+    "sha256": "^0.2.0",
+    "uuid": "^2.0.2"
+  }
+}
