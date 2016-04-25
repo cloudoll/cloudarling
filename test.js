@@ -33,17 +33,17 @@ var request = require('request');
 // }, function (err, res, body) {
 //   console.log(body);
 // });
-
-
-request.post('http://localhost:7301/3rd/login', {
-  form: {
-    provider: 'wechat',
-    map_id  : '000111',
-    nick    : 'we1113344'
-  }
-}, function (err, res, body) {
-  console.log(body);
-});
+//
+//
+// request.post('http://localhost:7301/3rd/login', {
+//   form: {
+//     provider: 'wechat',
+//     map_id  : '000111',
+//     nick    : 'we1113344'
+//   }
+// }, function (err, res, body) {
+//   console.log(body);
+// });
 
 // var tools = require('./tools');
 //
@@ -65,3 +65,12 @@ request.post('http://localhost:7301/3rd/login', {
 //   }
 // );
 
+
+// request.post("http://passport.youkutv.com/v2/login", {
+//   form:{
+//     passport:"13006699866",
+//     password:"xxxxxxx"
+//   }
+// },function (err, res, body) {
+//   console.log(body);
+// });

@@ -1,9 +1,9 @@
 module.exports = {
   debug   : true,
   cloudeer: {
-    disabled   : false,
-    serviceHost: "http://localhost:8801",
-    myHost     : 'localhost',
+    disabled   : false, //是否注册到 cloudeer 下
+    serviceHost: "http://10.163.11.23:8801",
+    myHost     : '10.163.57.25',
     myName     : 'cloudarling'
   },
   mysql   : {
