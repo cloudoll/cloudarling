@@ -1,9 +1,9 @@
 var request = require('request');
 
-// request.post('http://localhost:7301/register', {form: {nick: 'qqq1', password: '111111'}}, function (err, res, body) {
-//   console.log(body);
-//
-// });
+request.post('http://localhost:7301/register', {form: {nick: 'qqq1', password: '111111'}}, function (err, res, body) {
+  console.log(body);
+
+});
 //
 // request.post('http://localhost:7301/login', {form: {passport: 'qqq1', password: '111111'}}, function (err, res, body) {
 //   console.log(body);
