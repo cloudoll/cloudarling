@@ -1,4 +1,4 @@
-var db      = require('../share/db');
+var db      = require('ezway2mysql');
 var tools   = require('common-tools');
 var myTools = require('../tools');
 var errors  = require('common-rest-errors');

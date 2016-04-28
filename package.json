@@ -12,6 +12,7 @@
     "commander": "^2.9.0",
     "common-rest-errors": "0.0.8",
     "common-tools": "^0.0.9",
+    "ezway2mysql": "0.0.1",
     "koa": "^1.2.0",
     "koa-bodyparser": "^2.0.1",
     "koa-json": "^1.1.1",

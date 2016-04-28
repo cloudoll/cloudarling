@@ -47,6 +47,13 @@ app.use(router.routes());
 app.listen(port);
 
 
+var db = require('ezway2mysql');
+db.connect(config.mysql);
+db.debug = true;
+
+app.use(db.koaMiddleware);
+
+
 //cache district
 //require("./yservice/YDistrict").getAllFromDB();
 

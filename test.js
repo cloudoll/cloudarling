@@ -1,6 +1,6 @@
 var request = require('request');
 
-request.post('http://localhost:7301/register', {form: {nick: 'qqq1', password: '111111'}}, function (err, res, body) {
+request.post('http://localhost:7301/register', {form: {mobile: '13006699866', password: '111111'}}, function (err, res, body) {
   console.log(body);
 
 });

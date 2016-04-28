@@ -14,8 +14,9 @@ var Account = {
     regInfo.email    = form.email;
     regInfo.password = form.password;
     regInfo.nick     = form.nick;
-    regInfo.last_ip  = this.ip;
-    var accRes       = yield accountService.register(regInfo);
+    console.log(this.ip);
+    regInfo.last_ip = this.ip;
+    var accRes      = yield accountService.register(regInfo);
 
     var openId = accRes.open_id;
     var tick   = tools.makeTicket(openId);
@@ -83,7 +84,7 @@ var Account = {
     var map_id   = form.map_id;
     var nick     = form.nick;
 
-    var mine = yield accountService.loginFrom3rd(provider, map_id, nick);
+    var mine   = yield accountService.loginFrom3rd(provider, map_id, nick);
     var openId = mine.open_id;
     var tick   = tools.makeTicket(openId);
     tick.nick  = mine.nick;
