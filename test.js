@@ -1,9 +1,23 @@
 var request = require('request');
 
-request.post('http://localhost:7301/register', {form: {mobile: '13006699866', password: '111111'}}, function (err, res, body) {
-  console.log(body);
+// request.post('http://localhost:7301/register', {form: {mobile: '13006699866', password: '111111'}}, function (err, res, body) {
+//   console.log(body);
+//
+// });
 
-});
+var data = {
+  method    : 'load',
+  table     : 'account',
+  conditions: {
+    where : 'id>?',
+    params: [1]
+  }
+};
+
+var tools        = require('common-tools');
+var base64String = tools.stringTools.base64Encode(data);
+console.log(base64String);
+
 //
 // request.post('http://localhost:7301/login', {form: {passport: 'qqq1', password: '111111'}}, function (err, res, body) {
 //   console.log(body);
