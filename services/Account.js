@@ -70,7 +70,7 @@ var Account = {
   loginByPassport       : function *(passport, password) {
     var mine = yield Account.loadByPassport(passport);
     if (!mine) {
-      throw errors.LOGIN_ERROR_COMMON;
+      throw errors.LOGIN_ERROR_BECAUSE('用户没找到，请重新输入登录凭证。');
     }
 
     var cptPassword = tools.stringTools.computePassword(password, mine.salt);
