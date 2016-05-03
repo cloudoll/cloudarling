@@ -69,6 +69,9 @@ var Account = {
   },
   loginByPassport       : function *(passport, password) {
     var mine = yield Account.loadByPassport(passport);
+    if (!mine) {
+      throw errors.LOGIN_ERROR_COMMON;
+    }
 
     var cptPassword = tools.stringTools.computePassword(password, mine.salt);
 
