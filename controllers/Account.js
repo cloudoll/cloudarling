@@ -5,7 +5,7 @@ var accountService = require('../services/Account');
 var myTools        = require('../tools');
 
 var Account = {
-  register              : function *() {
+  register               : function *() {
     var form = this.request.body;
     //var expires_in = form.expires_in;
 
@@ -24,17 +24,15 @@ var Account = {
     this.body  = {errno: 0, data: tick};
 
   },
-  info                  : function *() {
+  info                   : function *() {
     var qs = querystring.parse(this.request.querystring);
 
     var res = yield accountService.getUserInfo(qs.ticket);
 
     this.body = {errno: 0, data: res};
   },
-  login                 : function *() {
-
-    var form = this.request.body;
-
+  login                  : function *() {
+    var form     = this.request.body;
     var passport = form.passport;
     var password = form.password;
 
@@ -45,7 +43,7 @@ var Account = {
     tick.nick  = mine.nick;
     this.body  = {errno: 0, data: tick};
   },
-  changePassword        : function *() {
+  changePassword         : function *() {
 
     var form     = this.request.body;
     var password = form.password;
@@ -58,13 +56,13 @@ var Account = {
     var res    = yield accountService.changePassword(openId, password);
     this.body  = {errno: 0};
   },
-  sendDynamicPassword   : function *() {
+  sendDynamicPassword    : function *() {
     var form     = this.request.body;
     var passport = form.passport;
     var res      = yield accountService.sendDynamicPassword(passport);
     this.body    = {errno: 0, data: res};
   },
-  loginByDynamicPassword: function *() {
+  loginByDynamicPassword : function *() {
     var form = this.request.body;
 
     var passport = form.passport;
@@ -77,7 +75,7 @@ var Account = {
     tick.nick  = mine.nick;
     this.body  = {errno: 0, data: tick};
   },
-  loginFrom3rd          : function *() {
+  loginFrom3rd           : function *() {
     var form = this.request.body;
 
     var provider = form.provider;
@@ -89,8 +87,23 @@ var Account = {
     var tick   = tools.makeTicket(openId);
     tick.nick  = mine.nick;
     this.body  = {errno: 0, data: tick};
-  }
+  },
+  checkPassportToRegister: function *() {
+    var form     = this.request.body;
+    var passport = form.passport;
+    var mine     = yield accountService.loadByPassport(passport);
+    if (mine) {
+      throw errors.WHAT_EXISTED('该帐号已经被注册。');
+    }
+    this.body = {errno: 0};
+  },
+  getRights: function*() {
+    var qs = querystring.parse(this.request.querystring);
+    var ticket = qs.ticket;
+    var service = qs.service;
+    this.body = yield accountService.getRightsByService(ticket, service);
 
+  }
 
 };
 

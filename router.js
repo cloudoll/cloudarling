@@ -14,6 +14,7 @@ router.post('/register', accountController.register);
 router.post('/login', accountController.login);
 router.post('/change-password', accountController.changePassword);
 router.get('/info', accountController.info);
+router.get('/rights', accountController.getRights);
 
 router.post('/dynamic-password/send', accountController.sendDynamicPassword);
 router.post('/dynamic-password/login', accountController.loginByDynamicPassword);
@@ -21,23 +22,23 @@ router.post('/dynamic-password/login', accountController.loginByDynamicPassword)
 router.post('/3rd/login', accountController.loginFrom3rd);
 
 
-router.get('/test', function *(next) {
-  var db  = require('./share/db');
-  var res = yield db.list('account', {
-    where  : "id > ?",
-    params : [0],
-    orderBy: 'id desc, email',
-    //cols:['id', ''],
-    limit  : 20
-  });
-  // var res   = yield db.update('account', {
-  //   id: 101,
-  //    mobile : '13006699860',
-  //   // email  : 'zhwell@sina.com',
-  //   //open_id: 'dddd0111bbb1'
-  // });
-  this.body = res;
-});
+// router.get('/test', function *(next) {
+//   var db  = require('./share/db');
+//   var res = yield db.list('account', {
+//     where  : "id > ?",
+//     params : [0],
+//     orderBy: 'id desc, email',
+//     //cols:['id', ''],
+//     limit  : 20
+//   });
+//   // var res   = yield db.update('account', {
+//   //   id: 101,
+//   //    mobile : '13006699860',
+//   //   // email  : 'zhwell@sina.com',
+//   //   //open_id: 'dddd0111bbb1'
+//   // });
+//   this.body = res;
+// });
 
 
 // var AccountStateless = require("./controllers/AccountStateless");

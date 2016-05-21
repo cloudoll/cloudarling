@@ -5,7 +5,7 @@ module.exports = Share = {
 
     checkAccessList: function *(ticket) {
 
-        var rInfo = yield yaccount.getRightsByTicket(ticket, "passport");
+        var rInfo = yield yaccount.getRightsByService(ticket, "passport");
 
         var exists = rInfo.rights.filter(function (ele) {
             return ele.code == "ADMIN" || ele.code == "list";
@@ -17,7 +17,7 @@ module.exports = Share = {
 
     checkAccessEdit: function *(ticket) {
 
-        var rInfo = yield yaccount.getRightsByTicket(ticket, "passport");
+        var rInfo = yield yaccount.getRightsByService(ticket, "passport");
 
         var exists = rInfo.rights.filter(function (ele) {
             return ele.code == "ADMIN" || ele.code == "edit";
@@ -29,7 +29,7 @@ module.exports = Share = {
 
     checkAccessAdmin: function *(ticket) {
 
-        var rInfo = yield yaccount.getRightsByTicket(ticket, "passport");
+        var rInfo = yield yaccount.getRightsByService(ticket, "passport");
 
         var exists = rInfo.rights.filter(function (ele) {
             return ele.code == "ADMIN" || ele.code == "admin";

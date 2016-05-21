@@ -117,7 +117,7 @@ var Account = {
     return mine;
 
   },
-  loginFrom3rd          : function *(provider, map_id, nick) {
+  loginFrom3rd      : function *(provider, map_id, nick) {
     //console.log("vvvvv");
     var myMap = yield db.load('account_map', {
       where : 'provider=? and map_id=?',
@@ -143,9 +143,50 @@ var Account = {
       return mine;
     }
   },
-  bindFrom3rd           : function (ticket, provider, map_id) {
+  bindFrom3rd       : function (ticket, provider, map_id) {
     //todo: 绑定已经有的帐号。
-  }
+  },
+  getRightsByService: function *(ticket, service) {
+    if (!ticket) {
+      throw errors.WHAT_REQUIRE("ticket");
+    }
+    if (!service) {
+      throw errors.WHAT_REQUIRE("微服务名称");
+    }
+    var openId = myTools.getOpenId(ticket);
+
+    var userInfo = yield db.load("account", {
+      where : "open_id=?",
+      cols  : ["id", "nick", "email", "mobile", "account_type"],
+      params: [openId]
+    });
+
+    var xservice = yield db.load("service", {
+      where : "code=?",
+      params: [service],
+      cols  : ["id", "title", "code"]
+    });
+    if (xservice == null) {
+      throw errors.WHAT_NOT_FOUND("服务 [" + service + "] ");
+    }
+
+    userInfo.rights = yield db.list("v_account_right", {
+      where : "account_id=? and service_id=?",
+      params: [userInfo.id, xservice.id],
+      cols  : ["id", "title", "code"]
+    });
+
+    var uAType = 0 || parseInt(userInfo.account_type);
+    if ((uAType & 8) == 8) {
+      userInfo.rights.push({
+        "id"   : 0,
+        "title": "上帝管理员",
+        "code" : "GOD_ADMIN"
+      });
+    }
+    return userInfo;
+
+  },
 
 };
 

@@ -23,6 +23,7 @@ var json       = require('koa-json');
 var config     = require('./config');
 var serve      = require('koa-static');
 var app        = koa();
+var cloudeer = require('cloudeer');
 
 app.use(json());
 app.use(bodyParser());
@@ -47,11 +48,12 @@ app.use(router.routes());
 app.listen(port);
 
 
-var db = require('ezway2mysql');
+var db            = require('ezway2mysql');
+var cloudarkTools = require('cloudark-tools');
 db.connect(config.mysql);
 db.debug = true;
 
-app.use(db.koaMiddleware);
+app.use(cloudarkTools.koaMiddleware.ezway2mysql);
 
 
 //cache district
@@ -72,4 +74,13 @@ if (!config.cloudeer.disabled) {
     });
   }, 8000);
 }
+
+//我同时也是 cloudeer 的消费者
+
+console.log((`从 cloudeer 【${config.cloudeer.serviceHost}】中获取微服务列表`));
+cloudeer.loadConfigRemote(config.cloudeer.serviceHost);
+
+setInterval(function () {
+  cloudeer.loadConfigRemote(config.cloudeer.serviceHost);
+}, 10000);
 
