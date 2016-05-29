@@ -117,7 +117,7 @@ var Account = {
     return mine;
 
   },
-  loginFrom3rd      : function *(provider, map_id, nick) {
+  loginFrom3rd          : function *(provider, map_id, nick) {
     //console.log("vvvvv");
     var myMap = yield db.load('account_map', {
       where : 'provider=? and map_id=?',
@@ -143,10 +143,10 @@ var Account = {
       return mine;
     }
   },
-  bindFrom3rd       : function (ticket, provider, map_id) {
+  bindFrom3rd           : function (ticket, provider, map_id) {
     //todo: 绑定已经有的帐号。
   },
-  getRightsByService: function *(ticket, service) {
+  getRightsByService    : function *(ticket, service) {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
@@ -166,15 +166,15 @@ var Account = {
       params: [service],
       cols  : ["id", "title", "code"]
     });
-    if (xservice == null) {
-      throw errors.WHAT_NOT_FOUND("服务 [" + service + "] ");
+    if (xservice) {
+      userInfo.rights = yield db.list("v_account_right", {
+        where : "account_id=? and service_id=?",
+        params: [userInfo.id, xservice.id],
+        cols  : ["id", "title", "code"]
+      });
+    } else {
+      userInfo.rights = [];
     }
-
-    userInfo.rights = yield db.list("v_account_right", {
-      where : "account_id=? and service_id=?",
-      params: [userInfo.id, xservice.id],
-      cols  : ["id", "title", "code"]
-    });
 
     var uAType = 0 || parseInt(userInfo.account_type);
     if ((uAType & 8) == 8) {
@@ -187,6 +187,33 @@ var Account = {
     return userInfo;
 
   },
+  checkGodAdmin: function *(ticket) {
+    var rights     = yield Account.getRightsByService(ticket, "cloudarling");
+    var adminRight = rights.rights.filter(function (ele) {
+      return ele.id == 0;
+    });
+    if (!adminRight || adminRight.length == 0) {
+      throw  errors.NO_RIGHTS; // errors.CUSTOM("必须上帝管理员才有此权限。");
+    }
+  },
+  listAll               : function *(keyword, skip, limit) {
+    skip       = skip || 0;
+    limit      = limit || 20;
+    var where  = "1=1";
+    var params = [];
+    if (keyword) {
+      where += " and mobile like ? or email like ? or nick like ?";
+      params.push("%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
+    }
+    return yield db.list("account", {
+      cols  : ["id", "nick", "email", "open_id", "mobile", "slogan", "avatar", "avatar_large", "account_type"],
+      where  : where,
+      params : params,
+      skip   : skip,
+      limit  : limit,
+      orderBy: "id desc"
+    });
+  }
 
 };
 

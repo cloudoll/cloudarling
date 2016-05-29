@@ -1,9 +1,8 @@
 var request = require('request');
 
-request.post('http://localhost:7301/register', {form: {mobile: '13006699866', password: '111111'}}, function (err, res, body) {
-  console.log(body);
-
-});
+//request.post('http://localhost:7301/register', {form: {mobile: '13006699866', password: '111111'}}, function (err, res, body) {
+//  console.log(body);
+//});
 
 // var data = {
 //   method    : 'load',
@@ -19,10 +18,9 @@ request.post('http://localhost:7301/register', {form: {mobile: '13006699866', pa
 // console.log(base64String);
 
 //
-// request.post('http://localhost:7301/login', {form: {passport: 'qqq1', password: '111111'}}, function (err, res, body) {
-//   console.log(body);
-//
-// });
+//  request.post('http://localhost:7301/login', {form: {passport: 'cloudbeer@gmail.com', password: '111111'}}, function (err, res, body) {
+//    console.log(body);
+//  });
 // request.post('http://localhost:7301/change-password', {
 //   form: {
 //     ticket  : 'eyJvcGVuX2lkIjoiMWU3NmUzZDU5OGU3NDc2MWE3OWRiNDI5OTQyOTJmNmIiLCJleHBpcmVzX2luIjoxNDYxMjE2MzY0LCJzaWduIjoiMDJlNGYxOWZlMzUyMDVlMjJhY2FjOWE1MzRjYTlhNDM4NzYwOGEzZDRiOTIzMzk3Y2VjMjQ0MzkzN2RjNWY1ZiJ9',

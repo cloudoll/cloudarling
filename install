@@ -26,10 +26,11 @@ if (!tools.validateTools.isEmail(email)) {
   return;
 }
 
+
 var reginfo = {
   email    : email,
   password : password,
-  user_type: 9
+  account_type: 9
 };
 
 
@@ -39,42 +40,29 @@ var ezmysql        = require('ezway2mysql');
 var config         = require('./config');
 ezmysql.connect(config.mysql);
 
-//TODO: 这里要加入建表操作。
 
+console.log("现在开始初始化 cloudarling 系统...");
 
+var fs = require('fs');
 
-// var co = accountService.register(reginfo);
-// while (!co.next().done){
-//   console.log(co.next());
-//   (co.value)(function (err, res) {
-//     console.log(res);
-//   });
-//   //console.log(co.next());
-// }
-//console.log(co.next());
-//co.next().val();
-var xco = co(function *() {
-  // console.log('开始注册...', reginfo);
-  var res = yield accountService.register(reginfo);
-  console.log(res);
-  console.log("你创建的超级管理员帐号是：");
-  console.log(`用户名： ${program.email}`);
-  console.log(`密码：${program.password}`);
-  console.log("现在请按 ^C 退出。");
+console.log('开始创建数据表： ');
+fs.readFile('./create.sql', 'utf8', function(err, data) {
+  if (err) throw err;
+  ezmysql.pool.query(data, null, function (err, rows, fields) {
 
-}).catch(function (reson) {
-  console.log(reson);
-  console.log("现在请按 ^C 退出。");
+    var xco = co(function *() {
+      var res = yield accountService.register(reginfo);
+      console.log(res);
+      console.log("你创建的超级管理员帐号是：");
+      console.log(`用户名： ${program.email}`);
+      console.log(`密码：${program.password}`);
+      console.log("现在请按 ^C 退出。");
+
+    }).catch(function (reson) {
+      console.log(reson);
+      console.log("现在请按 ^C 退出。");
+    });
+  });
+  
 });
-
-// console.log(xco);
-// xco.then(function (err, res) {
-//   console.log('eeee');
-//   console.log(res);
-// }).catch(function (reson) {
-//   console.log(reson);
-// });
-// var xco2 = co(xco);
-// console.log(xco2);
-
 

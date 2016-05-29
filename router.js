@@ -21,6 +21,11 @@ router.post('/dynamic-password/login', accountController.loginByDynamicPassword)
 
 router.post('/3rd/login', accountController.loginFrom3rd);
 
+var serviceController = require('./controllers/Service');
+//admin
+router.get('/admin/accounts', accountController.listAll);
+router.get('/admin/services', serviceController.listAll);
+
 
 // router.get('/test', function *(next) {
 //   var db  = require('./share/db');

@@ -9,7 +9,7 @@
 同时也是 cloudeer 生态系统一员。
 
 
-## API
+## 用户 API
 
 ### 注册
 
@@ -48,3 +48,20 @@ POST /dynamic-password/login
 参数：passport, password, ticket
 
 此处提交的 ticket 是发送动态密码时候由服务器端返回的，不是用户票据。
+
+
+### 获取用户权限
+
+GET /rights
+
+参数： ticket，service
+
+
+
+
+## 管理 API
+
+GET /admin/accounts
+
+参数： keyword，skip， limit
+

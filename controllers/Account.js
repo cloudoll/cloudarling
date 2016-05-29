@@ -14,9 +14,8 @@ var Account = {
     regInfo.email    = form.email;
     regInfo.password = form.password;
     regInfo.nick     = form.nick;
-    console.log(this.ip);
-    regInfo.last_ip = this.ip;
-    var accRes      = yield accountService.register(regInfo);
+    regInfo.last_ip  = this.ip;
+    var accRes       = yield accountService.register(regInfo);
 
     var openId = accRes.open_id;
     var tick   = tools.makeTicket(openId);
@@ -38,10 +37,11 @@ var Account = {
 
     var mine = yield accountService.loginByPassport(passport, password);
 
-    var openId = mine.open_id;
-    var tick   = tools.makeTicket(openId);
-    tick.nick  = mine.nick;
-    this.body  = {errno: 0, data: tick};
+    var openId   = mine.open_id;
+    var tick     = tools.makeTicket(openId);
+    tick.nick    = mine.nick;
+    tick.open_id = openId;
+    this.body    = {errno: 0, data: tick};
   },
   changePassword         : function *() {
 
@@ -97,14 +97,22 @@ var Account = {
     }
     this.body = {errno: 0};
   },
-  getRights: function*() {
-    var qs = querystring.parse(this.request.querystring);
-    var ticket = qs.ticket;
+  getRights              : function*() {
+    var qs      = querystring.parse(this.request.querystring);
+    var ticket  = qs.ticket;
     var service = qs.service;
-    this.body = yield accountService.getRightsByService(ticket, service);
-
+    this.body   = {errno: 0, data: yield accountService.getRightsByService(ticket, service)};
+  },
+  listAll                : function *() {
+    var qs      = querystring.parse(this.request.querystring);
+    var ticket  = qs.ticket;
+    var keyword = qs.keyword;
+    var skip    = qs.skip || 0;
+    var limit   = qs.limit || 20;
+    yield accountService.checkGodAdmin(ticket);
+    var res   = yield accountService.listAll(keyword, skip, limit);
+    this.body = {errno: 0, data: res};
   }
-
 };
 
 module.exports = Account;
