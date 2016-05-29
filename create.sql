@@ -6,7 +6,7 @@ CREATE TABLE `account` (
   `user_name` varchar(45) DEFAULT NULL COMMENT '用户名',
   `nick` varchar(45) DEFAULT NULL COMMENT '昵称',
   `mobile` varchar(20) DEFAULT NULL,
-  `email` varchar(300) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
   `password` varchar(64) DEFAULT NULL COMMENT '密码',
   `salt` varchar(36) DEFAULT NULL COMMENT '盐',
   `slogan` varchar(500) DEFAULT NULL,
