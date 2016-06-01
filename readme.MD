@@ -17,17 +17,25 @@ POST /register
 
 参数：mobile, email, nick, password
 
-### 获取用户信息
-
-GET /info
-
-参数：ticket
 
 ### 登录
 
 POST /login
 
 参数：passport, password
+
+### 检查手机/email/nick是否被注册
+
+POST /check-passport
+
+参数：passport
+
+### 获取用户信息
+
+GET /info
+
+参数：ticket
+
 
 ### 修改密码
 
@@ -58,10 +66,56 @@ GET /rights
 
 
 
-
 ## 管理 API
+
+一下组的 api 需要 cloudarling 中用户的 GOD_ADMIN 权限。
+
+### 查询用户
 
 GET /admin/accounts
 
-参数： keyword，skip， limit
+参数：ticket, keyword，skip， limit
+
+
+### 服务列表
+
+GET /admin/services
+
+
+### 从 cloudeer 中同步方法
+
+GET /admin/service/sync
+
+参数 ticket
+
+从 cloudeer 中同步方法，以便进行权限管理
+
+
+
+
+### 删除服务
+
+POST /admin/service/delete
+
+参数 ticket，id
+
+
+
+### 新增或者修改服务
+
+POST /admin/serivce/save
+
+参数：
+
+```
+{
+    id: 0 || 10,
+    code: 'cloudarling',
+    title: 'xxx',
+    content: 'xxxxx'
+}
+```
+
+如果传了 id，并且不为 0，则是新增！
+
 

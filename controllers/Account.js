@@ -53,7 +53,7 @@ var Account = {
       throw errors.WHAT_REQUIRE("ticket");
     }
     var openId = myTools.getOpenId(ticket);
-    var res    = yield accountService.changePassword(openId, password);
+    yield accountService.changePassword(openId, password);
     this.body  = {errno: 0};
   },
   sendDynamicPassword    : function *() {
@@ -88,6 +88,19 @@ var Account = {
     tick.nick  = mine.nick;
     this.body  = {errno: 0, data: tick};
   },
+  bindFrom3rd           : function *() {
+    var form = this.request.body;
+
+    var provider = form.provider;
+    var map_id   = form.map_id;
+    var nick     = form.nick;
+
+    var mine   = yield accountService.bindFrom3rd(provider, map_id, nick);
+    // var openId = mine.open_id;
+    // var tick   = tools.makeTicket(openId);
+    // tick.nick  = mine.nick;
+    // this.body  = {errno: 0, data: tick};
+  },
   checkPassportToRegister: function *() {
     var form     = this.request.body;
     var passport = form.passport;
@@ -112,6 +125,15 @@ var Account = {
     yield accountService.checkGodAdmin(ticket);
     var res   = yield accountService.listAll(keyword, skip, limit);
     this.body = {errno: 0, data: res};
+  },
+  grantGod               : function *() {
+    var form     = this.request.body;
+    var acountId = form.account_id;
+    var action   = form.action;
+
+    var upRes = yield accountService.grantGod(acountId, action);
+    console.log(upRes);
+    this.body = {errno: 0};
   }
 };
 

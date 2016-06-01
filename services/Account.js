@@ -6,6 +6,19 @@ var config  = require('../config');
 
 var Account = {
   register              : function *(regInfo) {
+    if (regInfo.mobile == '') {
+      delete regInfo.mobile;
+    }
+    if (regInfo.email == '') {
+      delete regInfo.email;
+    }
+    if (regInfo.nick == '') {
+      delete regInfo.nick;
+    }
+    if (!regInfo.mobile && !regInfo.nick && !regInfo.email) {
+      throw errors.WHAT_REQUIRE('手机，email，昵称至少一个');
+    }
+
     if (regInfo.mobile) {
       if (!tools.validateTools.isChinaMobile(regInfo.mobile)) {
         throw errors.CHINA_MOBILE_ILLEGAL;
@@ -14,6 +27,11 @@ var Account = {
     if (regInfo.email) {
       if (!tools.validateTools.isEmail(regInfo.email)) {
         throw errors.EMAIL_ILLEGAL;
+      }
+    }
+    if (regInfo.nick) {
+      if (regInfo.nick.length < 3 || regInfo.length > 30) {
+        throw errors.STRING_LENGTH('昵称', 3, 30);
       }
     }
     regInfo.open_id = tools.stringTools.uuid(true);
@@ -143,8 +161,9 @@ var Account = {
       return mine;
     }
   },
-  bindFrom3rd           : function (ticket, provider, map_id) {
+  bindFrom3rd           : function *(ticket, provider, map_id) {
     //todo: 绑定已经有的帐号。
+    throw errors.CUSTOM('尚未实现');
   },
   getRightsByService    : function *(ticket, service) {
     if (!ticket) {
@@ -187,6 +206,7 @@ var Account = {
     return userInfo;
 
   },
+
   checkGodAdmin: function *(ticket) {
     var rights     = yield Account.getRightsByService(ticket, "cloudarling");
     var adminRight = rights.rights.filter(function (ele) {
@@ -196,7 +216,8 @@ var Account = {
       throw  errors.NO_RIGHTS; // errors.CUSTOM("必须上帝管理员才有此权限。");
     }
   },
-  listAll               : function *(keyword, skip, limit) {
+
+  listAll : function *(keyword, skip, limit) {
     skip       = skip || 0;
     limit      = limit || 20;
     var where  = "1=1";
@@ -206,13 +227,31 @@ var Account = {
       params.push("%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%");
     }
     return yield db.list("account", {
-      cols  : ["id", "nick", "email", "open_id", "mobile", "slogan", "avatar", "avatar_large", "account_type"],
+      cols   : ["id", "nick", "email", "open_id", "mobile", "slogan", "avatar", "avatar_large", "account_type"],
       where  : where,
       params : params,
       skip   : skip,
       limit  : limit,
       orderBy: "id desc"
     });
+  },
+  grantGod: function *(accountId, action) {
+    var xuser = yield db.load('account', {
+      where : "id=?",
+      params: [accountId]
+    });
+    if (!xuser) {
+      throw errors.WHAT_NOT_FOUND('用户');
+    }
+    var updateData = {
+      id: accountId
+    };
+    if (action == 'add') {
+      updateData.account_type = xuser.account_type | 8;
+    } else {
+      updateData.account_type = xuser.account_type & ~8;
+    }
+    return yield db.update('account', updateData);
   }
 
 };

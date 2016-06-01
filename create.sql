@@ -63,7 +63,7 @@ DROP TABLE IF EXISTS `right`;
 
 CREATE TABLE `right` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(50) NOT NULL DEFAULT '',
+  `code` varchar(500) NOT NULL DEFAULT '',
   `title` varchar(50) NOT NULL DEFAULT '',
   `service_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)

@@ -66,7 +66,7 @@ if (!config.cloudeer.disabled) {
 //注册微服务。5s 每次。
   var regUrl  = `${config.cloudeer.serviceHost}/register?name=${config.cloudeer.myName}&host=${config.cloudeer.myHost}&port=${port}`;
   setInterval(function () {
-    request(regUrl, function (err, body) {
+    request(regUrl, function (err) {
       if (err) {
         console.log(regUrl);
         console.log('cloudeer 注册中心连接不上，请联系管理员，或者可以在 config 里禁用此功能。');
@@ -79,7 +79,6 @@ if (!config.cloudeer.disabled) {
 
 console.log((`从 cloudeer 【${config.cloudeer.serviceHost}】中获取微服务列表`));
 cloudeer.loadConfigRemote(config.cloudeer.serviceHost);
-
 setInterval(function () {
   cloudeer.loadConfigRemote(config.cloudeer.serviceHost);
 }, 10000);

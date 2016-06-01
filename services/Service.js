@@ -1,11 +1,37 @@
-var db      = require('ezway2mysql');
-var tools   = require('common-tools');
-var myTools = require('../tools');
-var errors  = require('common-rest-errors');
-var config  = require('../config');
+var db           = require('ezway2mysql');
+var tools        = require('common-tools');
+// var myTools      = require('../tools');
+var errors       = require('common-rest-errors');
+var config       = require('../config');
+var request      = require('request');
+var rightService = require('./Right');
 
 var Service = {
-  listAll : function *(keyword, skip, limit) {
+  save            : function *(tForm) {
+    if (!tForm.title) {
+      throw errors.WHAT_REQUIRE('标题');
+    }
+    if (!tForm.code) {
+      throw errors.WHAT_REQUIRE('代码');
+    }
+    if (tForm.hasOwnProperty('id')) {
+      tForm.id = parseInt(tForm.id);
+    }
+
+    if (tForm.id > 0) {
+      return yield db.update('service', tForm);
+    } else {
+      return yield db.insert('service', tForm);
+    }
+  },
+  saveAuto        : function *(code) {
+    var xservice = yield db.loadByKV('service', 'code', code);
+    if (!xservice) {
+      xservice = yield db.insert('service', {code: code});
+    }
+    return xservice;
+  },
+  listAll         : function *(keyword, skip, limit) {
     skip       = skip || 0;
     limit      = limit || 1000;
     var where  = "1=1";
@@ -22,15 +48,56 @@ var Service = {
       orderBy: "id desc"
     });
   },
-  saveRight: function *(service, title, code) {
-
+  load            : function *(id) {
+    return yield db.loadById('service', id);
   },
-  deleteRight: function *(service,  code) {
-
+  delete          : function *(id) {
+    var occ = yield db.load('right', {
+      where : 'service_id=?',
+      params: [id]
+    });
+    if (occ) {
+      throw errors.WHAT_OCCUPIED('服务');
+    }
+    yield db.delete('service', {
+      where : 'id=?',
+      params: [id]
+    });
   },
-  clearRights: function *(service) {
+  syncFromCloudeer: function *() {
+    var requestGetCo = function (url) {
+      return function (callback) {
+        request({url: url}, function (err, response, body) {
+          callback(err, body);
+        });
+      }
+    };
 
+    var body     = yield requestGetCo(config.cloudeer.serviceHost + '/methods');
+    var jMethods = JSON.parse(body);
+    if (jMethods.errno == 0) {
+      var xmethods = jMethods.data;
+      for (var mt of xmethods) {
+        var xservice = yield Service.saveAuto(mt.service);
+        for (var mtd of mt.methods) {
+          if (!mtd.open) {
+            yield rightService.saveAuto(xservice.id, mtd.url);
+          }
+        }
+      }
+    } else {
+      throw errors.YError(jMethods.errText, jMethods.errno, 200);
+    }
   }
+  // saveRight       : function *(service, title, code) {
+  //
+  // },
+  // deleteRight     : function *(service, code) {
+  //
+  // },
+  // clearRights     : function *(service) {
+  //
+  // }
 
 };
 

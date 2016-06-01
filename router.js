@@ -5,26 +5,33 @@
 var router = require('koa-router')();
 
 
-router.get('/', function *(next) {
+router.get('/', function *() {
   this.body = {msg: "亲，你好，我是怕死婆特。"};
 });
 
 var accountController = require('./controllers/Account');
 router.post('/register', accountController.register);
+router.post('/grant/god', accountController.grantGod);
 router.post('/login', accountController.login);
 router.post('/change-password', accountController.changePassword);
 router.get('/info', accountController.info);
 router.get('/rights', accountController.getRights);
+router.post('/check-passport', accountController.checkPassportToRegister);
 
 router.post('/dynamic-password/send', accountController.sendDynamicPassword);
 router.post('/dynamic-password/login', accountController.loginByDynamicPassword);
 
 router.post('/3rd/login', accountController.loginFrom3rd);
+router.post('/3rd/bind', accountController.bindFrom3rd);
 
 var serviceController = require('./controllers/Service');
 //admin
 router.get('/admin/accounts', accountController.listAll);
 router.get('/admin/services', serviceController.listAll);
+router.post('/admin/service/save', serviceController.save);
+router.get('/admin/service', serviceController.load);
+router.post('/admin/service/delete', serviceController.delete);
+router.get('/admin/service/sync', serviceController.syncFromCloudeer);
 
 
 // router.get('/test', function *(next) {
