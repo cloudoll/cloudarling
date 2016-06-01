@@ -68,7 +68,7 @@ GET /rights
 
 ## 管理 API
 
-一下组的 api 需要 cloudarling 中用户的 GOD_ADMIN 权限。
+以下的 api 需要 cloudarling 中用户的 GOD_ADMIN 权限。
 
 ### 查询用户
 
