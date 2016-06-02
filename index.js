@@ -23,7 +23,9 @@ var json       = require('koa-json');
 var config     = require('./config');
 var serve      = require('koa-static');
 var app        = koa();
-var cloudeer = require('cloudeer');
+var cloudeer   = require('cloudeer');
+var clouderr   = require('clouderr');
+clouderr.loadDefault('cloudarling');
 
 app.use(json());
 app.use(bodyParser());
@@ -35,8 +37,12 @@ app.use(function*(next) {
   try {
     yield next;
   } catch (err) {
+    if (err instanceof clouderr) {
+      this.body = err;
+    } else {
+      this.body = clouderr.SYSTEM_ERROR;
+    }
     this.app.emit('error', err, this);
-    this.body = {errno: err.errno || -1, errText: err.message};
   }
 });
 

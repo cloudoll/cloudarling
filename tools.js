@@ -1,7 +1,7 @@
 var request     = require("request");
 var querystring = require("querystring");
+var clouderr    = require('clouderr');
 var config      = require("./config");
-var error       = require('common-rest-errors');
 
 var tools = {
   //getUrl: function (url, data) {
@@ -185,13 +185,13 @@ var tools = {
       ticket = tools.base64Decode(ticket);
       tkJson = JSON.parse(ticket);
     } catch (e) {
-      throw error.TICKET_ILLEGAL;
+      throw clouderr.TICKET_ILLEGAL;
     }
     var expiresIn = tkJson.expires_in;
 
     var tsNow = tools.getTimeStamp();
     if (expiresIn < tsNow) {
-      throw error.TICKET_EXPIRED;
+      throw clouderr.TICKET_EXPIRED;
     }
 
     var xtick        = {};
@@ -201,9 +201,9 @@ var tools = {
     var xsign        = tools.sha256(xtickStr + config.account.public_key);
 
     if (xsign != tkJson.sign) {
-      throw error.TICKET_VERIFY_FAILED;
+      throw clouderr.TICKET_VERIFY_FAILED;
     }
-    if (!tkJson.open_id) throw error.WHAT_NOT_FOUND("ticket 中的 open_id");
+    if (!tkJson.open_id) throw clouderr.WHAT_NOT_FOUND("ticket 中的 open_id");
 
     return tkJson.open_id;
   },
@@ -216,7 +216,7 @@ var tools = {
     } else {
       intExpires = tools.getTimeStamp() + config.account.dynamic_password_expire_in;
     }
-    xtick.sign       = tools.sha256(passport + code + intExpires + config.account.public_key); 
+    xtick.sign       = tools.sha256(passport + code + intExpires + config.account.public_key);
     xtick.expires_in = intExpires;
 
     var xtickStrLast = tools.base64Encode(xtick);
@@ -231,13 +231,13 @@ var tools = {
       ticket = tools.base64Decode(ticket);
       tkJson = JSON.parse(ticket);
     } catch (e) {
-      throw error.TICKET_ILLEGAL;
+      throw clouderr.TICKET_ILLEGAL;
     }
     var expiresIn = tkJson.expires_in;
 
     var tsNow = tools.getTimeStamp();
     if (expiresIn < tsNow) {
-      throw error.TICKET_EXPIRED;
+      throw clouderr.TICKET_EXPIRED;
     }
 
     var sign = tkJson.sign;

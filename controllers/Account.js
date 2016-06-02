@@ -1,6 +1,6 @@
 var tools          = require('../tools');
 var querystring    = require("querystring");
-var errors         = require('common-rest-errors');
+var clouderr       = require('clouderr');
 var accountService = require('../services/Account');
 var myTools        = require('../tools');
 
@@ -50,11 +50,11 @@ var Account = {
     var ticket   = form.ticket;
 
     if (!ticket) {
-      throw errors.WHAT_REQUIRE("ticket");
+      throw clouderr.WHAT_REQUIRE("ticket");
     }
     var openId = myTools.getOpenId(ticket);
     yield accountService.changePassword(openId, password);
-    this.body  = {errno: 0};
+    this.body = {errno: 0};
   },
   sendDynamicPassword    : function *() {
     var form     = this.request.body;
@@ -88,14 +88,14 @@ var Account = {
     tick.nick  = mine.nick;
     this.body  = {errno: 0, data: tick};
   },
-  bindFrom3rd           : function *() {
+  bindFrom3rd            : function *() {
     var form = this.request.body;
 
     var provider = form.provider;
     var map_id   = form.map_id;
     var nick     = form.nick;
 
-    var mine   = yield accountService.bindFrom3rd(provider, map_id, nick);
+    var mine = yield accountService.bindFrom3rd(provider, map_id, nick);
     // var openId = mine.open_id;
     // var tick   = tools.makeTicket(openId);
     // tick.nick  = mine.nick;
@@ -106,7 +106,7 @@ var Account = {
     var passport = form.passport;
     var mine     = yield accountService.loadByPassport(passport);
     if (mine) {
-      throw errors.WHAT_EXISTED('该帐号已经被注册。');
+      throw clouderr.WHAT_EXISTED('该帐号已经被注册。');
     }
     this.body = {errno: 0};
   },

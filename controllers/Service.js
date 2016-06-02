@@ -1,6 +1,5 @@
 // var tools          = require('../tools');
 var querystring    = require("querystring");
-// var errors         = require('common-rest-errors');
 var serviceService = require('../services/Service');
 var accountService = require('../services/Account');
 // var myTools        = require('../tools');

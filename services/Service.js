@@ -1,18 +1,20 @@
 var db           = require('ezway2mysql');
 var tools        = require('common-tools');
-// var myTools      = require('../tools');
-var errors       = require('common-rest-errors');
+var clouderr     = require('clouderr');
 var config       = require('../config');
 var request      = require('request');
 var rightService = require('./Right');
 
+
+// var myTools      = require('../tools');
+
 var Service = {
   save            : function *(tForm) {
     if (!tForm.title) {
-      throw errors.WHAT_REQUIRE('标题');
+      throw clouderr.WHAT_REQUIRE('标题');
     }
     if (!tForm.code) {
-      throw errors.WHAT_REQUIRE('代码');
+      throw clouderr.WHAT_REQUIRE('代码');
     }
     if (tForm.hasOwnProperty('id')) {
       tForm.id = parseInt(tForm.id);
@@ -57,7 +59,7 @@ var Service = {
       params: [id]
     });
     if (occ) {
-      throw errors.WHAT_OCCUPIED('服务');
+      throw clouderr.WHAT_OCCUPIED('服务');
     }
     yield db.delete('service', {
       where : 'id=?',
@@ -86,7 +88,7 @@ var Service = {
         }
       }
     } else {
-      throw errors.YError(jMethods.errText, jMethods.errno, 200);
+      throw clouderr.YError(jMethods.errText, jMethods.errno, 200);
     }
   }
   // saveRight       : function *(service, title, code) {
