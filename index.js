@@ -13,6 +13,7 @@ var nodeEnv = program.node_env || "development";
 console.log("Start server @ port: %s, with node_env: %s", port, nodeEnv);
 
 process.env.NODE_ENV = nodeEnv;
+process.env.appName  = 'cloudarling';
 port                 = parseInt(port);
 
 //-------------------------------
@@ -24,8 +25,9 @@ var config     = require('./config');
 var serve      = require('koa-static');
 var app        = koa();
 var cloudeer   = require('cloudeer');
-var clouderr   = require('clouderr');
-clouderr.loadDefault('cloudarling');
+
+var Clouderr = require('clouderr').Clouderr;
+var errors   = require('clouderr').errors;
 
 app.use(json());
 app.use(bodyParser());
@@ -37,10 +39,10 @@ app.use(function*(next) {
   try {
     yield next;
   } catch (err) {
-    if (err instanceof clouderr) {
+    if (err instanceof Clouderr) {
       this.body = err;
     } else {
-      this.body = clouderr.SYSTEM_ERROR;
+      this.body = errors.SYSTEM_ERROR;
     }
     this.app.emit('error', err, this);
   }

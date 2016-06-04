@@ -1,6 +1,6 @@
 var tools          = require('../tools');
 var querystring    = require("querystring");
-var clouderr       = require('clouderr');
+var errors         = require('clouderr').errors;
 var accountService = require('../services/Account');
 var myTools        = require('../tools');
 
@@ -50,7 +50,7 @@ var Account = {
     var ticket   = form.ticket;
 
     if (!ticket) {
-      throw clouderr.WHAT_REQUIRE("ticket");
+      throw errors.WHAT_REQUIRE("ticket");
     }
     var openId = myTools.getOpenId(ticket);
     yield accountService.changePassword(openId, password);
@@ -106,7 +106,7 @@ var Account = {
     var passport = form.passport;
     var mine     = yield accountService.loadByPassport(passport);
     if (mine) {
-      throw clouderr.WHAT_EXISTED('该帐号已经被注册。');
+      throw errors.WHAT_EXISTED('该帐号已经被注册。');
     }
     this.body = {errno: 0};
   },

@@ -1,6 +1,6 @@
 var db       = require('ezway2mysql');
 var tools    = require('common-tools');
-var clouderr = require('clouderr');
+var errors = require('clouderr').errors;
 var myTools  = require('../tools');
 var config   = require('../config');
 
@@ -16,22 +16,22 @@ var Account = {
       delete regInfo.nick;
     }
     if (!regInfo.mobile && !regInfo.nick && !regInfo.email) {
-      throw clouderr.WHAT_REQUIRE('手机，email或昵称');
+      throw errors.WHAT_REQUIRE('手机，email或昵称');
     }
 
     if (regInfo.mobile) {
       if (!tools.validateTools.isChinaMobile(regInfo.mobile)) {
-        throw clouderr.CHINA_MOBILE_ILLEGAL;
+        throw errors.CHINA_MOBILE_ILLEGAL;
       }
     }
     if (regInfo.email) {
       if (!tools.validateTools.isEmail(regInfo.email)) {
-        throw clouderr.EMAIL_ILLEGAL;
+        throw errors.EMAIL_ILLEGAL;
       }
     }
     if (regInfo.nick) {
       if (regInfo.nick.length < 3 || regInfo.length > 30) {
-        throw clouderr.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
+        throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
       }
     }
     regInfo.open_id = tools.stringTools.uuid(true);
@@ -54,7 +54,7 @@ var Account = {
   },
   getUserInfo           : function *(ticket) {
     if (!ticket) {
-      throw clouderr.WHAT_REQUIRE("ticket");
+      throw errors.WHAT_REQUIRE("ticket");
     }
     var openId = myTools.getOpenId(ticket);
 
@@ -88,13 +88,13 @@ var Account = {
   loginByPassport       : function *(passport, password) {
     var mine = yield Account.loadByPassport(passport);
     if (!mine) {
-      throw clouderr.LOGIN_ERROR_BECAUSE('用户没找到，请重新输入登录凭证。');
+      throw errors.LOGIN_ERROR_BECAUSE('用户没找到，请重新输入登录凭证。');
     }
 
     var cptPassword = tools.stringTools.computePassword(password, mine.salt);
 
     if (cptPassword !== mine.password) {
-      throw clouderr.LOGIN_ERROR_COMMON;
+      throw errors.LOGIN_ERROR;
     }
     delete mine.password;
     delete mine.salt;
@@ -123,11 +123,11 @@ var Account = {
       return myTools.makeTicketTemp(passport, captcha);
     }
 
-    throw clouderr.PASSPORT_ILLEGAL;
+    throw errors.PASSPORT_ILLEGAL;
   },
   loginByDynamicPassword: function *(passport, password, ticket) {
     if (!myTools.validateTicketTemp(passport, password, ticket)) {
-      throw clouderr.CAPTCHA_VALIDATE_FAIL;
+      throw errors.CAPTCHA_VALIDATE_FAIL;
     }
     var mine = yield Account.loadByPassport(passport);
     delete mine.password;
@@ -163,15 +163,15 @@ var Account = {
   },
   bindFrom3rd           : function *(ticket, provider, map_id) {
     //todo: 绑定已经有的帐号。
-    //throw clouderr.('尚未实现');
-    throw clouderr.CUSTOM('尚未实现');
+    //throw errors.('尚未实现');
+    throw errors.CUSTOM('尚未实现');
   },
   getRightsByService    : function *(ticket, service) {
     if (!ticket) {
-      throw clouderr.WHAT_REQUIRE("ticket");
+      throw errors.WHAT_REQUIRE("ticket");
     }
     if (!service) {
-      throw clouderr.WHAT_REQUIRE("微服务名称");
+      throw errors.WHAT_REQUIRE("微服务名称");
     }
     var openId = myTools.getOpenId(ticket);
 
@@ -214,7 +214,7 @@ var Account = {
       return ele.id == 0;
     });
     if (!adminRight || adminRight.length == 0) {
-      throw clouderr.NO_RIGHTS; // errors.CUSTOM("必须上帝管理员才有此权限。");
+      throw errors.NO_RIGHTS; // errors.CUSTOM("必须上帝管理员才有此权限。");
     }
   },
 
@@ -242,7 +242,7 @@ var Account = {
       params: [accountId]
     });
     if (!xuser) {
-      throw clouderr.WHAT_NOT_FOUND('用户');
+      throw errors.WHAT_NOT_FOUND('用户');
     }
     var updateData = {
       id: accountId

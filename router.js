@@ -33,6 +33,11 @@ router.get('/admin/service', serviceController.load);
 router.post('/admin/service/delete', serviceController.delete);
 router.get('/admin/service/sync', serviceController.syncFromCloudeer);
 
+var rightController = require('./controllers/Right');
+router.get('/admin/rights', rightController.list);
+router.get('/admin/account-rights', rightController.listAllByAccount);
+router.post('/admin/grant-now', rightController.grantRight);
+
 
 // router.get('/test', function *(next) {
 //   var db  = require('./share/db');

@@ -1,6 +1,6 @@
 var db           = require('ezway2mysql');
 var tools        = require('common-tools');
-var clouderr     = require('clouderr');
+var errors       = require('clouderr').errors;
 var config       = require('../config');
 var request      = require('request');
 var rightService = require('./Right');
@@ -11,10 +11,10 @@ var rightService = require('./Right');
 var Service = {
   save            : function *(tForm) {
     if (!tForm.title) {
-      throw clouderr.WHAT_REQUIRE('标题');
+      throw errors.WHAT_REQUIRE('标题');
     }
     if (!tForm.code) {
-      throw clouderr.WHAT_REQUIRE('代码');
+      throw errors.WHAT_REQUIRE('代码');
     }
     if (tForm.hasOwnProperty('id')) {
       tForm.id = parseInt(tForm.id);
@@ -59,7 +59,7 @@ var Service = {
       params: [id]
     });
     if (occ) {
-      throw clouderr.WHAT_OCCUPIED('服务');
+      throw errors.WHAT_OCCUPIED('服务');
     }
     yield db.delete('service', {
       where : 'id=?',
@@ -83,12 +83,13 @@ var Service = {
         var xservice = yield Service.saveAuto(mt.service);
         for (var mtd of mt.methods) {
           if (!mtd.open) {
-            yield rightService.saveAuto(xservice.id, mtd.url);
+            yield rightService.saveAuto(xservice.id, mtd.url, mtd.name);
           }
         }
       }
     } else {
-      throw clouderr.YError(jMethods.errText, jMethods.errno, 200);
+      throw errors.CUSTOM(jMethods.errText);
+      //throw errors.YError(jMethods.errText, jMethods.errno, 200);
     }
   }
   // saveRight       : function *(service, title, code) {
