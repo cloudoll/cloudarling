@@ -1,6 +1,5 @@
 var tools          = require('../tools');
-var querystring    = require("querystring");
-var errors         = require('clouderr').errors;
+var errors         = require('cloudoll').errors;
 var accountService = require('../services/Account');
 var myTools        = require('../tools');
 
@@ -24,8 +23,7 @@ var Account = {
 
   },
   info                   : function *() {
-    var qs = querystring.parse(this.request.querystring);
-
+    var qs      = this.qs;
     var res = yield accountService.getUserInfo(qs.ticket);
 
     this.body = {errno: 0, data: res};
@@ -111,13 +109,13 @@ var Account = {
     this.body = {errno: 0};
   },
   getRights              : function*() {
-    var qs      = querystring.parse(this.request.querystring);
+    var qs      = this.qs;
     var ticket  = qs.ticket;
     var service = qs.service;
     this.body   = {errno: 0, data: yield accountService.getRightsByService(ticket, service)};
   },
   listAll                : function *() {
-    var qs      = querystring.parse(this.request.querystring);
+    var qs      = this.qs;
     var ticket  = qs.ticket;
     var keyword = qs.keyword;
     var skip    = qs.skip || 0;

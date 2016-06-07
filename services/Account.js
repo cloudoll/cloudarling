@@ -1,8 +1,8 @@
-var db       = require('ezway2mysql');
-var tools    = require('common-tools');
-var errors = require('clouderr').errors;
-var myTools  = require('../tools');
-var config   = require('../config');
+var db      = require('ezway2mysql');
+var tools   = require('common-tools');
+var errors  = require('cloudoll').errors;
+var myTools = require('../tools');
+var config  = require('../config');
 
 var Account = {
   register              : function *(regInfo) {
@@ -174,7 +174,7 @@ var Account = {
       throw errors.WHAT_REQUIRE("微服务名称");
     }
     var openId = myTools.getOpenId(ticket);
-
+    console.log('-----------------------------------');
     var userInfo = yield db.load("account", {
       where : "open_id=?",
       cols  : ["id", "nick", "email", "mobile", "account_type"],

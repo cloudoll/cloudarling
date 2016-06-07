@@ -1,19 +1,16 @@
-// var tools          = require('../tools');
-var querystring    = require("querystring");
 var serviceService = require('../services/Service');
 var accountService = require('../services/Account');
-// var myTools        = require('../tools');
 
 var Account = {
   save            : function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
     yield serviceService.save(this.request.body);
     this.body = {errno: 0};
   },
   listAll         : function *() {
-    var qs      = querystring.parse(this.request.querystring);
+    var qs      = this.qs;
     var ticket  = qs.ticket;
     var keyword = qs.keyword;
     var skip    = qs.skip || 0;
@@ -23,13 +20,13 @@ var Account = {
     this.body = {errno: 0, data: res};
   },
   load            : function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
     this.body = {errno: 0, data: yield serviceService.load(qs.id)};
   },
   delete          : function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
     var form = this.request.body;
@@ -37,7 +34,7 @@ var Account = {
     this.body = {errno: 0};
   },
   syncFromCloudeer: function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
     yield serviceService.syncFromCloudeer();

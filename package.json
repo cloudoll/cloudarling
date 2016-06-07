@@ -13,9 +13,7 @@
   "author": "Cloudbeer<cloudbeer@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "cloudark-tools": "0.0.5",
-    "cloudeer": "^0.1.4",
-    "clouderr": "^0.1.1",
+    "cloudoll": "^0.1.1",
     "commander": "^2.9.0",
     "common-tools": "^0.0.9",
     "ezway2mysql": "0.0.7",

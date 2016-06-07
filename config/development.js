@@ -5,7 +5,7 @@ module.exports = {
     // serviceHost: "http://127.0.0.1:8801",
     // myHost     : '127.0.0.1',
     serviceHost: "http://112.74.29.211:8801",
-    myHost     : '10.163.56.11',
+    myHost     : '10.163.56.91',
     myName     : 'cloudarling'
   },
   mysql   : {

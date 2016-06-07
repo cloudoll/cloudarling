@@ -1,20 +1,17 @@
-// var tools          = require('../tools');
-var querystring    = require("querystring");
 var service        = require('../services/Right');
 var accountService = require('../services/Account');
-var errors         = require("clouderr").errors;
-
+var errors         = require("cloudoll").errors;
 
 var Account = {
   list            : function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
 
     this.body = errors.SUCCESS(yield service.list(qs.service_id));
   },
   listAllByAccount: function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
 
@@ -22,11 +19,11 @@ var Account = {
       throw errors.WHAT_REQUIRE('account_id');
     }
     var accountId = parseInt(qs.account_id);
-    this.body     = errors.SUCCESS(yield service.getAllRightsByAccount(accountId));
+    this.body     = errors.success(yield service.getAllRightsByAccount(accountId));
 
   },
   grantRight      : function *() {
-    var qs     = querystring.parse(this.request.querystring);
+    var qs     = this.qs;
     var ticket = qs.ticket;
     yield accountService.checkGodAdmin(ticket);
 
@@ -44,7 +41,7 @@ var Account = {
       action = form.action;
     }
 
-    this.body = errors.SUCCESS(yield service.grantNow(accountId, rightID, action));
+    this.body = errors.success(yield service.grantNow(accountId, rightID, action));
 
   }
 };

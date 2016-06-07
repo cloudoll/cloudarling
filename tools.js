@@ -1,6 +1,6 @@
 var request     = require("request");
 var querystring = require("querystring");
-var clouderr    = require('clouderr');
+var errors      = require('cloudoll').errors;
 var config      = require("./config");
 
 var tools = {
@@ -185,13 +185,13 @@ var tools = {
       ticket = tools.base64Decode(ticket);
       tkJson = JSON.parse(ticket);
     } catch (e) {
-      throw clouderr.TICKET_ILLEGAL;
+      throw errors.TICKET_ILLEGAL;
     }
     var expiresIn = tkJson.expires_in;
 
     var tsNow = tools.getTimeStamp();
     if (expiresIn < tsNow) {
-      throw clouderr.TICKET_EXPIRED;
+      throw errors.TICKET_EXPIRED;
     }
 
     var xtick        = {};
@@ -201,9 +201,9 @@ var tools = {
     var xsign        = tools.sha256(xtickStr + config.account.public_key);
 
     if (xsign != tkJson.sign) {
-      throw clouderr.TICKET_VERIFY_FAILED;
+      throw errors.TICKET_VERIFY_FAILED;
     }
-    if (!tkJson.open_id) throw clouderr.WHAT_NOT_FOUND("ticket 中的 open_id");
+    if (!tkJson.open_id) throw errors.WHAT_NOT_FOUND("ticket 中的 open_id");
 
     return tkJson.open_id;
   },
@@ -231,13 +231,13 @@ var tools = {
       ticket = tools.base64Decode(ticket);
       tkJson = JSON.parse(ticket);
     } catch (e) {
-      throw clouderr.TICKET_ILLEGAL;
+      throw errors.TICKET_ILLEGAL;
     }
     var expiresIn = tkJson.expires_in;
 
     var tsNow = tools.getTimeStamp();
     if (expiresIn < tsNow) {
-      throw clouderr.TICKET_EXPIRED;
+      throw errors.TICKET_EXPIRED;
     }
 
     var sign = tkJson.sign;

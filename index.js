@@ -22,72 +22,53 @@ var koa        = require('koa');
 var bodyParser = require('koa-bodyparser');
 var json       = require('koa-json');
 var config     = require('./config');
-var serve      = require('koa-static');
 var app        = koa();
-var cloudeer   = require('cloudeer');
 
-var Clouderr = require('clouderr').Clouderr;
-var errors   = require('clouderr').errors;
+// var Clouderr = require('cloudoll').Clouderr;
+// var errors   = require('cloudoll').errors;
+
+var KoaMiddle = require('cloudoll').KoaMiddle;
+var koaMiddle = new KoaMiddle();
 
 app.use(json());
 app.use(bodyParser());
 
-app.use(serve("./static"));
+// app.use(serve("./static"));
+app.use(koaMiddle.errorsHandleAhead);
 
-
-app.use(function*(next) {
-  try {
-    yield next;
-  } catch (err) {
-    if (err instanceof Clouderr) {
-      this.body = err;
-    } else {
-      this.body = errors.SYSTEM_ERROR;
-    }
-    this.app.emit('error', err, this);
-  }
-});
-
+app.use(koaMiddle.queryStringParser);
 
 var router = require("./router");
 app.use(router.routes());
 
-
+app.use(koaMiddle.errorsHandleBehind);
 app.listen(port);
 
 
-var db            = require('ezway2mysql');
-var cloudarkTools = require('cloudark-tools');
+var db = require('ezway2mysql');
+// var cloudarkTools = require('cloudark-tools');
 db.connect(config.mysql);
 db.debug = true;
 
-app.use(cloudarkTools.koaMiddleware.ezway2mysql);
+// app.use(cloudarkTools.koaMiddleware.ezway2mysql);
 
 
 //cache district
 //require("./yservice/YDistrict").getAllFromDB();
 
-if (!config.cloudeer.disabled) {
+var Cloudeer = require('cloudoll').Cloudeer;
 
-  console.log('开始向 cloudeer 注册中心注册...');
-  var request = require('request');
-//注册微服务。5s 每次。
-  var regUrl  = `${config.cloudeer.serviceHost}/register?name=${config.cloudeer.myName}&host=${config.cloudeer.myHost}&port=${port}`;
-  setInterval(function () {
-    request(regUrl, function (err) {
-      if (err) {
-        console.log(regUrl);
-        console.log('cloudeer 注册中心连接不上，请联系管理员，或者可以在 config 里禁用此功能。');
-      }
-    });
-  }, 8000);
+var cloudeer = new Cloudeer({
+  cloudeerUri: config.cloudeer.serviceHost,
+  myHost     : config.cloudeer.myHost,
+  myPort     : port
+});
+
+
+if (!config.cloudeer.disabled) {
+  cloudeer.registerService();
 }
 
-//我同时也是 cloudeer 的消费者
+cloudeer.downloadService();
 
-console.log((`从 cloudeer 【${config.cloudeer.serviceHost}】中获取微服务列表`));
-cloudeer.loadConfigRemote(config.cloudeer.serviceHost);
-setInterval(function () {
-  cloudeer.loadConfigRemote(config.cloudeer.serviceHost);
-}, 10000);
 

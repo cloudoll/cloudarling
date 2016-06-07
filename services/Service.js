@@ -1,6 +1,6 @@
 var db           = require('ezway2mysql');
 var tools        = require('common-tools');
-var errors       = require('clouderr').errors;
+var errors       = require('cloudoll').errors;
 var config       = require('../config');
 var request      = require('request');
 var rightService = require('./Right');
@@ -89,7 +89,6 @@ var Service = {
       }
     } else {
       throw errors.CUSTOM(jMethods.errText);
-      //throw errors.YError(jMethods.errText, jMethods.errno, 200);
     }
   }
   // saveRight       : function *(service, title, code) {

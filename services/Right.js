@@ -1,4 +1,5 @@
 var db    = require('ezway2mysql');
+
 var Right = {
   saveAuto             : function *(serviceId, code, title) {
     var xRight = yield db.load('right', {
