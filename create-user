@@ -1,58 +1,76 @@
 #!/usr/bin/env node
 
-var program = require('commander');
-var tools   = require('common-tools');
-
-program
-  .version('0.0.1')
-  .usage('-m 13006699866 -p passWord!')
-  .option('-m, --mobile [mobile]', 'Mobile （必须填写）')
-  .option('-p, --password [password]', 'Password （必须填写）')
-  .option('-e, --node_env [node_env]', 'Environment: product, development, test')
-  .parse(process.argv);
-
-var mobile            = program.mobile;
-var password         = program.password;
-var nodeEnv          = program.node_env || "development";
-process.env.NODE_ENV = nodeEnv;
-
-if (!mobile || !password) {
-  program.outputHelp();
-  return;
-}
-
-if (!tools.validateTools.isChinaMobile(mobile)) {
-  console.log('请输入正确的手机');
-  return;
-}
+var request = require('request');
 
 
 var reginfo = {
-  mobile    : mobile,
-  password : password,
+  mobile      : '13006699861',
+  password    : '111111',
   account_type: 9
 };
+//
+// request.post('http://localhost:3000/open/account/register',
+//   {
+//     form: reginfo
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+
+// request.post('http://localhost:3000/open/account/check-passport',
+//   {
+//     form: {passport: '13006699865'},
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+
+// request.post('http://localhost:3000/open/account/login',
+//   {
+//     form: {passport: '13006699866',password:'111111'},
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+
+// request.post('http://localhost:3000/open/address/update',
+//   {
+//     form: {
+//       id         : 1,
+//       ticket     : 'eyJvcGVuX2lkIjoiODAwMjE3OWEtMzJjNS0xMWU2LTlhNDEtMDI0MmFjMTEwMDA0IiwiZXhwaXJlc19pbiI6MTQ2NTk4MjM5MCwic2lnbiI6ImE5N2I5YmEzY2M1OWQ3MGVjY2JiYTIyYTgwYmNlNjE4YmI4ZmIyODAyY2ZmMDBlZWY1NGEwMGQ1MmYyZDIwYzYifQ==',
+//       district_id: 875,
+//       cnee       : '张三',
+//       address    : "查查了某某ID阿莎",
+//       tel1       : '123444',
+//       postcode   : '2345522'
+//
+//     },
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+
+// request.post('http://localhost:3000/open/address/delete',
+//   {
+//     form: {
+//       id         : 3,
+//       ticket     : 'eyJvcGVuX2lkIjoiODAwMjE3OWEtMzJjNS0xMWU2LTlhNDEtMDI0MmFjMTEwMDA0IiwiZXhwaXJlc19pbiI6MTQ2NTk4MjM5MCwic2lnbiI6ImE5N2I5YmEzY2M1OWQ3MGVjY2JiYTIyYTgwYmNlNjE4YmI4ZmIyODAyY2ZmMDBlZWY1NGEwMGQ1MmYyZDIwYzYifQ==',
+//       district_id: 875,
+//       cnee       : '张三',
+//       address    : "查查了某某ID阿莎",
+//       tel1       : '123444',
+//       postcode   : '2345522'
+//
+//     },
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
 
 
-var co             = require('co');
-var accountService = require('./services/Account');
-var ezmysql        = require('ezway2mysql');
-var config         = require('./config');
-ezmysql.connect(config.mysql);
+request.post('http://localhost:3000/open/address/set-default',
+  {
+    form: {
+      id         : 4,
+      ticket     : 'eyJvcGVuX2lkIjoiODAwMjE3OWEtMzJjNS0xMWU2LTlhNDEtMDI0MmFjMTEwMDA0IiwiZXhwaXJlc19pbiI6MTQ2NTk4MjM5MCwic2lnbiI6ImE5N2I5YmEzY2M1OWQ3MGVjY2JiYTIyYTgwYmNlNjE4YmI4ZmIyODAyY2ZmMDBlZWY1NGEwMGQ1MmYyZDIwYzYifQ==',
+      
 
-
-console.log("现在开始创建用户..");
-
-
-var xco = co(function *() {
-  var res = yield accountService.register(reginfo);
-  console.log(res);
-  console.log("你创建的超级管理员帐号是：");
-  console.log(`用户名： ${mobile}`);
-  console.log(`密码：${password}`);
-  console.log("现在请按 ^C 退出。");
-
-}).catch(function (reson) {
-  console.log(reson);
-  console.log("现在请按 ^C 退出。");
-});
+    },
+  }, function (err, res, body) {
+    console.log(body);
+  });

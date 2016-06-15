@@ -51,7 +51,7 @@ var tools = {
     return key.sign(msg, "base64");
   },
   responseJsonp     : function (ctx, msg, querystring) {
-    if (querystring.hasOwnProperty("callback")) {
+    if (querystring.callback) {
       ctx.type = "application/javascript";
       ctx.body = querystring["callback"] + "(" + msg + ")";
     } else {
@@ -59,7 +59,7 @@ var tools = {
     }
   },
   responseJson      : function (ctx, msg, querystring) {
-    if (querystring.hasOwnProperty("callback")) {
+    if (querystring.callback) {
       ctx.type = "application/javascript";
       ctx.body = querystring["callback"] + "(" + JSON.stringify(msg) + ")";
     } else {

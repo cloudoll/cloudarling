@@ -1,48 +1,43 @@
-var service        = require('../../services/Right');
-var accountService = require('../../services/Account');
-var errors         = require("cloudoll").errors;
+var errors       = require("cloudoll").errors;
+var rightService = require('../../services2/right');
+var tools        = require("../../tools");
 
-var Right = {
-  list            : function *() {
-    if (!this.qs.service_id) {
-      throw errors.WHAT_REQUIRE('service_id');
-    }
-    this.body = errors.SUCCESS(yield service.list(this.qs.service_id));
+
+module.exports = Right = {
+
+  $editService    : function*() {
+    this.body = errors.success(yield rightService.editService(this.request.body));
   },
-  // listByServiceCode: function *(service) {
-  //   var qs     = this.qs;
-  //   var ticket = qs.ticket;
-  //   yield accountService.checkGodAdmin(ticket);
-  //
-  //   this.body = errors.SUCCESS(yield service.list(qs.service_id));
-  // },
-  listAllByAccount: function *() {
-    var qs = this.qs;
-    if (!qs.account_id) {
-      throw errors.WHAT_REQUIRE('account_id');
-    }
-    var accountId = parseInt(qs.account_id);
-    this.body     = errors.success(yield service.getAllRightsByAccount(accountId));
+  $delService     : function *() {
+    this.body = errors.success(yield rightService.delService(this.request.body));
+  },
+  listService     : function*() {
+    var rtn = yield rightService.listService(this.qs);
+    tools.responseJson(this, errors.success(rtn), this.qs);
+  },
+  $editRights     : function *() {
+    this.body = errors.success(yield rightService.editRights(this.request.body));
+  },
+  listRights     : function*() {
+    var rtn = yield rightService.listRights(this.qs);
+    tools.responseJson(this, errors.success(rtn), this.qs);
+  },
+  $delRights      : function *() {
+    this.body = errors.success(yield rightService.delRights(this.request.body));
+  },
+  $grant          : function*() {
+    this.body = errors.success(yield rightService.grant(this.request.body));
 
   },
-  grantRight      : function *() {
-    var form      = this.request.body;
-    var accountId = parseInt(form.account_id);
-    if (!accountId) {
-      throw errors.WHAT_REQUIRE('account_id');
-    }
-    var rightID = parseInt(form.right_id);
-    if (!rightID) {
-      throw errors.WHAT_REQUIRE('right_id');
-    }
-    var action = "remove";
-    if (form.action) {
-      action = form.action;
-    }
+  $ungrant        : function*() {
+    this.body = errors.success(yield rightService.ungrant(this.request.body));
 
-    this.body = errors.success(yield service.grantNow(accountId, rightID, action));
-
+  },
+  userRights      : function*() {
+    var rtn = yield rightService.userRights(this.qs);
+    tools.responseJson(this, errors.success(rtn), this.qs);
+  },
+  syncFromCloudeer: function *() {
+    this.body = errors.success(yield rightService.syncFromCloudeer());
   }
 };
-
-module.exports = Right;

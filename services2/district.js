@@ -1,0 +1,85 @@
+var db = require('cloudoll').orm.postgres;
+
+var District = module.exports = {
+
+  dists            : null,
+  getAllFromDB     : function *() {
+    District.dists = (yield db.take("district", {cols: ["id", "title", "parent_id"], size: -1})).data;
+  },
+  getMyChildren    : function *(id) {
+    if (District.dists == null)
+      yield District.getAllFromDB();
+
+    id = id || 0;
+    id = parseInt(id);
+    return District.dists.filter(function (ele) {
+      return ele.parent_id == id;
+    });
+  },
+  getMyFamily      : function *(id) {
+    if (District.dists == null)
+      yield District.getAllFromDB();
+
+    id            = id || 0;
+    id            = parseInt(id);
+    var container = [];
+
+    District.recursiveMyFamily(id, container, District.dists, false);
+
+    var rtn = container.reverse();
+
+    //return rtn;
+    // 同时获取自己的儿子
+    var mySons = District.dists.filter(function (ele) {
+      return ele.parent_id == id;
+    });
+
+    rtn.push(mySons);
+    return rtn;
+  },
+  getMyAncestor    : function *(id) {
+    if (District.dists == null)
+      yield District.getAllFromDB();
+
+    id            = id || 0;
+    id            = parseInt(id);
+    var container = [];
+
+    District.recursiveMyFamily(id, container, District.dists, true);
+
+
+    return container.reverse();
+  },
+  recursiveMyFamily: function (id, container, dists, noBrother) {
+
+    if (id > 0) {
+      var mes = dists.filter(function (ele) {
+        return ele.id == id;
+      });
+
+      if (mes.length == 1) {
+
+        var me = mes[0];
+
+        if (noBrother) {
+          container.push(me);
+        }
+        else {
+
+          var myBros = dists.filter(function (ele) {
+            //ele.selected = false;
+            return ele.parent_id == me.parent_id;
+          });
+          myBros.forEach(function (ele) {
+            ele.selected = false;
+          });
+          container.push(myBros);
+        }
+        me.selected = true;
+
+
+        District.recursiveMyFamily(me.parent_id, container, dists, noBrother);
+      }
+    }
+  }
+};

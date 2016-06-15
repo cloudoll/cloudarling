@@ -23,9 +23,11 @@ var config = require('./config');
 
 var app    = new doll.KoaApplication();
 
-var mysql = doll.orm.mysql;
-mysql.connect(config.mysql);
-mysql.debug = true;
+doll.orm.postgres.constr = config.postgres.conString;
+
+// var mysql = doll.orm.mysql;
+// mysql.connect(config.mysql);
+// mysql.debug = true;
 
 app.router.get('/', function *() {
   this.body = {msg: "亲，你好，我是怕死婆特。"};

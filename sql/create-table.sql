@@ -3,10 +3,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE IF NOT EXISTS account
 (
     id BIGSERIAL NOT NULL PRIMARY KEY,
-    mobile character varying(20) ,
-    email character varying(500) ,
-    nick character varying(50) ,
-    salt character varying(16) ,
+    mobile character varying(20) UNIQUE,
+    email character varying(500) UNIQUE,
+    nick character varying(50) UNIQUE,
+    salt character varying(16),
     password character varying(64) ,
     gender integer DEFAULT 0,
     youku_id bigint DEFAULT 0,
