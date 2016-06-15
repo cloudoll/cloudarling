@@ -1,4 +1,4 @@
-var db    = require('ezway2mysql');
+var db    = require('cloudoll').orm.mysql;
 
 var Right = {
   saveAuto             : function *(serviceId, code, title) {
@@ -19,7 +19,7 @@ var Right = {
     return yield db.list('right', {
       where : 'service_id=?',
       params: [serviceId],
-      limit : 1000
+      limit : 2000
     })
   },
   getAllRightsByAccount: function *(accountId) {

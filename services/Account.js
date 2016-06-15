@@ -1,4 +1,4 @@
-var db      = require('ezway2mysql');
+var db      = require('cloudoll').orm.mysql;
 var tools   = require('common-tools');
 var errors  = require('cloudoll').errors;
 var myTools = require('../tools');
