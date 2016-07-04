@@ -120,7 +120,7 @@ module.exports = {
       params: {account_id: userInfo.id},
       cols  : ["title", "sn", "mac", "code"]
     });
-    userInfo.devices = userDevices.data;
+    userInfo.devices = userDevices;
     return userInfo;
   },
   getInfoByTicket   : function *(ticket) {
@@ -168,7 +168,7 @@ module.exports = {
       cols  : ["id", "title", "code"]
     });
 
-    userInfo.rights = userRights.data;
+    userInfo.rights = userRights;
 
     var uAType = 0 || parseInt(userInfo.account_type);
     if ((uAType & 8) == 8) {
@@ -202,7 +202,7 @@ module.exports = {
       cols  : ["title", "sn", "mac", "code"]
     });
 
-    userInfo.devices = userDevices.data;
+    userInfo.devices = userDevices;
 
     return userInfo;
 

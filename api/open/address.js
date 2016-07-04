@@ -1,7 +1,5 @@
 var errors         = require("cloudoll").errors;
-var stringTools    = require("common-tools").stringTools;
 var tools          = require("../../tools");
-var accountService = require('../../services2/account');
 var addressService = require('../../services2/address');
 
 var Address = {

@@ -4,7 +4,7 @@ var District = module.exports = {
 
   dists            : null,
   getAllFromDB     : function *() {
-    District.dists = (yield db.take("district", {cols: ["id", "title", "parent_id"], size: -1})).data;
+    District.dists = (yield db.take("district", {cols: ["id", "title", "parent_id"], size: -1}));
   },
   getMyChildren    : function *(id) {
     if (District.dists == null)

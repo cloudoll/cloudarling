@@ -1,4 +1,5 @@
 module.exports = {
+  port                 : 7301,
   app_name             : 'cloudarling',
   debug                : true,
   my_host              : 'localhost',

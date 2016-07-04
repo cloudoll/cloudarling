@@ -16,15 +16,15 @@ var AccountStateless = {
     this.body    = errors.success(yield accountService.checkPassportAvailable(passport));
   },
   $login        : function *() {
-    var form = this.request.body;
-    var passport = form.passport;
-    var password = form.password;
-    // var expires_in = form.expires_in;
+    var form       = this.request.body;
+    var passport   = form.passport;
+    var password   = form.password;
+    var expires_in = form.expires_in;
 
     var mine = yield accountService.loginByPassport(passport, password);
 
     var openId   = mine.open_id;
-    var tick     = tools.makeTicket(openId);
+    var tick     = tools.makeTicket(openId, expires_in);
     tick.nick    = mine.nick;
     tick.open_id = openId;
     this.body    = errors.success(tick);
@@ -70,7 +70,7 @@ var AccountStateless = {
     var qs      = this.qs;
     var ticket  = qs.ticket;
     var service = qs.service;
-    var rtn = yield accountService.getRightsByTicket(ticket, service);
+    var rtn     = yield accountService.getRightsByTicket(ticket, service);
 
     tools.responseJson(this, errors.success(rtn), qs);
 
