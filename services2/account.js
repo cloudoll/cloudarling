@@ -115,12 +115,11 @@ module.exports = {
     });
 
 
-    var userDevices  = yield db.take("device", {
+    userInfo.devices = yield db.take("device", {
       where : "account_id=$account_id",
       params: {account_id: userInfo.id},
       cols  : ["title", "sn", "mac", "code"]
     });
-    userInfo.devices = userDevices;
     return userInfo;
   },
   getInfoByTicket   : function *(ticket) {
@@ -162,13 +161,12 @@ module.exports = {
       throw errors.WHAT_NOT_FOUND("服务 [" + service_code + "] ");
     }
 
-    var userRights = yield db.take("v_user_rights", {
+
+    userInfo.rights = yield db.take("v_user_rights", {
       where : "account_id=$account_id and service_id=$sid",
       params: {account_id: userInfo.id, sid: xservice.id},
       cols  : ["id", "title", "code"]
     });
-
-    userInfo.rights = userRights;
 
     var uAType = 0 || parseInt(userInfo.account_type);
     if ((uAType & 8) == 8) {
@@ -195,49 +193,114 @@ module.exports = {
       params: {openId: openId}
     });
 
-
-    var userDevices = yield db.take("device", {
+    userInfo.devices = yield db.take("device", {
       where : "account_id=$aid",
       params: {aid: userInfo.id},
       cols  : ["title", "sn", "mac", "code"]
     });
 
-    userInfo.devices = userDevices;
-
     return userInfo;
 
   },
-  adminList           : function *(qs) {
-    var page = qs.page || 1;
-    var size = qs.size || 20;
+  adminList         : function *(qs) {
+
+    var skip  = qs.skip || 0;
+    var limit = qs.limit || 20;
 
     var where = "1=1", queryParams = {};
 
-    var qmb = qs.mobile;
-    var eml = qs.email;
-    var nk  = qs.nick;
+    var qkey = qs.q;
+    //
+    // var qmb = qs.mobile;
+    // var eml = qs.email;
+    // var nk  = qs.nick;
 
-    if (qmb) {
-      where += " and mobile like $mobile";
-      queryParams.mobile = '%' + qmb + '%';
-    }
-    if (eml) {
-      where += " and email like $email";
-      queryParams.email = '%' + eml + '%';
-    }
-    if (nk) {
-      where += " and nick like $nick";
-      queryParams.nick = '%' + nk + '%';
+    if (qkey) {
+      where += " and ((mobile like $qkey) or (email like $qkey) or (nick like $qkey))";
+      queryParams.qkey = '%' + qkey + '%';
     }
 
     return yield db.list("account", {
       where  : where,
       params : queryParams,
       orderBy: "id desc",
-      page   : page,
-      size   : size,
-      cols   : ['id', 'mobile', 'email', 'nick', 'open_id', 'avatar']
+      skip   : skip,
+      limit  : limit,
+      cols   : ['id', 'mobile', 'email', 'nick', 'open_id', 'avatar', 'account_type']
     });
+  },
+  grantGod          : function *(accountId) {
+    if (!accountId) {
+      throw errors.WHAT_REQUIRE('id');
+    }
+    accountId      = parseInt(accountId);
+    var me         = yield db.loadById("account", accountId, ['id', 'account_type']);
+    var updateData = {id: accountId};
+
+    if ((me.account_type & 8) == 8) {
+      updateData.account_type = updateData.account_type & ~8;
+    } else {
+      updateData.account_type = updateData.account_type | 8;
+    }
+    yield db.update('account', updateData);
+    return true;
+
+  },
+  update            : function *(regInfo) {
+    if (regInfo.mobile == '') {
+      delete regInfo.mobile;
+    }
+    if (regInfo.email == '') {
+      delete regInfo.email;
+    }
+    if (regInfo.nick == '') {
+      delete regInfo.nick;
+    }
+    if (!regInfo.mobile && !regInfo.nick && !regInfo.email) {
+      throw errors.WHAT_REQUIRE('手机，email或昵称');
+    }
+
+    if (regInfo.mobile) {
+      if (!tools.validateTools.isChinaMobile(regInfo.mobile)) {
+        throw errors.CHINA_MOBILE_ILLEGAL;
+      }
+    }
+    if (regInfo.email) {
+      if (!tools.validateTools.isEmail(regInfo.email)) {
+        throw errors.EMAIL_ILLEGAL;
+      }
+    }
+    if (regInfo.nick) {
+      if (regInfo.nick.length < 3 || regInfo.length > 30) {
+        throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
+      }
+    }
+
+    if (regInfo.password && regInfo.password != "") {
+      var newPassword  = tools.stringTools.genPassword(regInfo.password);
+      regInfo.password = newPassword.password;
+      regInfo.salt     = newPassword.salt;
+    } else {
+      delete regInfo.password;
+    }
+
+    delete regInfo.open_id;
+    delete regInfo.account_type;
+    delete regInfo.avatar;
+
+    if (!regInfo.id) {
+      delete regInfo.id;
+    }
+
+
+    var xid = yield db.save('account', regInfo, ['id', 'open_id']);
+
+    delete regInfo.salt;
+    delete regInfo.password;
+    regInfo.id = xid.id;
+
+    return regInfo;
+
 
   }
 };
