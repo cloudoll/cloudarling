@@ -4,17 +4,17 @@ var request = require('request');
 
 
 var reginfo = {
-  mobile      : '13006699861',
+  mobile      : '13006699866',
   password    : '111111',
   account_type: 9
 };
 //
-// request.post('http://localhost:3000/open/account/register',
-//   {
-//     form: reginfo
-//   }, function (err, res, body) {
-//     console.log(body);
-//   });
+request.post('http://localhost:7301/open/account/register',
+  {
+    form: reginfo
+  }, function (err, res, body) {
+    console.log(body);
+  });
 
 // request.post('http://localhost:3000/open/account/check-passport',
 //   {
@@ -63,14 +63,14 @@ var reginfo = {
 //   });
 
 
-request.post('http://localhost:3000/open/address/set-default',
-  {
-    form: {
-      id         : 4,
-      ticket     : 'eyJvcGVuX2lkIjoiODAwMjE3OWEtMzJjNS0xMWU2LTlhNDEtMDI0MmFjMTEwMDA0IiwiZXhwaXJlc19pbiI6MTQ2NTk4MjM5MCwic2lnbiI6ImE5N2I5YmEzY2M1OWQ3MGVjY2JiYTIyYTgwYmNlNjE4YmI4ZmIyODAyY2ZmMDBlZWY1NGEwMGQ1MmYyZDIwYzYifQ==',
-      
-
-    },
-  }, function (err, res, body) {
-    console.log(body);
-  });
+// request.post('http://localhost:3000/open/address/set-default',
+//   {
+//     form: {
+//       id         : 4,
+//       ticket     : 'eyJvcGVuX2lkIjoiODAwMjE3OWEtMzJjNS0xMWU2LTlhNDEtMDI0MmFjMTEwMDA0IiwiZXhwaXJlc19pbiI6MTQ2NTk4MjM5MCwic2lnbiI6ImE5N2I5YmEzY2M1OWQ3MGVjY2JiYTIyYTgwYmNlNjE4YmI4ZmIyODAyY2ZmMDBlZWY1NGEwMGQ1MmYyZDIwYzYifQ==',
+//      
+//
+//     },
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
