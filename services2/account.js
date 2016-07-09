@@ -128,13 +128,15 @@ module.exports = {
     }
     var openId = myTools.getOpenId(ticket);
 
-    return yield db.load("account", {
+    var data = yield db.load("account", {
       where : "open_id=$openId",
-      cols  : ["id", "open_id", "youku_id", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
+      cols  : ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
       params: {openId: openId}
     });
-
-
+    if (!data) {
+      throw errors.WHAT_NOT_EXISTS('用户');
+    }
+    return data;
   },
   getRightsByTicket : function *(ticket, service_code) {
     if (!ticket) {
