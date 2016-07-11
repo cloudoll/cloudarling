@@ -9,60 +9,91 @@
 同时也是 cloudeer 生态系统一员。
 
 
-## 用户 API
+## 帐号 API
 
 ### 注册
 
-POST /register
+POST /open/account/register
 
 参数：mobile, email, nick, password
 
 
 ### 登录
 
-POST /login
+POST /open/account/login
 
 参数：passport, password
 
 ### 检查手机/email/nick是否被注册
 
-POST /check-passport
+POST /open/account/check-passport
 
 参数：passport
 
 ### 获取用户信息
 
-GET /info
+GET /open/account/info
 
 参数：ticket
 
+### 刷新 ticket
+
+GET /open/account/refresh-ticket
+
+
+### 获取用户权限
+
+GET /open/account/rights
+
+参数： ticket，service
 
 ### 修改密码
 
-POST /change-password
+POST /open/account/change-password
 
 参数：ticket, password
 
 ### 发送动态密码
 
-POST /dynamic-password/send
+POST /open/helper/captcha-send
 
 参数：passport
 
-### 使用动态密码登录
+### 验证动态密码
 
-POST /dynamic-password/login
+POST /open/helper/captcha-validate
 
-参数：passport, password, ticket
-
-此处提交的 ticket 是发送动态密码时候由服务器端返回的，不是用户票据。
+参数：passport, code
 
 
-### 获取用户权限
 
-GET /rights
 
-参数： ticket，service
+## 地区 API
+
+GET:  /open/district/children
+
+GET:  /open/district/family
+
+GET:  /open/district/ancestor
+
+
+
+
+## 地址 API
+
+POST: /open/address/add
+
+POST: /open/address/update
+
+POST: /open/address/delete
+
+POST: /open/address/set-default
+
+GET:  /open/address/list
+
+GET:  /open/address/default
+
+GET:  /open/address/one
 
 
 
@@ -70,52 +101,29 @@ GET /rights
 
 以下的 api 需要 cloudarling 中用户的 GOD_ADMIN 权限。
 
-### 查询用户
+GET:  /admin/account/list
 
-GET /admin/accounts
+POST: /admin/account/grant-god
 
-参数：ticket, keyword，skip， limit
+POST: /admin/account/save
 
+POST: /admin/right/edit-service
 
-### 服务列表
+POST: /admin/right/del-service
 
-GET /admin/services
+GET:  /admin/right/list-service
 
+POST: /admin/right/edit-rights
 
-### 从 cloudeer 中同步方法
+GET:  /admin/right/list-rights
 
-GET /admin/service/sync
+POST: /admin/right/del-rights
 
-参数 ticket
+POST: /admin/right/grant
 
-从 cloudeer 中同步方法，以便进行权限管理
+POST: /admin/right/ungrant
 
+GET:  /admin/right/user-rights
 
-
-
-### 删除服务
-
-POST /admin/service/delete
-
-参数 ticket，id
-
-
-
-### 新增或者修改服务
-
-POST /admin/serivce/save
-
-参数：
-
-```
-{
-    id: 0 || 10,
-    code: 'cloudarling',
-    title: 'xxx',
-    content: 'xxxxx'
-}
-```
-
-如果传了 id，并且不为 0，则是新增！
-
+GET:  /admin/right/sync-from-cloudeer
 
