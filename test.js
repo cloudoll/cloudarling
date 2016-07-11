@@ -1,19 +1,19 @@
 var request = require('request');
 
-// request.post('http://localhost:3000/open/account/login',
-//   {
-//     form: {passport: '13006699866', password: '111111'}
-//   }, function (err, res, body) {
-//     console.log(body);
-//   });
+request.post('http://localhost:7302/open/account/login',
+  {
+    form: {passport: '13006699866', password: '111111'}
+  }, function (err, res, body) {
+    console.log(body);
+  });
 
 
-var x = {
-  ticket: 'eyJvcGVuX2lkIjoiNTljNDViNzhhZDE1NGYzMmI3NGNhMDUyMzlhY2M5Y2EiLCJleHBpcmVzX2luIjoxNDY1ODk3Mzk2LCJzaWduIjoiNTk3MDQ2ZjliOWI0ZWUzNzU3YjZiOTQxNmE5Y2I3ZjFhMGExMTY2MTEzNGQ0Y2Y5NmEzZTgyOTRiOGJjNGQ2NiJ9'
-  ,service: 'cloudarling'
-};
-
-console.log(require('querystring').stringify(x));
+// var x = {
+//   ticket: 'eyJvcGVuX2lkIjoiNTljNDViNzhhZDE1NGYzMmI3NGNhMDUyMzlhY2M5Y2EiLCJleHBpcmVzX2luIjoxNDY1ODk3Mzk2LCJzaWduIjoiNTk3MDQ2ZjliOWI0ZWUzNzU3YjZiOTQxNmE5Y2I3ZjFhMGExMTY2MTEzNGQ0Y2Y5NmEzZTgyOTRiOGJjNGQ2NiJ9'
+//   ,service: 'cloudarling'
+// };
+//
+// console.log(require('querystring').stringify(x));
 //request.post('http://localhost:7301/register', {form: {mobile: '13006699866', password: '111111'}}, function (err, res, body) {
 //  console.log(body);
 //});

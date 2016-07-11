@@ -17,11 +17,38 @@
 // port                 = parseInt(port);
 
 //-------------------------------
-var doll   = require('cloudoll');
-var config = require('./config');
+var doll           = require('cloudoll');
+var config         = require('./config');
+var url            = require('url');
+var accountService = require('./services2/account');
 
 
-var app    = new doll.KoaApplication();
+//****************权限验证，所有的 admin 都需要 GOD_ADMIN 权限
+var checkGodAdmin = function *(next) {
+  var urls     = url.parse(this.url);
+  var authCode = urls.pathname;
+  authCode     = authCode.toLowerCase();
+  if (authCode.indexOf('/admin') == 0) {
+    var ticket = this.qs.ticket;
+    if (!ticket) {
+      throw doll.errors.WHAT_REQUIRE("ticket");
+    }
+    var rights = yield accountService.getInfoByTicket(ticket);
+    if ((rights.account_type & 8) == 8) {
+      yield  next;
+    } else {
+      throw doll.errors.NO_RIGHTS;
+    }
+  } else {
+    yield  next;
+  }
+};
+//888888888888888888888888888888
+
+
+var app = new doll.KoaApplication({
+  middles: [checkGodAdmin]
+});
 
 doll.orm.postgres.constr = config.postgres.conString;
 

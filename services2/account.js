@@ -110,7 +110,7 @@ module.exports = {
 
     var userInfo = yield db.load("account", {
       where : "open_id=$openId",
-      cols  : ["id", "open_id", "youku_id", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
+      cols  : ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
       params: {openId: openId}
     });
 
