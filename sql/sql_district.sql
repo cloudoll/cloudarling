@@ -45027,7 +45027,7 @@ INSERT INTO district (id,title,parent_id) VALUES (45026,'新城街道',5021);
 INSERT INTO district (id,title,parent_id) VALUES (45027,'石河子乡',5021);
 INSERT INTO district (id,title,parent_id) VALUES (45028,'红山街道',5021);
 INSERT INTO district (id,title,parent_id) VALUES (45029,'老街街道',5021);
-INSERT INTO district (id,title,parent_id) VALUES (45030,'1农一师6团',5022);
+INSERT INTO district (id,title,parent_id) VALUES (45030,'农一师6团',5022);
 INSERT INTO district (id,title,parent_id) VALUES (45031,'农一师10团',5022);
 INSERT INTO district (id,title,parent_id) VALUES (45032,'农一师11团',5022);
 INSERT INTO district (id,title,parent_id) VALUES (45033,'农一师12团',5022);
