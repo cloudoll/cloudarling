@@ -33,11 +33,11 @@ var AccountStateless = {
     var form     = this.request.body;
     var mine     = yield accountService.register(form);
     var openId   = mine.open_id;
+
     var tick     = tools.makeTicket(openId);
     tick.nick    = mine.nick;
     tick.open_id = openId;
-    this.body    = errors.success(tick);
-
+    this.echo(tick);
   },
   refreshTicket : function *() {
     var qs     = this.qs;

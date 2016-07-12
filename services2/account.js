@@ -71,7 +71,8 @@ module.exports = {
 
     delete regInfo.salt;
     delete regInfo.password;
-    regInfo.id = xid.id;
+    regInfo.id      = xid.id;
+    regInfo.open_id = xid.open_id;
 
     return regInfo;
   },

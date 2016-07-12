@@ -19,7 +19,7 @@ module.exports = {
     authenticate  : true
   },
   postgres             : {
-	conString: "postgres://postgres:docker_youku@112.74.29.211:5432/xietest"
+    conString: "postgres://postgres:docker_youku@112.74.29.211:5432/xietest"
   },
   // mysql   : {
   //   //mysql host 在我的 fedora 23 里面的 docker 里。
