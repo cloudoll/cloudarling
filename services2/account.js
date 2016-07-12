@@ -23,7 +23,7 @@ module.exports = {
       if (!tools.validateTools.isChinaMobile(regInfo.mobile)) {
         throw errors.CHINA_MOBILE_ILLEGAL;
       }
-      var existMobile = yield db.exists("account", {
+      var existMobile = yield db.load("account", {
         where : 'mobile=$mobile',
         params: {mobile: regInfo.mobile}
       });
@@ -35,7 +35,7 @@ module.exports = {
       if (!tools.validateTools.isEmail(regInfo.email)) {
         throw errors.EMAIL_ILLEGAL;
       }
-      var existEmail = yield db.exists("account", {
+      var existEmail = yield db.load("account", {
         where : 'email=$email',
         params: {email: regInfo.email}
       });
@@ -47,7 +47,7 @@ module.exports = {
       if (regInfo.nick.length < 3 || regInfo.length > 30) {
         throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
       }
-      var existNick = yield db.exists("account", {
+      var existNick = yield db.load("account", {
         where : 'nick=$nick',
         params: {nick: regInfo.nick}
       });
