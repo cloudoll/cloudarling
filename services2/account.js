@@ -19,10 +19,16 @@ module.exports = {
       throw errors.WHAT_REQUIRE('手机，email或昵称');
     }
 
+    if (regInfo.mobile && !tools.validateTools.isChinaMobile(regInfo.mobile)) {
+      throw errors.CHINA_MOBILE_ILLEGAL;
+    }
+    if (regInfo.email && !tools.validateTools.isEmail(regInfo.email)) {
+      throw errors.EMAIL_ILLEGAL;
+    }
+    if (regInfo.nick && (regInfo.nick.length < 3 || regInfo.length > 30)) {
+      throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
+    }
     if (regInfo.mobile) {
-      if (!tools.validateTools.isChinaMobile(regInfo.mobile)) {
-        throw errors.CHINA_MOBILE_ILLEGAL;
-      }
       var existMobile = yield db.load("account", {
         where : 'mobile=$mobile',
         params: {mobile: regInfo.mobile}
@@ -32,9 +38,6 @@ module.exports = {
       }
     }
     if (regInfo.email) {
-      if (!tools.validateTools.isEmail(regInfo.email)) {
-        throw errors.EMAIL_ILLEGAL;
-      }
       var existEmail = yield db.load("account", {
         where : 'email=$email',
         params: {email: regInfo.email}
@@ -44,9 +47,6 @@ module.exports = {
       }
     }
     if (regInfo.nick) {
-      if (regInfo.nick.length < 3 || regInfo.length > 30) {
-        throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
-      }
       var existNick = yield db.load("account", {
         where : 'nick=$nick',
         params: {nick: regInfo.nick}
@@ -54,7 +54,9 @@ module.exports = {
       if (existNick) {
         throw errors.WHAT_EXISTED("昵称");
       }
+
     }
+
     //regInfo.open_id = tools.stringTools.uuid(true);
 
     if (!regInfo.password) {
