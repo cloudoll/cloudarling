@@ -23,15 +23,36 @@ module.exports = {
       if (!tools.validateTools.isChinaMobile(regInfo.mobile)) {
         throw errors.CHINA_MOBILE_ILLEGAL;
       }
+      var existMobile = yield db.exists("account", {
+        where : 'mobile=$mobile',
+        params: {mobile: regInfo.mobile}
+      });
+      if (existMobile) {
+        throw errors.WHAT_EXISTED("手机");
+      }
     }
     if (regInfo.email) {
       if (!tools.validateTools.isEmail(regInfo.email)) {
         throw errors.EMAIL_ILLEGAL;
       }
+      var existEmail = yield db.exists("account", {
+        where : 'email=$email',
+        params: {email: regInfo.email}
+      });
+      if (existNick) {
+        throw errors.WHAT_EXISTED("邮箱");
+      }
     }
     if (regInfo.nick) {
       if (regInfo.nick.length < 3 || regInfo.length > 30) {
         throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
+      }
+      var existNick = yield db.exists("account", {
+        where : 'nick=$nick',
+        params: {nick: regInfo.nick}
+      });
+      if (existNick) {
+        throw errors.WHAT_EXISTED("昵称");
       }
     }
     //regInfo.open_id = tools.stringTools.uuid(true);
