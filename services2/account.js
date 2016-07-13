@@ -166,16 +166,29 @@ module.exports = {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
-    if (!service_code) {
-      throw errors.WHAT_REQUIRE("service");
-    }
-    var openId = myTools.getOpenId(ticket);
 
+    var openId   = myTools.getOpenId(ticket);
     var userInfo = yield db.load("account", {
       where : "open_id=$openId",
       cols  : ["id", "open_id", "youku_id", "nick", "email", "mobile", "account_type"],
       params: {openId: openId}
     });
+
+
+    var uAType = 0 || parseInt(userInfo.account_type);
+    if ((uAType & 8) == 8) {
+      userInfo.rights = [{
+        "id"   : "0",
+        "title": "上帝管理员",
+        "code" : "GOD_ADMIN"
+      }];
+      return userInfo;
+    }
+
+
+    if (!service_code) {
+      throw errors.WHAT_REQUIRE("service");
+    }
 
     var xservice = yield db.load("service", {
       where : "code=$code",
@@ -194,14 +207,14 @@ module.exports = {
       cols  : ["id", "title", "code"]
     });
 
-    var uAType = 0 || parseInt(userInfo.account_type);
-    if ((uAType & 8) == 8) {
-      userInfo.rights.push({
-        "id"   : "0",
-        "title": "上帝管理员",
-        "code" : "GOD_ADMIN"
-      });
-    }
+    // var uAType = 0 || parseInt(userInfo.account_type);
+    // if ((uAType & 8) == 8) {
+    //   userInfo.rights.push({
+    //     "id"   : "0",
+    //     "title": "上帝管理员",
+    //     "code" : "GOD_ADMIN"
+    //   });
+    // }
 
     //if (userInfo)
 
