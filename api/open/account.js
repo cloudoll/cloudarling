@@ -17,6 +17,7 @@ var AccountStateless = {
   },
   $login        : function *() {
     var form       = this.request.body;
+    console.log(form);
     var passport   = form.passport;
     var password   = form.password;
     var expires_in = form.expires_in;
