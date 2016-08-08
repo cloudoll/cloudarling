@@ -18,60 +18,84 @@ admin 接口里，ticket 一律放到 querystring 中。
 
 ## 帐号 API
 
-### 注册
+---
+
 
 POST /open/account/register
+
+注册
 
 参数：mobile, email, nick, password
 
 
-### 登录
+---
+
+登录
 
 POST /open/account/login
 
 参数：passport, password
 
-### 检查手机/email/nick是否被注册
+---
 
 POST /open/account/check-passport
-
+ 
+检查手机/email/nick是否被注册
+ 
 参数：passport
 
-### 获取用户信息
+---
+
 
 GET /open/account/info
 
+获取用户信息
+
 参数：ticket
 
-### 刷新 ticket
+---
 
 GET /open/account/refresh-ticket
 
+刷新 ticket
 
-### 获取用户权限
+---
 
 GET /open/account/rights
 
+获取用户权限
+
+上帝管理员将只获取一个权限，就是 GOD
+
 参数： ticket，service
 
-### 修改密码
+---
 
 POST /open/account/change-password
 
+修改密码
+
 参数：ticket, password
 
-### 发送动态密码
+---
 
 POST /open/helper/captcha-send
 
+发送动态密码
+
+
 参数：passport
 
-### 验证动态密码
+---
 
 POST /open/helper/captcha-validate
 
+验证动态密码
+
+
 参数：passport, code
 
+---
 
 
 
