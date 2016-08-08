@@ -1,9 +1,9 @@
 // var request       = require("request");
 var errors         = require("cloudoll").errors;
-var stringTools    = require("common-tools").stringTools;
-var validateTools  = require("common-tools").validateTools;
 var tools          = require("../../tools");
 var accountService = require('../../services2/account');
+// var stringTools    = require("common-tools").stringTools;
+// var validateTools  = require("common-tools").validateTools;
 
 /*
  * 无状态的登录管理

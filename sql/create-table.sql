@@ -158,17 +158,75 @@ CREATE TABLE IF NOT EXISTS account_map
     create_date timestamp without time zone DEFAULT now()
 );
 
-CREATE OR REPLACE VIEW v_user_rights AS
- SELECT user_rights.id,
-    user_rights.account_id,
-    user_rights.rights_id,
-    user_rights.create_date,
-    user_rights.creator,
-    rights.title,
-    rights.code,
-    rights.service_id
-   FROM user_rights
-     LEFT JOIN rights ON user_rights.rights_id = rights.id;
+CREATE TABLE IF NOT EXISTS area
+(
+  id integer  NOT NULL PRIMARY KEY,
+  title character varying(30) NOT NULL,
+  parent_id integer,
+  short_name character varying(30),
+  area_code integer,
+  zip_code integer,
+  pinyin character varying(100),
+  lng character varying(20),
+  lat character varying(20),
+  level integer NOT NULL,
+  "position" character varying(255),
+  sort integer
+);
+
+
+
+--CREATE OR REPLACE VIEW v_user_rights AS
+-- SELECT user_rights.id,
+--    user_rights.account_id,
+--    user_rights.rights_id,
+--    user_rights.create_date,
+--    user_rights.creator,
+--    rights.title,
+--    rights.code,
+--    rights.service_id
+--   FROM user_rights
+--     LEFT JOIN rights ON user_rights.rights_id = rights.id;
+
+
+
+
+--updated @ 2016年08月08日
+CREATE TABLE IF NOT EXISTS role
+(
+  id SERIAL NOT NULL PRIMARY KEY,
+  title character varying(50) NOT NULL,
+  create_date timestamp without time zone DEFAULT now(),
+  creator bigint
+);
+
+CREATE TABLE IF NOT EXISTS role_rights
+(
+  id SERIAL NOT NULL PRIMARY KEY,
+  rights_id bigint,
+  role_id integer,
+  create_date timestamp without time zone DEFAULT now(),
+  creator bigint
+);
+
+CREATE TABLE IF NOT EXISTS user_role
+(
+  id BIGSERIAL NOT NULL PRIMARY KEY,
+  account_id bigint,
+  role_id integer,
+  create_date timestamp without time zone DEFAULT now(),
+  creator bigint
+);
+
+drop view if exists v_user_rights;
+
+CREATE OR REPLACE VIEW public.v_user_rights AS
+select
+d.id, d.title title,d.code code,d.service_id service_id, a.id account_id
+from account a
+inner join user_role b on a.id=b.account_id
+inner join role_rights c on b.role_id=c.role_id
+inner join rights d on c.rights_id=d.id
 
 
 

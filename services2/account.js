@@ -207,20 +207,10 @@ module.exports = {
       cols  : ["id", "title", "code"]
     });
 
-    // var uAType = 0 || parseInt(userInfo.account_type);
-    // if ((uAType & 8) == 8) {
-    //   userInfo.rights.push({
-    //     "id"   : "0",
-    //     "title": "上帝管理员",
-    //     "code" : "GOD_ADMIN"
-    //   });
-    // }
-
-    //if (userInfo)
-
     return userInfo;
 
   },
+
   getDevicesByTicket: function *(ticket) {
     if (!ticket)
       throw errors.WHAT_REQUIRE("ticket");

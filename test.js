@@ -1,18 +1,42 @@
 var request = require('request');
 
-// request.post('http://localhost:7302/open/account/login',
+var ticket = "eyJvcGVuX2lkIjoiOTEyYzNkMjAtNDcxZi0xMWU2LTk0M2YtMDI0MmFjMTEwMDAxIiwiZXhwaXJlc19pbiI6MTQ3MDY0MjI1Niwic2lnbiI6IjBjNDYzMjdlNzI4YTEwMDc0YTllOWUyNjY2NzU3NzJiYzE0YTg3NTQ5MjM4NjI5YWU2N2IxNzA1NTkzMGUyZDkifQ==";
+// request.post('http://localhost:7301/open/account/login',
 //   {
 //     form: {passport: '13006699866', password: '111111'}
 //   }, function (err, res, body) {
 //     console.log(body);
 //   });
 
-request.post('http://localhost:7302/open/account/register',
+// request.post('http://localhost:7301/open/account/register',
+//   {
+//     form: {mobile: '13006699866', password: '111111'}
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+
+// request.post('http://localhost:7301/admin/role/edit-user?ticket=' + ticket,
+//   {
+//     form: {account_id: '1', role_id: '1'}
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+
+request.post('http://localhost:7301/admin/role/edit-rights?ticket=' + ticket,
   {
-    form: {mobile: '13006699862', password: '111111'}
+    form: {role_id: '1', rights_id: '2'}
   }, function (err, res, body) {
     console.log(body);
   });
+
+
+// request.post('http://localhost:7301/admin/role/save?ticket=' + ticket,
+//   {
+//     form: {title: '客服'}
+//   }, function (err, res, body) {
+//     console.log(body);
+//   });
+//
 
 // var x = {
 //   ticket: 'eyJvcGVuX2lkIjoiNTljNDViNzhhZDE1NGYzMmI3NGNhMDUyMzlhY2M5Y2EiLCJleHBpcmVzX2luIjoxNDY1ODk3Mzk2LCJzaWduIjoiNTk3MDQ2ZjliOWI0ZWUzNzU3YjZiOTQxNmE5Y2I3ZjFhMGExMTY2MTEzNGQ0Y2Y5NmEzZTgyOTRiOGJjNGQ2NiJ9'

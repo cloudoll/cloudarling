@@ -103,6 +103,8 @@ GET:  /open/address/one
 
 GET:  /admin/account/list
 
+---
+
 POST: /admin/account/grant-god
 
 POST: /admin/account/save
@@ -126,4 +128,33 @@ POST: /admin/right/ungrant
 GET:  /admin/right/user-rights
 
 GET:  /admin/right/sync-from-cloudeer
+
+---------
+
+GET: /admin/role/list 角色列表
+
+输入 q 查询角色名称
+
+------------
+
+POST: /admin/role/save 角色保存
+
+输入 title， id(不输入是插入，输入是修改)
+
+---------
+
+POST: /admin/role/edit-user 在角色中增加用户，或者给用户增加角色
+
+输入 account_id, role_id, 如果存在就是删除，如果不存在就是增加。
+
+---------
+
+POST: /admin/role/edit-rights 在角色中增加功能，或者将功能授权给角色
+
+输入 account_id, rights_id, 如果存在就是删除，如果不存在就是增加。
+
+---------
+
+
+
 
