@@ -108,6 +108,8 @@ GET:  /open/address/one
 
 以下的 api 需要 cloudarling 中用户的 GOD_ADMIN 权限。
 
+---
+
 GET:  /admin/account/list
 
 ---
@@ -144,25 +146,27 @@ POST: /admin/right/del-rights
 
 ---------
 
-POST: /admin/right/grant
+~~POST: /admin/right/grant~~
 
 废弃，现在使用 role 关联
 
 ---------
 
-<u>POST: /admin/right/ungrant</u>
+~~POST: /admin/right/ungrant~~
 
 废弃，现在使用 role 关联
 
 ---------
 
-GET:  /admin/right/user-rights
+~~GET:  /admin/right/user-rights~~
 
 废弃，现在使用 role 关联
 
 ---------
 
 GET:  /admin/right/sync-from-cloudeer
+
+从 cloudeer 中同步服务和方法
 
 ---------
 
