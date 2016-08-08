@@ -77,6 +77,8 @@ POST /open/helper/captcha-validate
 
 ## 地区 API
 
+以下 api 无需 ticket
+
 GET:  /open/district/children
 
 GET:  /open/district/family
@@ -112,6 +114,10 @@ GET:  /open/address/one
 
 GET:  /admin/account/list
 
+帐号列表
+
+输入： q （可选，查询条件，可以对 email nick 和 mobile 进行模糊查询）
+
 ---
 
 POST: /admin/account/grant-god
@@ -140,6 +146,10 @@ POST: /admin/right/edit-rights
 
 GET:  /admin/right/list-rights
 
+权限列表
+
+输入：service_id, title （可选，查询条件）
+
 ---------
 
 POST: /admin/right/del-rights
@@ -153,6 +163,8 @@ POST: /admin/right/del-rights
 ---------
 
 ~~POST: /admin/right/ungrant~~
+
+给用户删除一个权限
 
 废弃，现在使用 role 关联
 
@@ -170,27 +182,35 @@ GET:  /admin/right/sync-from-cloudeer
 
 ---------
 
-GET: /admin/role/list 角色列表
+GET: /admin/role/list 
 
-输入 q 查询角色名称
+角色列表
+
+输入: q （可选，查询条件，查询角色名称）
 
 ------------
 
-POST: /admin/role/save 角色保存
+POST: /admin/role/save 
 
-输入 title， id(不输入是插入，输入是修改)
+角色保存
 
----------
-
-POST: /admin/role/edit-user 在角色中增加用户，或者给用户增加角色
-
-输入 account_id, role_id, 如果存在就是删除，如果不存在就是增加。
+输入: title， id(不输入是插入，输入是修改)
 
 ---------
 
-POST: /admin/role/edit-rights 在角色中增加功能，或者将功能授权给角色
+POST: /admin/role/edit-user 
 
-输入 account_id, rights_id, 如果存在就是删除，如果不存在就是增加。
+在角色中增加用户，或者给用户增加角色
+
+输入: account_id, role_id, 如果存在就是删除，如果不存在就是增加。
+
+---------
+
+POST: /admin/role/edit-rights 
+
+在角色中增加功能，或者将功能授权给角色
+
+输入: account_id, rights_id, 如果存在就是删除，如果不存在就是增加。
 
 ---------
 
