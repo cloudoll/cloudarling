@@ -20,21 +20,27 @@ admin 接口里，ticket 一律放到 querystring 中。
 
 ---
 
-
-POST /open/account/register
-
-注册
-
-参数：mobile, email, nick, password
-
-
----
-
 POST /open/account/login
 
 登录
 
-参数：passport, password
+
+输入：passport （手机或者email，然后是用户名）, password, expires_in(可选)
+
+如果登录成功则：
+
+```json
+    {
+      "errno": 0,
+      "data": {
+        "ticket": "eyJvcGVuX2l...",
+        "expires_in": 1440655749,
+        "nick": "啤酒云"
+      }
+    }
+```
+
+ticket 是登录票据，之后的所有 api 将会依赖此票据，expires_in 表示这次登录即将失效的时间（时间戳，单位：秒），由客户端保存。
 
 ---
 
@@ -43,6 +49,19 @@ POST /open/account/check-passport
 检查手机/email/nick是否被注册
  
 参数：passport
+
+---
+
+
+
+POST /open/account/register
+
+注册
+
+参数：mobile, email, nick, password, expires_in
+
+
+
 
 ---
 
@@ -103,12 +122,35 @@ POST /open/helper/captcha-validate
 
 以下 api 无需 ticket
 
+---
+
 GET:  /open/district/children
+
+参数： id
+
+这个API将获取当前id地区的亲生儿子
+
+---
+
 
 GET:  /open/district/family
 
+参数： id
+
+这个API将获取当前 id 的家族
+
+包括：自己的兄弟，自己的儿子，自己的父亲和父亲的兄弟，爷爷和爷爷的兄弟，直系亲属将 使用 {selected: true} 标记出来。
+
+---
+
 GET:  /open/district/ancestor
 
+参数： id
+
+这个API将获取当前id向上递归的直系地区列表
+
+
+---
 
 
 
