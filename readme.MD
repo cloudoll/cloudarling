@@ -30,9 +30,9 @@ POST /open/account/register
 
 ---
 
-登录
-
 POST /open/account/login
+
+登录
 
 参数：passport, password
 
