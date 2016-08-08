@@ -9,6 +9,13 @@
 同时也是 cloudeer 生态系统一员。
 
 
+
+以下 api，如无特殊说明，均需要 ticket 参数。
+
+open 接口里，ticket 随 form 或者 querystring 走。
+
+admin 接口里，ticket 一律放到 querystring 中。
+
 ## 帐号 API
 
 ### 注册
@@ -107,25 +114,53 @@ GET:  /admin/account/list
 
 POST: /admin/account/grant-god
 
+---------
+
 POST: /admin/account/save
+
+---------
 
 POST: /admin/right/edit-service
 
+---------
+
 POST: /admin/right/del-service
+
+---------
 
 GET:  /admin/right/list-service
 
+---------
+
 POST: /admin/right/edit-rights
+
+---------
 
 GET:  /admin/right/list-rights
 
+---------
+
 POST: /admin/right/del-rights
+
+---------
 
 POST: /admin/right/grant
 
-POST: /admin/right/ungrant
+废弃，现在使用 role 关联
+
+---------
+
+<u>POST: /admin/right/ungrant</u>
+
+废弃，现在使用 role 关联
+
+---------
 
 GET:  /admin/right/user-rights
+
+废弃，现在使用 role 关联
+
+---------
 
 GET:  /admin/right/sync-from-cloudeer
 
