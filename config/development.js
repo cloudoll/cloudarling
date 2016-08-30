@@ -1,8 +1,8 @@
 module.exports = {
-  port: 7301,
+port:3000,
   app_name: 'cloudarling',
   debug: true,
-  my_host: 'localhost',
+  //my_host: 'localhost',
   cloudeer: {
     disabled: false, //是否注册到 cloudeer 下
     server: "http://127.0.0.1:8801",
