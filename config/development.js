@@ -20,7 +20,7 @@ module.exports = {
   },
   postgres: {
     //conString: "postgres://postgres:docker_youku@112.74.29.211:5432/xietest"
-    conString: "postgres://cloudbeer:zhwell@10.163.56.186:5432/u-cloudarling"
+    conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/u-cloudarling"
   },
   // mysql   : {
   //   //mysql host 在我的 fedora 23 里面的 docker 里。
