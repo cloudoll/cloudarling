@@ -3,13 +3,13 @@ module.exports = {
   app_name             : 'cloudarling',
   debug                : true,
   //my_host: 'localhost',
-  cloudeer             : {
-    disabled: false, //是否注册到 cloudeer 下
-    server  : "http://127.0.0.1:8801",
-    // myHost     : '127.0.0.1',
-    //serviceHost: "http://112.74.29.211:8801",
-    // myHost  : '10.163.56.91',
-    // myName  : 'cloudarling'
+  cloudeer              : {
+    type          : 'rest', //可选 rest, tcp, zoo
+    //host          : '30.97.93.93',
+    host          : '127.0.0.1',
+    port          : 2345,
+    username      : 'youku',
+    password      : 'youku123'
   },
   address              : {
     max_count: 200
@@ -20,7 +20,7 @@ module.exports = {
   },
   postgres             : {
     //conString: "postgres://postgres:docker_youku@112.74.29.211:5432/xietest"
-    conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/u-cloudarling"
+    conString: "postgres://youku:docker@127.0.0.1:5432/youku"
   },
   // mysql   : {
   //   //mysql host 在我的 fedora 23 里面的 docker 里。
