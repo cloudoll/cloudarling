@@ -4,8 +4,16 @@ module.exports = {
   debug                : true,
   //my_host: 'localhost',
   cloudeer             : {
-    disabled: false, //是否注册到 cloudeer 下
-    server  : "http://127.0.0.1:8801",
+    type          : 'tcp', //可选 rest, tcp, zoo
+    host          : '127.0.0.1',
+    port          : 2345,
+    username      : 'knock',
+    password      : 'password',
+    not_a_consumer: true,
+    not_a_service : false
+
+    // disabled: false, //是否注册到 cloudeer 下
+    // server  : "http://127.0.0.1:8801",
     // myHost     : '127.0.0.1',
     //serviceHost: "http://112.74.29.211:8801",
     // myHost  : '10.163.56.91',
@@ -19,8 +27,9 @@ module.exports = {
     authenticate  : true
   },
   postgres             : {
+    conString: "postgres://cloudbeer:zhwell@30.97.92.164:5432/u-cloudarling"
     //conString: "postgres://postgres:docker_youku@112.74.29.211:5432/xietest"
-    conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/u-cloudarling"
+    //conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/u-cloudarling"
   },
   // mysql   : {
   //   //mysql host 在我的 fedora 23 里面的 docker 里。
