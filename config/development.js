@@ -3,13 +3,13 @@ module.exports = {
   app_name             : 'cloudarling',
   debug                : true,
   //my_host: 'localhost',
-  cloudeer              : {
-    type          : 'rest', //可选 rest, tcp, zoo
+  cloudeer             : {
+    type    : 'rest', //可选 rest, tcp, zoo
     //host          : '30.97.93.93',
-    host          : '127.0.0.1',
-    port          : 8801,
-    username      : 'youku',
-    password      : 'youku123'
+    host    : '127.0.0.1',
+    port    : 8801,
+    username: 'youku',
+    password: 'youku123'
   },
   address              : {
     max_count: 200
@@ -34,3 +34,4 @@ module.exports = {
     public_key                : 'iloveyou', //这个是加密的key，无状态的 ticket
     dynamic_password_expire_in: 60000 //短信默认过期时间
   }
+};

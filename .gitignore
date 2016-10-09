@@ -32,4 +32,5 @@ node_modules
 data
 
 # Config of project
-config
+config/development.js
+config/product.js
