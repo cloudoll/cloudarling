@@ -7,7 +7,7 @@ module.exports = {
     type          : 'rest', //可选 rest, tcp, zoo
     //host          : '30.97.93.93',
     host          : '127.0.0.1',
-    port          : 2345,
+    port          : 8801,
     username      : 'youku',
     password      : 'youku123'
   },
