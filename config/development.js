@@ -19,7 +19,6 @@ module.exports = {
     authenticate  : true
   },
   postgres             : {
-    //conString: "postgres://postgres:docker_youku@112.74.29.211:5432/xietest"
     conString: "postgres://youku:docker@127.0.0.1:5432/youku"
   },
   // mysql   : {
@@ -35,8 +34,3 @@ module.exports = {
     public_key                : 'iloveyou', //这个是加密的key，无状态的 ticket
     dynamic_password_expire_in: 60000 //短信默认过期时间
   }
-};
-//
-// ticket=eyJvcGVuX2lkIjoiNTljNDViNzhhZDE1NGYzMmI3NGNhMDUyMzlhY2M5Y2EiLCJleHBpcmVzX2luIjoxNDY1ODk3Mzk2LCJzaWduIjoiNTk3MDQ2ZjliOWI0U3YjZiOTQxNmE5Y2I3ZjFhMGExMTY2MTEzNGQ0Y2Y5NmEzZTgyOTRiOGJjNGQ2NiJ9
-// ticket=eyJvcGVuX2lkIjoiNTljNDViNzhhZDE1NGYzMmI3NGNhMDUyMzlhY2M5Y2EiLCJleHBpcmVzX2luIjoxNDY1ODk3Mzk2LCJzaoiNTk3MDQ2ZjliOWI0ZWUzNzU3YjZiOTQxNmE5Y2I3ZjFhMGExMTY2MTEzNGQ0Y2Y5NmEzZTgyOTRiOGJjNGQ2NiJ9&service=cloudarling
-
