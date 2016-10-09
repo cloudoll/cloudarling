@@ -5,7 +5,13 @@ var myTools = require('../tools');
 
 
 module.exports = {
-  register              : function *(regInfo) {
+  register              : function *(regInfo0) {
+    var regInfo      = {};
+    regInfo.mobile   = regInfo0.mobile;
+    regInfo.email    = regInfo0.email;
+    regInfo.nick     = regInfo0.nick;
+    regInfo.password = regInfo0.password;
+
     if (regInfo.mobile == '') {
       delete regInfo.mobile;
     }
@@ -126,7 +132,7 @@ module.exports = {
     return true;
   },
 
-  getAllByTicket    : function *(ticket) {
+  getAllByTicket   : function *(ticket) {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
@@ -146,7 +152,7 @@ module.exports = {
     });
     return userInfo;
   },
-  getInfoByTicket   : function *(ticket) {
+  getInfoByTicket  : function *(ticket) {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
@@ -162,7 +168,7 @@ module.exports = {
     }
     return data;
   },
-  getRightsByTicket : function *(ticket, service_code) {
+  getRightsByTicket: function *(ticket, service_code) {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
