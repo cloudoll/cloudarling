@@ -1,7 +1,7 @@
 module.exports = {
   port                 : 7301,
   app_name             : 'cloudarling',
-  debug                : true,
+  //debug                : true,
   //my_host: 'localhost',
   cloudeer             : {
     type    : 'rest', //可选 rest, tcp, zoo
