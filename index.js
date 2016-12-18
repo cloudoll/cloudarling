@@ -17,23 +17,25 @@
 // port                 = parseInt(port);
 
 //-------------------------------
-var doll           = require('cloudoll');
-var config         = require('./config');
-var url            = require('url');
-var accountService = require('./services2/account');
+const doll           = require('cloudoll');
+const config         = require('./config');
+const url            = require('url');
+const accountService = require('./services2/account');
+const querystring = require("querystring");
 
 
 //****************权限验证，所有的 admin 都需要 GOD_ADMIN 权限
-var checkGodAdmin = function *(next) {
-  var urls     = url.parse(this.url);
-  var authCode = urls.pathname;
+let checkGodAdmin = function *(next) {
+  let urls     = url.parse(this.url);
+  let authCode = urls.pathname;
   authCode     = authCode.toLowerCase();
   if (authCode.indexOf('/admin') == 0) {
-    var ticket = this.qs.ticket;
+    let qs = querystring.parse(this.request.querystring);
+    let ticket = qs.ticket;
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
-    var rights = yield accountService.getInfoByTicket(ticket);
+    let rights = yield accountService.getInfoByTicket(ticket);
     if ((rights.account_type & 8) == 8) {
       yield  next;
     } else {
@@ -46,7 +48,7 @@ var checkGodAdmin = function *(next) {
 //888888888888888888888888888888
 
 
-var app = new doll.KoaApplication({
+let app = new doll.KoaApplication({
   middles: [checkGodAdmin]
 });
 
