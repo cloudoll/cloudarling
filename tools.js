@@ -1,8 +1,9 @@
 var request     = require("request");
 var querystring = require("querystring");
 var errors      = require('cloudoll').errors;
-var config      = require("./config");
+// var config      = require("./config");
 
+const config  = {}; //TODO: this config for what?
 var tools = {
   //getUrl: function (url, data) {
   //    return function (callback) {
@@ -160,7 +161,7 @@ var tools = {
   getTimeStamp      : function () {
     return Math.round(new Date().getTime() / 1000);
   },
-  makeTicket        : function (open_id, expires_in) {
+  makeTicket        : function (open_id, expires_in, config) {
     var xtick      = {};
     //pires_in = expires_in || tools.getTimeStamp() + 24 * 3600; //默认保存一天
     xtick.open_id  = open_id;

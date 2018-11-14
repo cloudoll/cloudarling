@@ -17,32 +17,32 @@
 // port                 = parseInt(port);
 
 //-------------------------------
-const doll           = require('cloudoll');
-const config         = require('./config');
-const url            = require('url');
+const doll = require('cloudoll');
+// const config = require('./config');
+const url = require('url');
 const accountService = require('./services2/account');
 const querystring = require("querystring");
 
 
 //****************权限验证，所有的 admin 都需要 GOD_ADMIN 权限
-let checkGodAdmin = function *(next) {
-  let urls     = url.parse(this.url);
+let checkGodAdmin = async (ctx, next) => {
+  let urls = url.parse(ctx.url);
   let authCode = urls.pathname;
-  authCode     = authCode.toLowerCase();
+  authCode = authCode.toLowerCase();
   if (authCode.indexOf('/admin') == 0) {
     let qs = querystring.parse(this.request.querystring);
     let ticket = qs.ticket;
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
-    let rights = yield accountService.getInfoByTicket(ticket);
+    let rights = await accountService.getInfoByTicket(ticket);
     if ((rights.account_type & 8) == 8) {
-      yield  next;
+      await next();
     } else {
       throw doll.errors.NO_RIGHTS;
     }
   } else {
-    yield  next;
+    await next();
   }
 };
 //888888888888888888888888888888
@@ -52,14 +52,15 @@ let app = new doll.KoaApplication({
   middles: [checkGodAdmin]
 });
 
-doll.orm.postgres.constr = config.postgres.conString;
+doll.orm.postgres.connect(app.config.postgres);
+//doll.orm.postgres.constr = config.postgres.conString;
 
 // var mysql = doll.orm.mysql;
 // mysql.connect(config.mysql);
 // mysql.debug = true;
 
-app.router.get('/', function *() {
-  this.body = {msg: "亲，你好，我是怕死婆特。"};
+app.router.get('/',  () => {
+  this.body = { msg: "亲，你好，我是怕死婆特。" };
 });
 // console.log(process.env);
 

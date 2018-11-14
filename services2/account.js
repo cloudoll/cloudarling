@@ -1,15 +1,15 @@
-var db      = require('cloudoll').orm.postgres;
-var tools   = require('common-tools');
-var errors  = require('cloudoll').errors;
-var myTools = require('../tools');
+const db = require('cloudoll').orm.postgres;
+const tools = require('common-tools');
+const errors = require('cloudoll').errors;
+const myTools = require('../tools');
 
 
-module.exports = {
-  register              : function *(regInfo0) {
-    var regInfo      = {};
-    regInfo.mobile   = regInfo0.mobile;
-    regInfo.email    = regInfo0.email;
-    regInfo.nick     = regInfo0.nick;
+const me = module.exports = {
+  register: async (regInfo0) => {
+    var regInfo = {};
+    regInfo.mobile = regInfo0.mobile;
+    regInfo.email = regInfo0.email;
+    regInfo.nick = regInfo0.nick;
     regInfo.password = regInfo0.password;
 
     if (regInfo.mobile == '') {
@@ -35,27 +35,27 @@ module.exports = {
       throw errors.WHAT_WRONG_LENGTH_RANGE('昵称', 3, 30);
     }
     if (regInfo.mobile) {
-      var existMobile = yield db.load("account", {
-        where : 'mobile=$mobile',
-        params: {mobile: regInfo.mobile}
+      var existMobile = await db.load("account", {
+        where: 'mobile=$mobile',
+        params: { mobile: regInfo.mobile }
       });
       if (existMobile) {
         throw errors.WHAT_EXISTED("手机");
       }
     }
     if (regInfo.email) {
-      var existEmail = yield db.load("account", {
-        where : 'email=$email',
-        params: {email: regInfo.email}
+      var existEmail = await db.load("account", {
+        where: 'email=$email',
+        params: { email: regInfo.email }
       });
       if (existNick) {
         throw errors.WHAT_EXISTED("邮箱");
       }
     }
     if (regInfo.nick) {
-      var existNick = yield db.load("account", {
-        where : 'nick=$nick',
-        params: {nick: regInfo.nick}
+      var existNick = await db.load("account", {
+        where: 'nick=$nick',
+        params: { nick: regInfo.nick }
       });
       if (existNick) {
         throw errors.WHAT_EXISTED("昵称");
@@ -69,20 +69,20 @@ module.exports = {
       regInfo.password = tools.stringTools.randomString(18);
     }
 
-    var newPassword  = tools.stringTools.genPassword(regInfo.password);
+    var newPassword = tools.stringTools.genPassword(regInfo.password);
     regInfo.password = newPassword.password;
-    regInfo.salt     = newPassword.salt;
+    regInfo.salt = newPassword.salt;
 
-    var xid = yield db.insert('account', regInfo, ['id', 'open_id']);
+    var xid = await db.insert('account', regInfo, ['id', 'open_id']);
 
     delete regInfo.salt;
     delete regInfo.password;
-    regInfo.id      = xid.id;
+    regInfo.id = xid.id;
     regInfo.open_id = xid.open_id;
 
     return regInfo;
   },
-  loadByPassport        : function *(passport) {
+  loadByPassport: async (passport) => {
     var where = 'nick=$passport';
     if (tools.validateTools.isEmail(passport)) {
       where = 'email=$passport';
@@ -90,26 +90,26 @@ module.exports = {
       where = 'mobile=$passport';
     }
 
-    return yield db.load("account", {
-      where : where,
-      params: {passport: passport}
+    return await db.load("account", {
+      where: where,
+      params: { passport: passport }
     });
   },
-  loadById              : function *(id) {
+  loadById: async (id) => {
     var where = 'id=$id';
-    return yield db.load("account", {
-      where : where,
-      params: {id: id}
+    return await db.load("account", {
+      where: where,
+      params: { id: id }
     });
   },
-  loginByPassport       : function *(passport, password) {
+  loginByPassport: async (passport, password) => {
     if (!passport) {
       throw errors.WHAT_REQUIRE("帐号");
     }
     if (!password) {
       throw errors.WHAT_REQUIRE("密码");
     }
-    var mine = yield this.loadByPassport(passport);
+    var mine = await me.loadByPassport(passport);
     if (!mine) {
       throw errors.LOGIN_ERROR_BECAUSE('用户没找到，请重新输入登录凭证。');
     }
@@ -124,69 +124,69 @@ module.exports = {
     return mine;
 
   },
-  checkPassportAvailable: function *(passport) {
-    var mine = yield this.loadByPassport(passport);
+  checkPassportAvailable: async (passport) => {
+    var mine = await me.loadByPassport(passport);
     if (mine) {
       throw errors.WHAT_EXISTED(passport);
     }
     return true;
   },
 
-  getAllByTicket   : function *(ticket) {
+  getAllByTicket: async (ticket) => {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
     var openId = myTools.getOpenId(ticket);
 
-    var userInfo = yield db.load("account", {
-      where : "open_id=$openId",
-      cols  : ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
-      params: {openId: openId}
+    var userInfo = await db.load("account", {
+      where: "open_id=$openId",
+      cols: ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
+      params: { openId: openId }
     });
 
 
-    userInfo.devices = yield db.take("device", {
-      where : "account_id=$account_id",
-      params: {account_id: userInfo.id},
-      cols  : ["title", "sn", "mac", "code"]
+    userInfo.devices = await db.take("device", {
+      where: "account_id=$account_id",
+      params: { account_id: userInfo.id },
+      cols: ["title", "sn", "mac", "code"]
     });
     return userInfo;
   },
-  getInfoByTicket  : function *(ticket) {
+  getInfoByTicket: async (ticket) => {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
     var openId = myTools.getOpenId(ticket);
 
-    var data = yield db.load("account", {
-      where : "open_id=$openId",
-      cols  : ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
-      params: {openId: openId}
+    var data = await db.load("account", {
+      where: "open_id=$openId",
+      cols: ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
+      params: { openId: openId }
     });
     if (!data) {
       throw errors.WHAT_NOT_EXISTS('用户');
     }
     return data;
   },
-  getRightsByTicket: function *(ticket, service_code) {
+  getRightsByTicket: async (ticket, service_code) => {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
 
-    var openId   = myTools.getOpenId(ticket);
-    var userInfo = yield db.load("account", {
-      where : "open_id=$openId",
-      cols  : ["id", "open_id", "youku_id", "nick", "email", "mobile", "account_type"],
-      params: {openId: openId}
+    var openId = myTools.getOpenId(ticket);
+    var userInfo = await db.load("account", {
+      where: "open_id=$openId",
+      cols: ["id", "open_id", "youku_id", "nick", "email", "mobile", "account_type"],
+      params: { openId: openId }
     });
 
 
     var uAType = 0 || parseInt(userInfo.account_type);
     if ((uAType & 8) == 8) {
       userInfo.rights = [{
-        "id"   : "0",
+        "id": "0",
         "title": "上帝管理员",
-        "code" : "GOD_ADMIN"
+        "code": "GOD_ADMIN"
       }];
       return userInfo;
     }
@@ -196,10 +196,10 @@ module.exports = {
       throw errors.WHAT_REQUIRE("service");
     }
 
-    var xservice = yield db.load("service", {
-      where : "code=$code",
-      params: {code: service_code},
-      cols  : ["id", "title", "code"]
+    var xservice = await db.load("service", {
+      where: "code=$code",
+      params: { code: service_code },
+      cols: ["id", "title", "code"]
 
     });
     if (xservice == null) {
@@ -207,39 +207,39 @@ module.exports = {
     }
 
 
-    userInfo.rights = yield db.take("v_user_rights", {
-      where : "account_id=$account_id and service_id=$sid",
-      params: {account_id: userInfo.id, sid: xservice.id},
-      cols  : ["id", "title", "code"]
+    userInfo.rights = await db.take("v_user_rights", {
+      where: "account_id=$account_id and service_id=$sid",
+      params: { account_id: userInfo.id, sid: xservice.id },
+      cols: ["id", "title", "code"]
     });
 
     return userInfo;
 
   },
 
-  getDevicesByTicket: function *(ticket) {
+  getDevicesByTicket: async (ticket) => {
     if (!ticket)
       throw errors.WHAT_REQUIRE("ticket");
     var openId = myTools.getOpenId(ticket);
 
-    var userInfo = yield db.load("account", {
-      where : "open_id=$openId",
-      cols  : ["id", "youku_id", "nick", "email", "mobile"],
-      params: {openId: openId}
+    var userInfo = await db.load("account", {
+      where: "open_id=$openId",
+      cols: ["id", "youku_id", "nick", "email", "mobile"],
+      params: { openId: openId }
     });
 
-    userInfo.devices = yield db.take("device", {
-      where : "account_id=$aid",
-      params: {aid: userInfo.id},
-      cols  : ["title", "sn", "mac", "code"]
+    userInfo.devices = await db.take("device", {
+      where: "account_id=$aid",
+      params: { aid: userInfo.id },
+      cols: ["title", "sn", "mac", "code"]
     });
 
     return userInfo;
 
   },
-  adminList         : function *(qs) {
+  adminList: async (qs) => {
 
-    var skip  = qs.skip || 0;
+    var skip = qs.skip || 0;
     var limit = qs.limit || 20;
 
     var where = "1=1", queryParams = {};
@@ -255,33 +255,33 @@ module.exports = {
       queryParams.qkey = '%' + qkey + '%';
     }
 
-    return yield db.list("account", {
-      where  : where,
-      params : queryParams,
+    return await db.list("account", {
+      where: where,
+      params: queryParams,
       orderBy: "id desc",
-      skip   : skip,
-      limit  : limit,
-      cols   : ['id', 'mobile', 'email', 'nick', 'open_id', 'avatar', 'account_type']
+      skip: skip,
+      limit: limit,
+      cols: ['id', 'mobile', 'email', 'nick', 'open_id', 'avatar', 'account_type']
     });
   },
-  grantGod          : function *(accountId) {
+  grantGod: async (accountId) => {
     if (!accountId) {
       throw errors.WHAT_REQUIRE('id');
     }
-    accountId      = parseInt(accountId);
-    var me         = yield db.loadById("account", accountId, ['id', 'account_type']);
-    var updateData = {id: accountId};
+    accountId = parseInt(accountId);
+    var me = await db.loadById("account", accountId, ['id', 'account_type']);
+    var updateData = { id: accountId };
 
     if ((me.account_type & 8) == 8) {
       updateData.account_type = updateData.account_type & ~8;
     } else {
       updateData.account_type = updateData.account_type | 8;
     }
-    yield db.update('account', updateData);
+    await db.update('account', updateData);
     return true;
 
   },
-  update            : function *(regInfo) {
+  update: async (regInfo) => {
     if (regInfo.mobile == '') {
       delete regInfo.mobile;
     }
@@ -312,9 +312,9 @@ module.exports = {
     }
 
     if (regInfo.password && regInfo.password != "") {
-      var newPassword  = tools.stringTools.genPassword(regInfo.password);
+      var newPassword = tools.stringTools.genPassword(regInfo.password);
       regInfo.password = newPassword.password;
-      regInfo.salt     = newPassword.salt;
+      regInfo.salt = newPassword.salt;
     } else {
       delete regInfo.password;
     }
@@ -328,7 +328,7 @@ module.exports = {
     }
 
 
-    var xid = yield db.save('account', regInfo, ['id', 'open_id']);
+    var xid = await db.save('account', regInfo, ['id', 'open_id']);
 
     delete regInfo.salt;
     delete regInfo.password;

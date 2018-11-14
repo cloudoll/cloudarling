@@ -1,21 +1,21 @@
-var db              = require('cloudoll').orm.postgres;
-var errors          = require('cloudoll').errors;
-var stringTools     = require('common-tools').stringTools;
-var accountService  = require('./account');
+var db = require('cloudoll').orm.postgres;
+var errors = require('cloudoll').errors;
+var stringTools = require('common-tools').stringTools;
+var accountService = require('./account');
 var districtService = require('./district');
-var config          = require('../config');
+// var config          = require('../config');
 
 module.exports = {
-  list: function *(ticket) {
-    var user = yield accountService.getInfoByTicket(ticket);
+  list: async (ticket) => {
+    var user = await accountService.getInfoByTicket(ticket);
 
-    return yield db.take("address", {
-      where : "account_id=$accountId",
-      params: {accountId: user.id},
-      cols  : ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
+    return await db.take("address", {
+      where: "account_id=$accountId",
+      params: { accountId: user.id },
+      cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
-  add : function *(form) {
+  add: async (form, maxAddressCount) => {
 
     if (!form.district_id) {
       throw errors.WHAT_REQUIRE("地区ID【district_id】");
@@ -30,30 +30,30 @@ module.exports = {
     if (!form.tel1) {
       throw errors.WHAT_REQUIRE("联系电话【tel1】");
     }
-    form.cnee    = stringTools.htmlEncode(form.cnee);
+    form.cnee = stringTools.htmlEncode(form.cnee);
     form.address = stringTools.htmlEncode(form.address);
 
     var ticket = form.ticket;
     delete form.ticket;
 
-    var user = yield accountService.getInfoByTicket(ticket);
+    var user = await accountService.getInfoByTicket(ticket);
 
-    var cnt = yield db.count("address", {
-      where : "account_id=$accountId",
-      params: {accountId: user.id}
+    var cnt = await db.count("address", {
+      where: "account_id=$accountId",
+      params: { accountId: user.id }
     });
 
-    var maxAddressCount = 100;
-    if (config.address && config.address.max_count) {
-      maxAddressCount = config.address.max_count;
-    }
+    var maxAddressCount = maxAddressCount || 100;
+    // if (this.app.config.address && this.app.config.address.max_count) {
+    //   maxAddressCount = this.app.config.address.max_count;
+    // }
 
     if (cnt.count >= maxAddressCount) {
       throw errors.WHAT_TOO_MUCH("您的地址");
     }
 
 
-    var districtObj = yield districtService.getMyAncestor(form.district_id);
+    var districtObj = await districtService.getMyAncestor(form.district_id);
 
     if (districtObj) {
       form.district = districtObj.reduce(function (prev, ele) {
@@ -67,16 +67,16 @@ module.exports = {
     if (addStatus > 2 || addStatus < 1) addStatus = 1;
     if (form.address_status == 2) {
       //插入默认地址需要将之前的地址置为 1
-      yield db.updateBatch("address", {address_status: 1}, {
-        where : "account_id=$accountId",
-        params: {accountId: user.id}
+      await db.updateBatch("address", { address_status: 1 }, {
+        where: "account_id=$accountId",
+        params: { accountId: user.id }
       });
     }
-    return yield db.insert("address", form, ["id"]);
+    return await db.insert("address", form, ["id"]);
 
   },
 
-  update: function *(form) {
+  update: async (form) => {
     var ticket = form.ticket;
     delete form.ticket;
 
@@ -84,20 +84,20 @@ module.exports = {
     if (!form.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
-    var user = yield accountService.getInfoByTicket(ticket);
+    var user = await accountService.getInfoByTicket(ticket);
 
-    var oriAddress = yield db.loadById("address", form.id, ["id", "account_id"]);
+    var oriAddress = await db.loadById("address", form.id, ["id", "account_id"]);
     if (!oriAddress) {
       throw errors.WHAT_NOT_EXISTS("此条地址");
     }
     if (oriAddress.account_id != user.id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
-    form.cnee    = stringTools.htmlEncode(form.cnee);
+    form.cnee = stringTools.htmlEncode(form.cnee);
     form.address = stringTools.htmlEncode(form.address);
 
     if (!form.district && form.district_id && form.district_id > 0) {
-      var districtObj = yield districtService.getMyAncestor(form.district_id);
+      var districtObj = await districtService.getMyAncestor(form.district_id);
 
       if (districtObj) {
         form.district = districtObj.reduce(function (prev, ele) {
@@ -105,19 +105,19 @@ module.exports = {
         }, "");
       }
     }
-    return yield db.save("address", form, ["id"]);
+    return await db.save("address", form, ["id"]);
   },
 
-  delete: function *(form) {
+  delete: async (form) => {
     var ticket = form.ticket;
     delete form.ticket;
     if (!form.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
 
-    var user = yield accountService.getInfoByTicket(ticket);
+    var user = await accountService.getInfoByTicket(ticket);
 
-    var oriAddress = yield db.loadById("address", form.id, ["id", "account_id"]);
+    var oriAddress = await db.loadById("address", form.id, ["id", "account_id"]);
 
     if (!oriAddress) {
       throw errors.WHAT_NOT_EXISTS("此条地址");
@@ -126,10 +126,10 @@ module.exports = {
     if (oriAddress.account_id != user.id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
-    return yield db.delById("address", form.id, ["id"]);
+    return await db.delById("address", form.id, ["id"]);
   },
 
-  setDefault    : function *(form) {
+  setDefault: async (form) => {
     var ticket = form.ticket;
     delete form.ticket;
 
@@ -138,9 +138,9 @@ module.exports = {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
 
-    var user = yield accountService.getInfoByTicket(ticket);
+    var user = await accountService.getInfoByTicket(ticket);
 
-    var oriAddress = yield db.loadById("address", form.id, ["id", "account_id"]);
+    var oriAddress = await db.loadById("address", form.id, ["id", "account_id"]);
 
     if (!oriAddress) {
       throw errors.WHAT_NOT_EXISTS("此条地址");
@@ -150,36 +150,36 @@ module.exports = {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
 
-    yield db.updateBatch("address", {address_status: 1}, {
-      where : "account_id=$accountId",
-      params: {accountId: user.id}
+    await db.updateBatch("address", { address_status: 1 }, {
+      where: "account_id=$accountId",
+      params: { accountId: user.id }
     });
 
-    return yield db.update("address", {address_status: 2, id: form.id});
+    return await db.update("address", { address_status: 2, id: form.id });
 
   },
-  getDefault    : function *(qs) {
+  getDefault: async (qs) => {
     var ticket = qs.ticket;
-    var user   = yield accountService.getInfoByTicket(ticket);
-    return yield db.load("address", {
-      where : "account_id=$accountId and address_status=2",
-      params: {accountId: user.id},
-      cols  : ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
+    var user = await accountService.getInfoByTicket(ticket);
+    return await db.load("address", {
+      where: "account_id=$accountId and address_status=2",
+      params: { accountId: user.id },
+      cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
-  getAddressById: function *(qs) {
+  getAddressById: async (qs) => {
     var ticket = qs.ticket;
-    var user   = yield accountService.getInfoByTicket(ticket);
-    var id     = qs.id;
+    var user = await accountService.getInfoByTicket(ticket);
+    var id = qs.id;
 
     if (!qs.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
 
-    return yield db.load("address", {
-      where : "account_id=$accountId and id=$id",
-      params: {accountId: user.id, id: id},
-      cols  : ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
+    return await db.load("address", {
+      where: "account_id=$accountId and id=$id",
+      params: { accountId: user.id, id: id },
+      cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
 
   }

@@ -1,6 +1,6 @@
 // var request       = require("request");
-var errors         = require("cloudoll").errors;
-var tools          = require("../../tools");
+var errors = require("cloudoll").errors;
+var tools = require("../../tools");
 var accountService = require('../../services2/account');
 // var stringTools    = require("common-tools").stringTools;
 // var validateTools  = require("common-tools").validateTools;
@@ -10,56 +10,57 @@ var accountService = require('../../services2/account');
  *
  */
 var AccountStateless = {
-  $checkPassport: function*() {
-    var form     = this.request.body;
+  $checkPassport: function* () {
+    var form = this.request.body;
     var passport = form.passport;
-    this.body    = errors.success(yield accountService.checkPassportAvailable(passport));
+    this.body = errors.success(yield accountService.checkPassportAvailable(passport));
   },
-  $login        : function *() {
-    var form       = this.request.body;
+  $login: async (ctx) => {
+    var form = ctx.request.body;
     console.log(form);
-    var passport   = form.passport;
-    var password   = form.password;
+    var passport = form.passport;
+    var password = form.password;
     var expires_in = form.expires_in;
 
-    var mine = yield accountService.loginByPassport(passport, password);
+    var mine = await accountService.loginByPassport(passport, password);
+    console.log(mine);
 
-    var openId   = mine.open_id;
-    var tick     = tools.makeTicket(openId, expires_in);
-    tick.nick    = mine.nick;
+    var openId = mine.open_id;
+    var tick = tools.makeTicket(openId, expires_in, ctx.app.config);
+    tick.nick = mine.nick;
     tick.open_id = openId;
-    this.body    = errors.success(tick);
+    this.body = errors.success(tick);
   },
-  $register     : function*(next) {
-    var form     = this.request.body;
-    var mine     = yield accountService.register(form);
-    var openId   = mine.open_id;
+  $register: function* (next) {
+    var form = this.request.body;
+    var mine = yield accountService.register(form);
+    var openId = mine.open_id;
 
-    var tick     = tools.makeTicket(openId);
-    tick.nick    = mine.nick;
+    var tick = tools.makeTicket(openId);
+    tick.nick = mine.nick;
     tick.open_id = openId;
     this.echo(tick);
   },
-  refreshTicket : function *() {
-    var qs     = this.qs;
+  refreshTicket: function* () {
+    var qs = this.qs;
     var ticket = qs.ticket;
 
     var openId = tools.getOpenId(ticket);
-    var tick   = tools.makeTicket(openId);
+    var tick = tools.makeTicket(openId);
 
     tools.responseJson(this, errors.success(rtn), qs);
 
   },
-  info          : function*(next) {
-    var qs     = this.qs;
+  info: function* (next) {
+    var qs = this.qs;
     var ticket = qs.ticket;
 
     var rtn = yield accountService.getInfoByTicket(ticket);
 
     tools.responseJson(this, errors.success(rtn), qs);
   },
-  devices       : function*(next) {
-    var qs     = this.qs;
+  devices: function* (next) {
+    var qs = this.qs;
     var ticket = qs.ticket;
 
     var rtn = yield accountService.getDevicesByTicket(ticket);
@@ -67,11 +68,11 @@ var AccountStateless = {
     tools.responseJson(this, errors.success(rtn), qs);
 
   },
-  rights        : function*(next) {
-    var qs      = this.qs;
-    var ticket  = qs.ticket;
+  rights: function* (next) {
+    var qs = this.qs;
+    var ticket = qs.ticket;
     var service = qs.service;
-    var rtn     = yield accountService.getRightsByTicket(ticket, service);
+    var rtn = yield accountService.getRightsByTicket(ticket, service);
 
     tools.responseJson(this, errors.success(rtn), qs);
 

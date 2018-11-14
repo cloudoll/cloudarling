@@ -1,6 +1,5 @@
 var errors = require("cloudoll").errors;
 var db     = require("cloudoll").orm.postgres;
-var config = require("../../config");
 
 module.exports = {
   list: function*() {
