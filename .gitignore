@@ -34,3 +34,5 @@ data
 # Config of project
 config/development.js
 config/product.js
+
+trash

@@ -6,8 +6,8 @@ var districtService = require('./district');
 // var config          = require('../config');
 
 module.exports = {
-  list: async (ticket) => {
-    var user = await accountService.getInfoByTicket(ticket);
+  list: async (ticket, publicKey) => {
+    var user = await accountService.getInfoByTicket(ticket, publicKey);
 
     return await db.take("address", {
       where: "account_id=$accountId",
@@ -15,7 +15,7 @@ module.exports = {
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
-  add: async (form, maxAddressCount) => {
+  add: async (form, maxAddressCount, publicKey) => {
 
     if (!form.district_id) {
       throw errors.WHAT_REQUIRE("地区ID【district_id】");
@@ -36,7 +36,7 @@ module.exports = {
     var ticket = form.ticket;
     delete form.ticket;
 
-    var user = await accountService.getInfoByTicket(ticket);
+    var user = await accountService.getInfoByTicket(ticket,publicKey);
 
     var cnt = await db.count("address", {
       where: "account_id=$accountId",

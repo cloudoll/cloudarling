@@ -1,8 +1,5 @@
-var errors = require("cloudoll").errors;
-var tools = require("../../tools");
-var accountService = require('../../services2/account');
-// var stringTools    = require("common-tools").stringTools;
-// var validateTools  = require("common-tools").validateTools;
+const tools = require("../../tools");
+const accountService = require('../../services/account');
 
 /*
  * 无状态的登录管理
@@ -13,13 +10,13 @@ var AccountStateless = {
     ctx.body = "hello world";
   },
   h1: ctx => {
-    ctx.echo("a");
+    ctx.echo("w l u");
   },
 
   $checkPassport: async ctx => {
     var form = ctx.request.body;
     var passport = form.passport;
-    ctx.body = errors.success(await accountService.checkPassportAvailable(passport));
+    ctx.echo(await accountService.checkPassportAvailable(passport));
   },
   $login: async ctx => {
     var form = ctx.request.body;
@@ -33,7 +30,7 @@ var AccountStateless = {
     var tick = tools.makeTicket(openId, expires_in, ctx.app.config);
     tick.nick = mine.nick;
     tick.open_id = openId;
-    ctx.body = errors.success(tick);
+    ctx.echo(tick)
   },
   $register: async ctx => {
     var form = ctx.request.body;
@@ -45,40 +42,37 @@ var AccountStateless = {
     tick.open_id = openId;
     ctx.echo(tick);
   },
-  refreshTicket: async  ctx => {
+  refreshTicket: async ctx => {
     var qs = ctx.qs;
     var ticket = qs.ticket;
 
-    var openId = tools.getOpenId(ticket);
-    var tick = tools.makeTicket(openId);
+    console.log(ticket);
+    var openId = tools.getOpenId(ticket, ctx.app.config.account.public_key);
+    var tick = tools.makeTicket(openId, null, ctx.app.config);
+    ctx.echo(tick);
 
-    tools.responseJson(ctx, errors.success(rtn), qs);
 
   },
   info: async (ctx) => {
     var qs = ctx.qs;
     var ticket = qs.ticket;
 
-    var rtn = await accountService.getInfoByTicket(ticket);
+    var rtn = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
 
-    tools.responseJson(ctx, errors.success(rtn), qs);
+    ctx.echo(rtn);
   },
   devices: async (ctx) => {
     var qs = ctx.qs;
     var ticket = qs.ticket;
-
-    var rtn = await accountService.getDevicesByTicket(ticket);
-
-    tools.responseJson(ctx, errors.success(rtn), qs);
-
+    var rtn = await accountService.getDevicesByTicket(ticket, ctx.app.config.account.public_key);
+    ctx.echo(rtn);
   },
-  rights: async (ctx, next) => {
+  rights: async (ctx) => {
     var qs = ctx.qs;
     var ticket = qs.ticket;
     var service = qs.service;
-    var rtn = await accountService.getRightsByTicket(ticket, service);
-
-    tools.responseJson(ctx, errors.success(rtn), qs);
+    var rtn = await accountService.getRightsByTicket(ticket, service, ctx.app.config.account.public_key);
+    ctx.echo(rtn);
 
   }
 };

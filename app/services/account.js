@@ -4,7 +4,9 @@ const errors = require('cloudoll').errors;
 const myTools = require('../tools');
 
 
+
 const me = module.exports = {
+
   register: async (regInfo0) => {
     var regInfo = {};
     regInfo.mobile = regInfo0.mobile;
@@ -48,7 +50,7 @@ const me = module.exports = {
         where: 'email=$email',
         params: { email: regInfo.email }
       });
-      if (existNick) {
+      if (existEmail) {
         throw errors.WHAT_EXISTED("邮箱");
       }
     }
@@ -152,11 +154,11 @@ const me = module.exports = {
     });
     return userInfo;
   },
-  getInfoByTicket: async (ticket) => {
+  getInfoByTicket: async (ticket, pubKey) => {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
-    var openId = myTools.getOpenId(ticket);
+    var openId = myTools.getOpenId(ticket, pubKey);
 
     var data = await db.load("account", {
       where: "open_id=$openId",
@@ -168,12 +170,12 @@ const me = module.exports = {
     }
     return data;
   },
-  getRightsByTicket: async (ticket, service_code) => {
+  getRightsByTicket: async (ticket, service_code, pubKey) => {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
     }
 
-    var openId = myTools.getOpenId(ticket);
+    var openId = myTools.getOpenId(ticket, pubKey);
     var userInfo = await db.load("account", {
       where: "open_id=$openId",
       cols: ["id", "open_id", "youku_id", "nick", "email", "mobile", "account_type"],
@@ -217,10 +219,10 @@ const me = module.exports = {
 
   },
 
-  getDevicesByTicket: async (ticket) => {
+  getDevicesByTicket: async (ticket, pubKey) => {
     if (!ticket)
       throw errors.WHAT_REQUIRE("ticket");
-    var openId = myTools.getOpenId(ticket);
+    var openId = myTools.getOpenId(ticket, pubKey);
 
     var userInfo = await db.load("account", {
       where: "open_id=$openId",

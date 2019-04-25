@@ -1,26 +1,8 @@
-// var program = require('commander');
-//
-// program
-//   .version('0.0.1')
-//   .option('-p, --port [type]', 'Server port')
-//   .option('-e, --node_env [type]', 'Environment: product, development, test')
-//   .parse(process.argv);
-//
-// var port    = program.port || 7301;
-// var nodeEnv = program.node_env || "development";
-//
-//
-// console.log("Start server @ port: %s, with node_env: %s", port, nodeEnv);
-//
-// process.env.NODE_ENV = nodeEnv;
-// process.env.appName  = 'cloudarling';
-// port                 = parseInt(port);
 
-//-------------------------------
 const doll = require('cloudoll');
 // const config = require('./config');
 const url = require('url');
-const accountService = require('./services2/account');
+const accountService = require('./app/services/account');
 const querystring = require("querystring");
 
 
@@ -30,12 +12,13 @@ let checkGodAdmin = async (ctx, next) => {
   let authCode = urls.pathname;
   authCode = authCode.toLowerCase();
   if (authCode.indexOf('/admin') == 0) {
-    let qs = querystring.parse(this.request.querystring);
+    let qs = querystring.parse(ctx.request.querystring);
     let ticket = qs.ticket;
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
-    let rights = await accountService.getInfoByTicket(ticket);
+    let rights = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
+    console.log(rights);
     if ((rights.account_type & 8) == 8) {
       await next();
     } else {
@@ -48,7 +31,7 @@ let checkGodAdmin = async (ctx, next) => {
 //888888888888888888888888888888
 
 
-let app = new doll.KoaApplication({
+let app = new doll.WebApplication({
   middles: [checkGodAdmin]
 });
 
@@ -62,6 +45,8 @@ doll.orm.postgres.connect(app.config.postgres);
 app.router.get('/',  () => {
   this.body = { msg: "亲，你好，我是怕死婆特。" };
 });
+
+app.startService();
 // console.log(process.env);
 
 
