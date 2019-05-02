@@ -13,12 +13,11 @@
   "author": "Cloudbeer<cloudbeer@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "cloudoll": "^0.2.12",
-    "commander": "^2.9.0",
+    "commander": "^2.19.0",
     "common-tools": "^0.0.9",
-    "moment": "^2.14.1",
-    "request": "^2.74.0",
+    "moment": "^2.22.2",
+    "request": "^2.88.0",
     "sha256": "^0.2.0",
-    "uuid": "^2.0.2"
+    "uuid": "^3.3.2"
   }
 }

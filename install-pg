@@ -1,0 +1,90 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var tools   = require('common-tools');
+
+program
+  .version('0.0.1')
+  .usage('-m cloudbeer@gmail.com -p passWord!')
+  .option('-m, --email [email]', 'Email （必须填写）')
+  .option('-p, --password [password]', 'Password （必须填写）')
+  .option('-e, --node_env [node_env]', 'Environment: product, development, test')
+  .parse(process.argv);
+
+var email            = program.email;
+var password         = program.password;
+var nodeEnv          = program.node_env || "development";
+process.env.NODE_ENV = nodeEnv;
+
+if (!email || !password) {
+  program.outputHelp();
+  return;
+}
+
+if (!tools.validateTools.isEmail(email)) {
+  console.log('请输入正确的 email');
+  return;
+}
+
+
+var reginfo = {
+  email    : email,
+  password : password,
+  account_type: 9
+};
+
+
+
+const doll           = require('cloudoll');
+const co             = require('co');
+// var accountService = require('./services/Account');
+const accountService = require('./services2/account');
+// var ezmysql        = require('ezway2mysql');
+const config         = require('./config');
+// ezmysql.connect(config.mysql);
+
+const db = doll.orm.postgres;
+
+db.constr = config.postgres.conString;
+
+console.log("现在开始初始化 cloudarling 系统...");
+
+const fs = require('fs');
+
+console.log('开始创建数据表： ');
+fs.readFile('./sql/create-table.sql', 'utf8', function(err, data) {
+  if (err) throw err;
+  const xco1 = co(function *() {
+    yield db.query(data);
+    console.log("数据表创建完成，现在开始创建超级用户。");
+    var res = yield accountService.register(reginfo);
+    // console.log(res);
+    console.log("你创建的超级管理员帐号是：");
+    console.log(`用户名： ${program.email}`);
+    console.log(`密码：${program.password}`);
+  }).catch(function (reson) {
+    console.log(reson);
+    console.log("现在请按 ^C 退出。");
+  });
+  installArea();
+});
+
+
+
+function installArea(){
+  console.log('开始插入地区数据： ');
+  fs.readFile('./sql/area_postgres_data.sql', 'utf8', function(err, data) {
+    if (err) throw err;
+    
+  
+    const xco2 = co(function *() {
+      yield db.query(data);
+      console.log("地区数据插入完成。");
+      console.log("现在请按 ^C 退出。");
+    }).catch(function (reson) {
+      console.log(reson);
+      console.log("现在请按 ^C 退出。");
+    });
+  });
+}
+

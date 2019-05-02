@@ -1,8 +1,8 @@
-var errors = require('cloudoll').errors;
-var tools = require("../../tools");
-var districtServie = require('../../services2/district');
+const errors = require('cloudoll').errors;
+const tools = require("../../tools");
+const districtServie = require('../../services/district');
 
-var District = {
+const District = {
   children: async ctx => {
     var qs = ctx.qs;
     var id = qs.id || 0;

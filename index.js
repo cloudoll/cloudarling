@@ -1,67 +1,54 @@
-// var program = require('commander');
-//
-// program
-//   .version('0.0.1')
-//   .option('-p, --port [type]', 'Server port')
-//   .option('-e, --node_env [type]', 'Environment: product, development, test')
-//   .parse(process.argv);
-//
-// var port    = program.port || 7301;
-// var nodeEnv = program.node_env || "development";
-//
-//
-// console.log("Start server @ port: %s, with node_env: %s", port, nodeEnv);
-//
-// process.env.NODE_ENV = nodeEnv;
-// process.env.appName  = 'cloudarling';
-// port                 = parseInt(port);
 
-//-------------------------------
-const doll           = require('cloudoll');
-const config         = require('./config');
-const url            = require('url');
-const accountService = require('./services2/account');
+const doll = require('cloudoll');
+// const config = require('./config');
+const url = require('url');
+const accountService = require('./app/services/account');
 const querystring = require("querystring");
 
 
 //****************权限验证，所有的 admin 都需要 GOD_ADMIN 权限
-let checkGodAdmin = function *(next) {
-  let urls     = url.parse(this.url);
+let checkGodAdmin = async (ctx, next) => {
+  let urls = url.parse(ctx.url);
   let authCode = urls.pathname;
-  authCode     = authCode.toLowerCase();
-  console.log(this.request.querystring);
+
+  authCode = authCode.toLowerCase();
+  
   if (authCode.indexOf('/admin') == 0) {
-    let qs = querystring.parse(this.request.querystring);
+    let qs = querystring.parse(ctx.request.querystring);
     let ticket = qs.ticket;
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
-    let rights = yield accountService.getInfoByTicket(ticket);
+    let rights = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
+    console.log(rights);
     if ((rights.account_type & 8) == 8) {
-      yield  next;
+      await next();
     } else {
       throw doll.errors.NO_RIGHTS;
     }
   } else {
-    yield  next;
+    await next();
   }
 };
 //888888888888888888888888888888
 
 
-let app = new doll.KoaApplication({
+let app = new doll.WebApplication({
   middles: [checkGodAdmin]
 });
 
-doll.orm.postgres.constr = config.postgres.conString;
+doll.orm.postgres.connect(app.config.postgres);
+//doll.orm.postgres.constr = config.postgres.conString;
 
 // var mysql = doll.orm.mysql;
 // mysql.connect(config.mysql);
 // mysql.debug = true;
 
-app.router.get('/', function *() {
-  this.body = {msg: "亲，你好，我是怕死婆特。"};
+app.router.get('/',  () => {
+  this.body = { msg: "亲，你好，我是怕死婆特。" };
 });
+
+app.startService();
 // console.log(process.env);
 
 

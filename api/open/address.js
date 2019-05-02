@@ -1,31 +1,33 @@
-var errors         = require("cloudoll").errors;
-var tools          = require("../../tools");
-var addressService = require('../../services2/address');
+const errors = require("cloudoll").errors;
+const tools = require("../../tools");
+const addressService = require('../../services2/address');
 
-var Address = {
-  $add       : function *() {
-    this.body = errors.success(yield addressService.add(this.request.body));
+const Address = {
+  $add: async ctx => {
+    ctx.body = errors.success(
+      await addressService.add(ctx.request.body, ctx.app.config.address.max_count)
+    );
   },
-  $update    : function *() {
-    this.body = errors.success(yield addressService.update(this.request.body));
+  $update: async ctx => {
+    ctx.body = errors.success(await addressService.update(ctx.request.body));
   },
-  $delete    : function *() {
-    this.body = errors.success(yield addressService.delete(this.request.body));
+  $delete: async ctx => {
+    ctx.body = errors.success(await addressService.delete(ctx.request.body));
   },
-  $setDefault: function *() {
-    this.body = errors.success(yield addressService.setDefault(this.request.body));
+  $setDefault: async ctx => {
+    ctx.body = errors.success(await addressService.setDefault(ctx.request.body));
   },
-  list       : function *() {
-    var rtn = yield addressService.list(this.qs.ticket);
-    tools.responseJson(this, {errno: 0, data: rtn}, this.qs);
+  list: async ctx => {
+    var rtn = await addressService.list(ctx.qs.ticket);
+    tools.responseJson(this, { errno: 0, data: rtn }, ctx.qs);
   },
-  default    : function *() {
-    var rtn = yield addressService.getDefault(this.qs);
-    tools.responseJson(this, {errno: 0, data: rtn}, this.qs);
+  default: async ctx => {
+    var rtn = await addressService.getDefault(ctx.qs);
+    tools.responseJson(this, { errno: 0, data: rtn }, ctx.qs);
   },
-  one        : function *() {
-    var rtn = yield addressService.getAddressById(this.qs);
-    tools.responseJson(this, {errno: 0, data: rtn}, this.qs);
+  one: async ctx => {
+    var rtn = await addressService.getAddressById(ctx.qs);
+    tools.responseJson(this, { errno: 0, data: rtn }, ctx.qs);
   }
 };
 
