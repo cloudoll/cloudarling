@@ -29,6 +29,7 @@ let checkGodAdmin = function *(next) {
   let urls     = url.parse(this.url);
   let authCode = urls.pathname;
   authCode     = authCode.toLowerCase();
+  console.log(this.request.querystring);
   if (authCode.indexOf('/admin') == 0) {
     let qs = querystring.parse(this.request.querystring);
     let ticket = qs.ticket;
