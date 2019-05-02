@@ -37,15 +37,15 @@ let app = new doll.WebApplication({
   middles: [checkGodAdmin]
 });
 
-doll.orm.postgres.connect(app.config.postgres);
+// doll.orm.postgres.connect(app.config.postgres);
 //doll.orm.postgres.constr = config.postgres.conString;
 
-// var mysql = doll.orm.mysql;
-// mysql.connect(config.mysql);
-// mysql.debug = true;
+var mysql = doll.orm.mysql;
+mysql.debug = app.config.debug;
+mysql.connect(app.config.mysql);
 
-app.router.get('/',  () => {
-  this.body = { msg: "亲，你好，我是怕死婆特。" };
+app.router.get('/',  ctx => {
+  ctx.body = { msg: "亲，你好，我是怕死婆特。" };
 });
 
 app.startService();

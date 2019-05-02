@@ -8,25 +8,25 @@ module.exports = {
   //   username: 'youku',
   //   password: 'youku123'
   // },
-  postgres: {
-    host: '127.0.0.1',
-    port: 5432,
-    user: 'cloudbeer',
-    database: "cloudark",
-    password: 'zhwell',
-    max: 20,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000,
-    // conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/cloudark"
-  },
-  // mysql   : {
-  //   //mysql host 在我的 fedora 23 里面的 docker 里。
-  //   connectionLimit: 10,
-  //   host           : '10.211.55.15',
-  //   user           : 'root',
-  //   password       : 'zhwell',
-  //   database       : 'cloudarling'
+  // postgres: {
+  //   host: '127.0.0.1',
+  //   port: 5432,
+  //   user: 'cloudbeer',
+  //   database: "cloudark",
+  //   password: 'zhwell',
+  //   max: 20,
+  //   idleTimeoutMillis: 30000,
+  //   connectionTimeoutMillis: 2000,
+  //   // conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/cloudark"
   // },
+  mysql   : {
+    //mysql host 在我的 fedora 23 里面的 docker 里。
+    connectionLimit: 10,
+    host           : 'localhost',
+    user           : 'root',
+    password       : 'chuchur-cloudbeer',
+    database       : 'seeease-erp'
+  },
   address: {
     max_count: 200
   },

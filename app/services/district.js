@@ -1,4 +1,4 @@
-var db = require('cloudoll').orm.postgres;
+var db = require('cloudoll').orm.mysql;
 
 var District = module.exports = {
 

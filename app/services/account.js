@@ -1,4 +1,4 @@
-const db = require('cloudoll').orm.postgres;
+const db = require('cloudoll').orm.mysql;
 const tools = require('common-tools');
 const errors = require('cloudoll').errors;
 const myTools = require('../tools');

@@ -1,4 +1,4 @@
-var db = require('cloudoll').orm.postgres;
+var db = require('cloudoll').orm.mysql;
 var errors = require('cloudoll').errors;
 var stringTools = require('common-tools').stringTools;
 var accountService = require('./account');
