@@ -38,8 +38,8 @@ const me = module.exports = {
     }
     if (regInfo.mobile) {
       var existMobile = await db.load("account", {
-        where: 'mobile=$mobile',
-        params: { mobile: regInfo.mobile }
+        where: 'mobile=?',
+        params: [regInfo.mobile]
       });
       if (existMobile) {
         throw errors.WHAT_EXISTED("手机");
@@ -47,8 +47,8 @@ const me = module.exports = {
     }
     if (regInfo.email) {
       var existEmail = await db.load("account", {
-        where: 'email=$email',
-        params: { email: regInfo.email }
+        where: 'email=?',
+        params: [regInfo.email]
       });
       if (existEmail) {
         throw errors.WHAT_EXISTED("邮箱");
@@ -56,8 +56,8 @@ const me = module.exports = {
     }
     if (regInfo.nick) {
       var existNick = await db.load("account", {
-        where: 'nick=$nick',
-        params: { nick: regInfo.nick }
+        where: 'nick=?',
+        params: [regInfo.nick]
       });
       if (existNick) {
         throw errors.WHAT_EXISTED("昵称");
@@ -85,23 +85,22 @@ const me = module.exports = {
     return regInfo;
   },
   loadByPassport: async (passport) => {
-    var where = 'nick=$passport';
+    let where = 'nick=?';
     if (tools.validateTools.isEmail(passport)) {
-      where = 'email=$passport';
+      where = 'email=?';
     } else if (tools.validateTools.isChinaMobile(passport)) {
-      where = 'mobile=$passport';
+      where = 'mobile=?';
     }
-
     return await db.load("account", {
       where: where,
-      params: { passport: passport }
+      params: [passport]
     });
   },
   loadById: async (id) => {
-    var where = 'id=$id';
+    var where = 'id=?';
     return await db.load("account", {
       where: where,
-      params: { id: id }
+      params: [id]
     });
   },
   loginByPassport: async (passport, password) => {
@@ -141,15 +140,15 @@ const me = module.exports = {
     var openId = myTools.getOpenId(ticket);
 
     var userInfo = await db.load("account", {
-      where: "open_id=$openId",
+      where: "open_id=?",
       cols: ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
-      params: { openId: openId }
+      params: [openId]
     });
 
 
     userInfo.devices = await db.take("device", {
-      where: "account_id=$account_id",
-      params: { account_id: userInfo.id },
+      where: "account_id=?",
+      params: [userInfo.id],
       cols: ["title", "sn", "mac", "code"]
     });
     return userInfo;
@@ -161,9 +160,9 @@ const me = module.exports = {
     var openId = myTools.getOpenId(ticket, pubKey);
 
     var data = await db.load("account", {
-      where: "open_id=$openId",
+      where: "open_id=?",
       cols: ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
-      params: { openId: openId }
+      params: [openId]
     });
     if (!data) {
       throw errors.WHAT_NOT_EXISTS('用户');
@@ -177,9 +176,9 @@ const me = module.exports = {
 
     var openId = myTools.getOpenId(ticket, pubKey);
     var userInfo = await db.load("account", {
-      where: "open_id=$openId",
+      where: "open_id=?",
       cols: ["id", "open_id", "youku_id", "nick", "email", "mobile", "account_type"],
-      params: { openId: openId }
+      params: [openId]
     });
 
 
@@ -199,8 +198,8 @@ const me = module.exports = {
     }
 
     var xservice = await db.load("service", {
-      where: "code=$code",
-      params: { code: service_code },
+      where: "code=?",
+      params: [service_code],
       cols: ["id", "title", "code"]
 
     });
@@ -210,8 +209,8 @@ const me = module.exports = {
 
 
     userInfo.rights = await db.take("v_user_rights", {
-      where: "account_id=$account_id and service_id=$sid",
-      params: { account_id: userInfo.id, sid: xservice.id },
+      where: "account_id=? and service_id=?",
+      params: [userInfo.id, xservice.id],
       cols: ["id", "title", "code"]
     });
 
@@ -225,14 +224,14 @@ const me = module.exports = {
     var openId = myTools.getOpenId(ticket, pubKey);
 
     var userInfo = await db.load("account", {
-      where: "open_id=$openId",
+      where: "open_id=?",
       cols: ["id", "youku_id", "nick", "email", "mobile"],
-      params: { openId: openId }
+      params: [openId]
     });
 
     userInfo.devices = await db.take("device", {
-      where: "account_id=$aid",
-      params: { aid: userInfo.id },
+      where: "account_id=?",
+      params: [userInfo.id],
       cols: ["title", "sn", "mac", "code"]
     });
 
@@ -244,7 +243,7 @@ const me = module.exports = {
     var skip = qs.skip || 0;
     var limit = qs.limit || 20;
 
-    var where = "1=1", queryParams = {};
+    var where = "1=1", queryParams = [];
 
     var qkey = qs.q;
     //
@@ -253,8 +252,10 @@ const me = module.exports = {
     // var nk  = qs.nick;
 
     if (qkey) {
-      where += " and ((mobile like $qkey) or (email like $qkey) or (nick like $qkey))";
-      queryParams.qkey = '%' + qkey + '%';
+      where += " and ((mobile like ?) or (email like ?) or (nick like ?))";
+      queryParams.qkey.push('%' + qkey + '%');
+      queryParams.qkey.push('%' + qkey + '%');
+      queryParams.qkey.push('%' + qkey + '%');
     }
 
     return await db.list("account", {

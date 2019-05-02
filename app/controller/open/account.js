@@ -6,13 +6,6 @@ const accountService = require('../../services/account');
  *
  */
 var AccountStateless = {
-  hello: ctx => {
-    ctx.body = "hello world";
-  },
-  h1: ctx => {
-    ctx.echo("w l u");
-  },
-
   $checkPassport: async ctx => {
     var form = ctx.request.body;
     var passport = form.passport;
