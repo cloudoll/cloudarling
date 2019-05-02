@@ -10,8 +10,8 @@ module.exports = {
     var user = await accountService.getInfoByTicket(ticket, publicKey);
 
     return await db.take("address", {
-      where: "account_id=$accountId",
-      params: { accountId: user.id },
+      where: "account_id=?",
+      params: [user.id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
@@ -36,11 +36,11 @@ module.exports = {
     var ticket = form.ticket;
     delete form.ticket;
 
-    var user = await accountService.getInfoByTicket(ticket,publicKey);
+    var user = await accountService.getInfoByTicket(ticket, publicKey);
 
     var cnt = await db.count("address", {
-      where: "account_id=$accountId",
-      params: { accountId: user.id }
+      where: "account_id=?",
+      params: [user.id]
     });
 
     var maxAddressCount = maxAddressCount || 100;
@@ -68,8 +68,8 @@ module.exports = {
     if (form.address_status == 2) {
       //插入默认地址需要将之前的地址置为 1
       await db.updateBatch("address", { address_status: 1 }, {
-        where: "account_id=$accountId",
-        params: { accountId: user.id }
+        where: "account_id=?",
+        params: [user.id]
       });
     }
     return await db.insert("address", form, ["id"]);
@@ -151,8 +151,8 @@ module.exports = {
     }
 
     await db.updateBatch("address", { address_status: 1 }, {
-      where: "account_id=$accountId",
-      params: { accountId: user.id }
+      where: "account_id=?",
+      params: [user.id]
     });
 
     return await db.update("address", { address_status: 2, id: form.id });
@@ -162,8 +162,8 @@ module.exports = {
     var ticket = qs.ticket;
     var user = await accountService.getInfoByTicket(ticket);
     return await db.load("address", {
-      where: "account_id=$accountId and address_status=2",
-      params: { accountId: user.id },
+      where: "account_id=? and address_status=2",
+      params: [user.id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
@@ -177,8 +177,8 @@ module.exports = {
     }
 
     return await db.load("address", {
-      where: "account_id=$accountId and id=$id",
-      params: { accountId: user.id, id: id },
+      where: "account_id=? and id=?",
+      params: [user.id, id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
 
