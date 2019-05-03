@@ -20,7 +20,7 @@ let checkGodAdmin = async (ctx, next) => {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
     let rights = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
-    console.log(rights);
+    // console.log(rights);
     if ((rights.account_type & 8) == 8) {
       await next();
     } else {
