@@ -7,7 +7,7 @@ const querystring = require("querystring");
 
 
 //****************权限验证，所有的 admin 都需要 GOD_ADMIN 权限
-let checkGodAdmin = async (ctx, next) => {
+const checkGodAdmin = async (ctx, next) => {
   let urls = url.parse(ctx.url);
   let authCode = urls.pathname;
 
