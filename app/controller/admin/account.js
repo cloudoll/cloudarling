@@ -1,14 +1,14 @@
 const accountService = require('../../services/account');
 
 module.exports = {
-  list     : function*() {
-    var rtn = yield accountService.adminList(this.qs);
-    this.echo(rtn);
+  list: async ctx => {
+    var rtn = await accountService.adminList(ctx.qs);
+    ctx.echo(rtn);
   },
-  $grantGod: function *() {
-    this.echo(yield accountService.grantGod(this.request.body.id));
+  $grantGod: async ctx => {
+    ctx.echo(await accountService.grantGod(ctx.request.body.id));
   },
-  $save: function *() {    
-    this.echo(yield accountService.update(this.request.body));    
+  $save: async ctx => {
+    ctx.echo(await accountService.update(ctx.request.body));
   }
 };

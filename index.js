@@ -7,7 +7,7 @@ const querystring = require("querystring");
 
 
 //****************权限验证，所有的 admin 都需要 GOD_ADMIN 权限
-let checkGodAdmin = async (ctx, next) => {
+const checkGodAdmin = async (ctx, next) => {
   let urls = url.parse(ctx.url);
   let authCode = urls.pathname;
 
@@ -20,7 +20,7 @@ let checkGodAdmin = async (ctx, next) => {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
     let rights = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
-    console.log(rights);
+    // console.log(rights);
     if ((rights.account_type & 8) == 8) {
       await next();
     } else {
@@ -37,15 +37,15 @@ let app = new doll.WebApplication({
   middles: [checkGodAdmin]
 });
 
-doll.orm.postgres.connect(app.config.postgres);
+// doll.orm.postgres.connect(app.config.postgres);
 //doll.orm.postgres.constr = config.postgres.conString;
 
-// var mysql = doll.orm.mysql;
-// mysql.connect(config.mysql);
-// mysql.debug = true;
+var mysql = doll.orm.mysql;
+mysql.debug = app.config.debug;
+mysql.connect(app.config.mysql);
 
-app.router.get('/',  () => {
-  this.body = { msg: "亲，你好，我是怕死婆特。" };
+app.router.get('/',  ctx => {
+  ctx.body = { msg: "亲，你好，我是怕死婆特。" };
 });
 
 app.startService();

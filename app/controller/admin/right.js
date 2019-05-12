@@ -1,43 +1,43 @@
-const errors       = require("cloudoll").errors;
+const errors = require("cloudoll").errors;
 const rightService = require('../../services/right');
-const tools        = require("../../tools");
+const tools = require("../../tools");
 
 
 module.exports = Right = {
 
-  $editService    : function*() {
-    this.body = errors.success(yield rightService.editService(this.request.body));
+  $editService: async ctx => {
+    ctx.echo(await rightService.editService(ctx.request.body));
   },
-  $delService     : function *() {
-    this.body = errors.success(yield rightService.delService(this.request.body));
+  $delService: async ctx => {
+    ctx.echo(await rightService.delService(ctx.request.body));
   },
-  listService     : function*() {
-    var rtn = yield rightService.listService(this.qs);
-    tools.responseJson(this, errors.success(rtn), this.qs);
+  listService: async ctx => {
+    var rtn = await rightService.listService(ctx.qs);
+    ctx.echo(rtn);
   },
-  $editRights     : function *() {
-    this.body = errors.success(yield rightService.editRights(this.request.body));
+  $editRights: async ctx => {
+    ctx.echo(await rightService.editRights(ctx.request.body));
   },
-  listRights     : function*() {
-    var rtn = yield rightService.listRights(this.qs);
-    tools.responseJson(this, errors.success(rtn), this.qs);
+  listRights: async ctx => {
+    var rtn = await rightService.listRights(ctx.qs);
+    ctx.echo(rtn);
   },
-  $delRights      : function *() {
-    this.body = errors.success(yield rightService.delRights(this.request.body));
+  $delRights: async ctx => {
+    ctx.echo(await rightService.delRights(ctx.request.body));
   },
-  $grant          : function*() {
-    this.body = errors.success(yield rightService.grant(this.request.body));
+  $grant: async ctx => {
+    ctx.echo(await rightService.grant(ctx.request.body));
 
   },
-  $ungrant        : function*() {
-    this.body = errors.success(yield rightService.ungrant(this.request.body));
+  $ungrant: async ctx => {
+    ctx.echo(await rightService.ungrant(ctx.request.body));
 
   },
-  userRights      : function*() {
-    var rtn = yield rightService.userRights(this.qs);
-    tools.responseJson(this, errors.success(rtn), this.qs);
-  },
-  syncFromCloudeer: function *() {
-    this.body = errors.success(yield rightService.syncFromCloudeer());
+  userRights: async ctx => {
+    var rtn = await rightService.userRights(ctx.qs);
+    ctx.echo(rtn);
   }
+  // syncFromCloudeer: async ctx => {
+  //   this.body = errors.success(yield rightService.syncFromCloudeer());
+  // }
 };

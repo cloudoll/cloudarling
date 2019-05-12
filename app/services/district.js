@@ -1,4 +1,4 @@
-var db = require('cloudoll').orm.postgres;
+var db = require('cloudoll').orm.mysql;
 
 var District = module.exports = {
 
@@ -6,7 +6,7 @@ var District = module.exports = {
   getAllFromDB     : async () => {
     //District.dists = (yield db.take("district", {cols: ["id", "title", "parent_id"], size: -1}));
     // console.log("BBBBBBB");
-    District.dists  = await db.take("area", {cols: ["id", "title", "short_name", "parent_id", "lat", "lng", "sort", "level"], size: -1});
+    District.dists  = await db.list("area", {cols: ["id", "title", "short_name", "parent_id", "lat", "lng", "sort", "level"], limit: 50000});
   },
   getMyChildren    : async id=> {
     if (District.dists == null)
@@ -18,9 +18,9 @@ var District = module.exports = {
       return ele.parent_id == id;
     });
   },
-  getMyFamily      : function *(id) {
+  getMyFamily      : async (id) => {
     if (District.dists == null)
-      yield District.getAllFromDB();
+      await District.getAllFromDB();
 
     id            = id || 0;
     id            = parseInt(id);
@@ -39,9 +39,9 @@ var District = module.exports = {
     rtn.push(mySons);
     return rtn;
   },
-  getMyAncestor    : function *(id) {
+  getMyAncestor    : async (id) => {
     if (District.dists == null)
-      yield District.getAllFromDB();
+      await District.getAllFromDB();
 
     id            = id || 0;
     id            = parseInt(id);

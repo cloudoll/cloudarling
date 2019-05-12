@@ -18,7 +18,7 @@ var Helper = {
 
   $captchaValidate: async (ctx) => {
     // var qs   = this.qs;
-    const form = this.request.body;
+    const form = ctx.request.body;
 
     const passport = form.passport;
     const code = form.code;
