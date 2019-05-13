@@ -25,7 +25,7 @@ module.exports = {
     host: 'localhost',
     user: 'root',
     password: 'chuchur-cloudbeer',
-    database: 'cloudarling'
+    database: 'seeease-erp'
   },
   address: {
     max_count: 200
