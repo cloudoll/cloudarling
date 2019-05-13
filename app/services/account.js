@@ -3,8 +3,6 @@ const tools = require('common-tools');
 const errors = require('cloudoll').errors;
 const myTools = require('../tools');
 
-
-
 const me = module.exports = {
 
   register: async (regInfo0) => {
@@ -335,20 +333,22 @@ const me = module.exports = {
       delete regInfo.password;
     }
 
+    //TODO: 这里没有去重
     delete regInfo.open_id;
-    delete regInfo.account_type;
-    delete regInfo.avatar;
-
-    if (!regInfo.id) {
-      delete regInfo.id;
-    }
+    // delete regInfo.account_type;
+    // delete regInfo.avatar;
 
 
-    var xid = await db.save('account', regInfo, ['id', 'open_id']);
+    await db.update('account', regInfo);
+
+    // if (!regInfo.id) {
+    //   delete regInfo.id;
+    // }
+
 
     delete regInfo.salt;
     delete regInfo.password;
-    regInfo.id = xid.id;
+    // regInfo.id = xid.id;
 
     return regInfo;
 
