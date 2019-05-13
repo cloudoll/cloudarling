@@ -185,6 +185,20 @@ GET:  /admin/account/list
 输入： q （可选，查询条件，可以对 email nick 和 mobile 进行模糊查询）
 
 ---
+POST: /admin/account/list-more
+
+通过 open_id 数组获取用户列表。
+
+```json
+{
+  "open_ids":[
+    "3b28bae0-6d7a-11e9-8531-0242ac110002", 
+    "4edddb44-749b-11e9-98cc-4e158326cc13"
+  ]
+}
+```
+
+---
 
 POST: /admin/account/grant-god
 

@@ -2,7 +2,7 @@ const accountService = require('../../services/account');
 
 module.exports = {
   list: async ctx => {
-    var rtn = await accountService.adminList(ctx.qs);
+    const rtn = await accountService.adminList(ctx.qs);
     ctx.echo(rtn);
   },
   $grantGod: async ctx => {
@@ -10,5 +10,9 @@ module.exports = {
   },
   $save: async ctx => {
     ctx.echo(await accountService.update(ctx.request.body));
+  },
+  $listMore: async ctx => {
+    const form = ctx.request.body;
+    ctx.echo(await accountService.getInfoByTickets(form.open_ids))
   }
 };

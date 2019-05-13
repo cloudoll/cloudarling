@@ -19,13 +19,13 @@ module.exports = {
   //   connectionTimeoutMillis: 2000,
   //   // conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/cloudark"
   // },
-  mysql   : {
+  mysql: {
     //mysql host 在我的 fedora 23 里面的 docker 里。
     connectionLimit: 10,
-    host           : 'localhost',
-    user           : 'root',
-    password       : 'chuchur-cloudbeer',
-    database       : 'cloudarling'
+    host: 'localhost',
+    user: 'root',
+    password: 'chuchur-cloudbeer',
+    database: 'cloudarling'
   },
   address: {
     max_count: 200

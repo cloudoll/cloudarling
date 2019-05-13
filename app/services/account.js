@@ -169,6 +169,19 @@ const me = module.exports = {
     }
     return data;
   },
+  getInfoByTickets: async (openIds) => {
+    if (!openIds || openIds.length<=0) {
+      throw errors.WHAT_REQUIRE("openIds");
+    }
+
+    var data = await db.list("account", {
+      where: "open_id in (?)",
+      limit: 200,
+      cols: ["id", "open_id", "account_type", "nick", "email", "mobile", "slogan", "avatar", "avatar_large"],
+      params: [openIds]
+    });
+    return data;
+  },
   getRightsByTicket: async (ticket, service_code, pubKey) => {
     if (!ticket) {
       throw errors.WHAT_REQUIRE("ticket");
