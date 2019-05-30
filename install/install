@@ -1,0 +1,130 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+var tools = require('common-tools');
+
+program
+  .version('0.0.1')
+  .usage('-p passWord!')
+  // .option('-m, --email [email]', 'Email （必须填写）')
+  .option('-p, --password [password]', 'Password （必须填写）')
+  .option('-e, --node_env [node_env]', 'Environment: product, development, test')
+  .parse(process.argv);
+
+var email = program.email || "admin@arche.cloud";
+var password = program.password;
+var nodeEnv = program.node_env || "development";
+process.env.NODE_ENV = nodeEnv;
+
+if ( !password) {
+  program.outputHelp();
+  return;
+}
+
+if (!tools.validateTools.isEmail(email)) {
+  console.log('请输入正确的 email');
+  return;
+}
+
+
+const reginfo = {
+  email: email,
+  mobile: "13000000000",
+  password: password,
+  account_type: 9
+};
+
+
+const fs = require('fs');
+const doll = require('cloudoll');
+const accountService = require('../app/services/Account');
+const ezmysql = doll.orm.mysql;
+
+const config = require("../config/" + nodeEnv);
+
+ezmysql.connect(config.mysql);
+
+
+function processFile(inputFile, queryLine) {
+  var lineReader = require('readline').createInterface({
+    input: require('fs').createReadStream(inputFile)
+  });
+  lineReader.on('line', function (line) {
+      // console.log(line);
+      queryLine(line)
+  });
+}
+
+// console.log("Init cloudarling...");
+
+
+console.log('Creating areas of China... ');
+processFile('./area_data.sql', (line)=>{
+  // const con = ezmysql.pool.getConnection();
+  // console.log(con);
+  ezmysql.pool.query(line, function (err, rows, fields) {
+    if (err) throw err;
+    // process.stdout.write(".");
+  });
+});
+
+// fs.readFile('./area_data.sql', 'utf8', function (errArea, areaData) {
+//   if (errArea) throw errArea;
+//   console.log(areaData.length);
+//   ezmysql.pool.query(areaData, function (err, rows, fields) {
+//     if (err) throw err;
+//     console.log('China areas created... ');
+//   });
+// });
+
+
+// return;
+
+accountService.register(reginfo).then(val => {
+  console.log('God user created, please remember: ');
+  console.log(`passport: ${program.email}`);
+  console.log(`password: ${program.password}`);
+});
+
+
+
+
+
+console.log('Creating tables... ');
+fs.readFile('./Cloudarling.my.sql', 'utf8', function (err, data) {
+  // console.log(data);
+  // return;
+  data = data.replace(/`/gm, "");
+  // console.log(data);
+  // return;
+
+  ezmysql.pool.query(data, function (err, rows, fields) {
+    if (err) throw err;
+    console.log('Tables created...');
+    accountService.register(reginfo).then(val => {
+      console.log('God user created, please remember: ');
+      console.log(`passport: ${program.email}`);
+      console.log(`password: ${program.password}`);
+    });
+
+    console.log('Creating additional views and triggers... ');
+    fs.readFile('./Cloudarling.add.sql', 'utf8', function (errAdd, addData) {
+      if (errAdd) throw errAdd;
+      ezmysql.pool.query(addData, null, function (err, rows, fields) {
+        console.log('Additional somethings created... ');
+
+      });
+    });
+
+    console.log('Creating areas of China... ');
+    fs.readFile('./area_data.sql', 'utf8', function (errArea, areaData) {
+      if (errArea) throw errArea;
+      ezmysql.pool.query(areaData, null, function (err, rows, fields) {
+        console.log('China areas created... ');
+      });
+    });
+
+  });
+
+});
+

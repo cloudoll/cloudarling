@@ -6,7 +6,26 @@
 
 也提供简单权限管理。
 
-同时也是 cloudeer 生态系统一员。
+---
+## Init MySQL 
+
+建库执行： 
+
+./install/Cloudarling.my.sql
+
+./install/Cloudarling.add.sql
+
+./install/area_data.sql
+
+---
+
+## 创建超级用户
+
+执行：/open/account/init
+
+
+---
+
 
 
 

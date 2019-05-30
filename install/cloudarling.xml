@@ -1,0 +1,4242 @@
+<?xml version="1.0" encoding="gb2312"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Namespace>cloudarling</Namespace>
+  <Title>cloudarling</Title>
+  <Tables>
+    <Table>
+      <Name>account</Name>
+      <Title>账号</Title>
+      <Remark />
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>mobile</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>mobile</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>email</Name>
+          <DataType>VarChar</DataType>
+          <Length>500</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>email</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>nick</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>nick</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>salt</Name>
+          <DataType>VarChar</DataType>
+          <Length>16</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>salt</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>password</Name>
+          <DataType>VarChar</DataType>
+          <Length>64</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>password</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>gender</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>gender</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>balance</Name>
+          <DataType>Decimal</DataType>
+          <Length>18,4</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0.0000</Default>
+          <Title>balance</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>vbalance</Name>
+          <DataType>Decimal</DataType>
+          <Length>18,4</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0.0000</Default>
+          <Title>vbalance</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>score</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>score</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>alt_email</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>alt_email</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>avatar</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>avatar</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>avatar_large</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>avatar_large</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>slogan</Name>
+          <DataType>VarChar</DataType>
+          <Length>500</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>slogan</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_type</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>account_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>account_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>open_id</Name>
+          <DataType>Char</DataType>
+          <Length>36</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>open_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>account_log</Name>
+      <Title>登陆日志</Title>
+      <Remark />
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>ip</Name>
+          <DataType>VarChar</DataType>
+          <Length>64</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>ip</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>account_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>log_type</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>log_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>account_map</Name>
+      <Title>账号映射</Title>
+      <Remark>用户关联其他的登陆系统</Remark>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>account_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>open_id</Name>
+          <DataType>VarChar</DataType>
+          <Length>64</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>open_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>map_id</Name>
+          <DataType>VarChar</DataType>
+          <Length>64</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>map_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>provider</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>provider</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>last_ip</Name>
+          <DataType>VarChar</DataType>
+          <Length>64</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>last_ip</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>login_time</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>login_time</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>address</Name>
+      <Title>address</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>district_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>district_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>district</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>district</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>postcode</Name>
+          <DataType>VarChar</DataType>
+          <Length>10</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>postcode</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>address</Name>
+          <DataType>VarChar</DataType>
+          <Length>500</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>address</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>cnee</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>cnee</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tel1</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>tel1</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tel2</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>tel2</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>im</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>im</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>account_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>address_type</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>address_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>address_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>address_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>area</Name>
+      <Title>area</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>parent_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>parent_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>short_name</Name>
+          <DataType>VarChar</DataType>
+          <Length>30</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>short_name</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>area_code</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>area_code</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>zip_code</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>zip_code</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>pinyin</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>pinyin</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>lng</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>lng</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>lat</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>lat</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>level</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>level</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>position</Name>
+          <DataType>VarChar</DataType>
+          <Length>255</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>position</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>sort</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>sort</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>device</Name>
+      <Title>device</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>sn</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>sn</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>mac</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>mac</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>code</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>code</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>account_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>device_type</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>device_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>device_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>device_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>district</Name>
+      <Title>district</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>postcode</Name>
+          <DataType>VarChar</DataType>
+          <Length>10</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>postcode</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>code</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>code</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>parent_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>parent_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>district_type</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>district_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>district_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>district_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>rights</Name>
+      <Title>rights</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>code</Name>
+          <DataType>VarChar</DataType>
+          <Length>500</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>code</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>rights_type</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>rights_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>rights_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>rights_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>service_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>service_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>role</Name>
+      <Title>role</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>role_rights</Name>
+      <Title>role_rights</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>rights_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>rights_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>role_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>role_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>service</Name>
+      <Title>service</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>code</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>code</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>title</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>content</Name>
+          <DataType>VarChar</DataType>
+          <Length>1000</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>content</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>service_type</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>service_type</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>service_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>service_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>user_info</Name>
+      <Title>user_info</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>idcard</Name>
+          <DataType>VarChar</DataType>
+          <Length>40</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>idcard</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>last_name</Name>
+          <DataType>VarChar</DataType>
+          <Length>30</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>last_name</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>first_name</Name>
+          <DataType>VarChar</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>first_name</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>qq</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>qq</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>info_status</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>info_status</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>update_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>updater</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>link</Name>
+          <DataType>VarChar</DataType>
+          <Length>500</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>link</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>user_rights</Name>
+      <Title>user_rights</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>account_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>rights_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>rights_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>user_role</Name>
+      <Title>user_role</Title>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>account_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>role_id</Name>
+          <DataType>Int</DataType>
+          <Length>11</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>role_id</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>Timestamp</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>CURRENT_TIMESTAMP</Default>
+          <Title>create_date</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length>20</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>creator</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>tenant</Name>
+      <Title>租户</Title>
+      <Remark>商家</Remark>
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>true</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>编号</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Sortable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tenant_type</Name>
+          <DataType>Int</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>类型</Title>
+          <Remark>类型标记，可以多选的，需要具体的业务系统来定义其含义</Remark>
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>CheckBoxList</RenderType>
+          <EnumType>tenantTypes</EnumType>
+          <ResourceType>Resources.X</ResourceType>
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType>Queryable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tenant_status</Name>
+          <DataType>Int</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>状态</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>RadioButtonList</RenderType>
+          <EnumType>tenantStatus</EnumType>
+          <ResourceType>Resources.X</ResourceType>
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType>Queryable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>DateTime</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>(GetDate())</Default>
+          <Title>创建时间</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w3</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Sortable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>创建人</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>update_date</Name>
+          <DataType>DateTime</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>更新时间</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w3</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>updater</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>更新人</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>标题</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Editable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title2</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>标题2</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>domain</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>域</Title>
+          <Remark>域是一个唯一的标识，可以通过域访问租户</Remark>
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>grade</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>等级</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>fake_name</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>虚拟名称</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>open_id</Name>
+          <DataType>Char</DataType>
+          <Length>36</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>开放ID</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Editable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>title_short</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>标题简称</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+    <Table>
+      <Name>tenant_account</Name>
+      <Title>租户的账号</Title>
+      <Remark />
+      <Cols>
+        <Col>
+          <Name>id</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>true</IsPK>
+          <IsNull>false</IsNull>
+          <Unique>true</Unique>
+          <AutoIncrease>true</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>编号</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Sortable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_type</Name>
+          <DataType>Int</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>类型</Title>
+          <Remark>1 普通，   8 租户管理员</Remark>
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>CheckBoxList</RenderType>
+          <EnumType>tenant_accoutTypes</EnumType>
+          <ResourceType>Resources.X</ResourceType>
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType>Queryable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_status</Name>
+          <DataType>Int</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>1</Default>
+          <Title>状态</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>RadioButtonList</RenderType>
+          <EnumType>tenant_accoutStatus</EnumType>
+          <ResourceType>Resources.X</ResourceType>
+          <CssClass />
+          <CssClassLength />
+          <ValidateRegex />
+          <UIColType>Queryable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>create_date</Name>
+          <DataType>DateTime</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>(GetDate())</Default>
+          <Title>创建时间</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w3</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Sortable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>creator</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>创建人</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>account_id</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>账号</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Editable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tenant_id</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>租户</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Editable Listable Detailable</UIColType>
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>permission</Name>
+          <DataType>BigInt</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>权限</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+      </Cols>
+    </Table>
+  </Tables>
+</Project>
