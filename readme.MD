@@ -11,6 +11,7 @@
 # 约定
 
 ## ticket 约定
+
 如无特殊说明，均需要 ticket 参数。
 
 ticket 可以放到 form 或者 querystring 里。
@@ -46,7 +47,11 @@ ticket 可以放到 form 或者 querystring 里。
 }
 ```
 
-查询列表格式：
+分页查询格式：
+
+分页查询的输入参数为： offset 和 limit
+
+输出结果为：
 
 ```json
 {
@@ -138,19 +143,71 @@ POST /open/account/register
 GET /open/account/info
 参数：ticket
 
-###刷新 ticket
+### 刷新 ticket
 
 GET /open/account/refresh-ticket
 
+### 绑定第三方用户
+
+POST /admin/account/third-part
+
+输入参数：
+
+```json
+{
+  "passport": "xxx",
+  "password": "....",
+  "map_id": "",
+  "provider": "wechat"
+}
+```
+
+passport 只能是手机或者email，请验证之后再调用此 API。
+
+不能使用 昵称 绑定。
+
+绑定后，系统会下发此用户的 open_id，需要应用端保存。
+
+如果此 passport 已经绑定过，则直接绑定。
+
+否则注册后绑定。
+
+password 为可选项。
+
+### 解除绑定
+
+POST /admin/account/third-part-remove
+
+输入参数：
+
+```json
+{
+  "open_id": "xxx",
+  "map_id": "",
+  "provider": "wechat"
+}
+```
+
+### 使用第三方 id 直接登录
+
+POST /admin/account/third-part-login
+
+输入参数：
+
+```json
+{
+  "map_id": "xxxx",
+  "provider": "wechat"
+}
+```
 
 ### 获取用户权限
+
 GET /open/account/rights
 
 上帝管理员将只获取一个权限，就是 GOD
 
 参数： ticket，service
-
-
 
 ### 修改密码
 POST /open/account/change-password
@@ -261,6 +318,70 @@ POST: /admin/account/grant-god
 ### 插入/更新 用户
 
 POST: /admin/account/save
+
+## 租户管理
+
+### 租户列表
+
+GET /admin/tenant/list
+
+输入：q
+对 title， title_short, fake_name, domain 模糊查询
+
+### 插入/更新 租户
+
+POST /admin/tenant
+
+输入参数：
+
+```json
+{
+	
+		"title": "阿里云计算公司",
+		"domain": "aliyun",
+		"grade": 2,
+		"fake_name": "xxx",
+		"title_short": "dddd"
+}
+```
+
+### 给租户添加用户
+
+POST /admin/tenant/add-account
+
+输入参数：
+
+```json
+{
+	"open_id": "d8ccb34a-xxx",
+	"tenant_open_id": "97115139-xx",
+	"permission": 8
+}
+```
+
+### 移除租户的用户
+
+POST /admin/tenant/remove-account
+
+输入参数：
+
+```json
+{
+	"open_id": "d8ccb34a-xxx",
+	"tenant_open_id": "97115139-xx"
+}
+```
+
+### 租户的用户列表
+
+GET /admin/tenant/list-account
+
+输入参数：
+
+tenant_open_id: 必选
+q： 模糊匹配 mobile, email, nick
+
+
 
 
 ## 权限和服务相关

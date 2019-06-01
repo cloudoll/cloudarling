@@ -10,7 +10,7 @@ const me = module.exports = {
         const conditions = {
             limit: limit,
             skip: offset,
-            cols: "id, title, title_short, domain, grade, open_id",
+            cols: "id, title, title2,  title_short, fake_name, domain, grade, open_id",
             orderBy: "id desc"
         }
         const params = [];
@@ -20,8 +20,8 @@ const me = module.exports = {
             params.push(~~options.id);
         }
         if (options.q) {
-            where += "and (title like ? or title_short like ?)";
-            params.push(`%${options.q}%`, `%${options.q}%`);
+            where += "and (title like ? or title_short like ? or fake_name like ? or domain like ?)";
+            params.push(`%${options.q}%`, `%${options.q}%`, `%${options.q}%`, `%${options.q}%`);
         }
         conditions.where = where;
         conditions.params = params;
@@ -65,23 +65,41 @@ const me = module.exports = {
         if (!options.open_id) {
             throw doll.errors.WHAT_REQUIRE("open_id");
         }
-        if (!options.tenant_id) {
-            throw doll.errors.WHAT_REQUIRE("tenant_id");
+        if (!options.tenant_open_id) {
+            throw doll.errors.WHAT_REQUIRE("tenant_open_id");
         }
+
+        const cAccount = await mysql.load("account", {
+            where: "open_id=?",
+            params: [options.open_id]
+        });
+        if (!cAccount) {
+            throw doll.errors.WHAT_NOT_EXISTS("当前用户");
+        }
+
+        const cTenant = await mysql.load("tenant", {
+            where: "open_id=?",
+            params: [options.tenant_open_id]
+        });
+        if (!cTenant) {
+            throw doll.errors.WHAT_NOT_EXISTS("当前租户");
+        }
+
+
         const tAccount = {
-            open_id: options.open_id,
-            tenant_id: options.tenant_id,
+            account_id: cAccount.id,
+            tenant_id: cTenant.id,
             permission: options.permission
         };
 
         const exists = await mysql.exists("tenant_account", {
-            where: "open_id=? and tenant_id=?",
-            params: [options.open_id, options.tenant_id]
+            where: "account_id=? and tenant_id=?",
+            params: [cAccount.id, cTenant.id]
         });
 
         if (!exists) {
-            const res = await mysql.insert("tenant_account", tAccount);
-            options.id = res.id;
+            await mysql.insert("tenant_account", tAccount);
+            // options.id = res.id;
             return true;
         } else {
             return false;
@@ -91,19 +109,46 @@ const me = module.exports = {
         if (!options.open_id) {
             throw doll.errors.WHAT_REQUIRE("open_id");
         }
-        if (!options.tenant_id) {
-            throw doll.errors.WHAT_REQUIRE("tenant_id");
+        if (!options.tenant_open_id) {
+            throw doll.errors.WHAT_REQUIRE("tenant_open_id");
         }
+
+        const cAccount = await mysql.load("account", {
+            where: "open_id=?",
+            params: [options.open_id]
+        });
+        if (!cAccount) {
+            throw doll.errors.WHAT_NOT_EXISTS("当前用户");
+        }
+
+        const cTenant = await mysql.load("tenant", {
+            where: "open_id=?",
+            params: [options.tenant_open_id]
+        });
+        if (!cTenant) {
+            throw doll.errors.WHAT_NOT_EXISTS("当前租户");
+        }
+
         const res = await mysql.delete("tenant_account", {
-            where: "open_id=? and tenant_id=?",
-            params: [options.open_id, options.tenant_id]
+            where: "account_id=? and tenant_id=?",
+            params: [cAccount.id, cTenant.id]
         });
         return res;
     },
     listAccounts: async options => {
-        if (!options.tenant_id) {
-            throw doll.errors.WHAT_REQUIRE("tenant_id");
+        if (!options.tenant_open_id) {
+            throw doll.errors.WHAT_REQUIRE("tenant_open_id");
         }
+        const qkey = options.q;
+
+        const cTenant = await mysql.load("tenant", {
+            where: "open_id=?",
+            params: [options.tenant_open_id]
+        });
+        if (!cTenant) {
+            throw doll.errors.WHAT_NOT_EXISTS("当前租户");
+        }
+
 
         const limit = parseInt(options.limit) || 20;
         const offset = parseInt(options.offset) || 0;
@@ -114,17 +159,22 @@ const me = module.exports = {
             cols: "id, tenant_id, open_id, permission",
             orderBy: "id desc"
         }
-        const params = [~~options.tenant_id];
-        let where = "tenant_id=? "
-        if (options.id) {
-            where += "and id=?";
-            params.push(~~options.id);
+        const params = [cTenant.id];
+        let where = "tenant_id=? ";
+        if (qkey) {
+            where += " and ((mobile like ?) or (email like ?) or (nick like ?))";
+            params.push('%' + qkey + '%');
+            params.push('%' + qkey + '%');
+            params.push('%' + qkey + '%');
         }
         conditions.where = where;
         conditions.params = params;
-        const items = await mysql.list("tenant_account", conditions);
-        const total = await mysql.count("tenant_account", conditions);
-        ctx.echo({ items, total, limit, offset });
+
+        conditions.cols = "mobile, email, nick, avatar, avatar_large, slogan, permission";
+
+        const items = await mysql.list("v_tenant_account", conditions);
+        const total = await mysql.count("v_tenant_account", conditions);
+        return ({ items, total, limit, offset });
     }
 
 }

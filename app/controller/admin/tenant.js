@@ -18,10 +18,14 @@ module.exports = {
     },
     $addAccount: async ctx => {
         const rtn = await service.addAccount(ctx.request.body);
-        ctx.ech(rtn);
+        ctx.echo(rtn);
     },
     $removeAccount: async ctx => {
         const rtn = await service.removeAccount(ctx.request.body);
-        ctx.ech(rtn);
+        ctx.echo(rtn);
+    },
+    listAccount: async ctx => {
+        const rtn = await service.listAccounts(ctx.qs);
+        ctx.echo(rtn);
     }
 };
