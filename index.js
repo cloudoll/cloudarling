@@ -12,16 +12,18 @@ const checkGodAdmin = async (ctx, next) => {
   let authCode = urls.pathname;
 
   authCode = authCode.toLowerCase();
-  
-  if (authCode.indexOf('/admin') == 0) {
-    let qs = querystring.parse(ctx.request.querystring);
-    let ticket = qs.ticket;
+  if (authCode.indexOf('/admin') == 0 || authCode.indexOf('/tenant') == 0) {
+    const ticket = ctx.qs.ticket || ctx.request.form.ticket;
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
-    let rights = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
-    // console.log(rights);
-    if ((rights.account_type & 8) == 8) {
+    
+    ctx.user = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
+    console.log(ctx.user);
+  }
+
+  if (authCode.indexOf('/admin') == 0) {
+    if ((ctx.user.account_type & 8) == 8) {
       await next();
     } else {
       throw doll.errors.NO_RIGHTS;
@@ -30,6 +32,8 @@ const checkGodAdmin = async (ctx, next) => {
     await next();
   }
 };
+
+
 //888888888888888888888888888888
 
 
@@ -44,7 +48,7 @@ var mysql = doll.orm.mysql;
 mysql.debug = app.config.debug;
 mysql.connect(app.config.mysql);
 
-app.router.get('/',  ctx => {
+app.router.get('/', ctx => {
   ctx.body = { msg: "亲，你好，我是怕死婆特。" };
 });
 

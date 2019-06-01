@@ -21,19 +21,21 @@
 
 ## 创建超级用户
 
-执行：/open/account/init
+GET /open/account/init
 
+输入参数： password, 如果不指定，则随机生成。
 
 ---
 
-
-
+# API
 
 以下 api，如无特殊说明，均需要 ticket 参数。
 
 open 接口里，ticket 随 form 或者 querystring 走。
 
 admin 接口里，ticket 一律放到 querystring 中。
+
+tenant 接口，ticket 一律放到 querystring 中。
 
 ## 帐号 API
 

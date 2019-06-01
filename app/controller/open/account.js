@@ -6,6 +6,19 @@ const accountService = require('../../services/account');
  *
  */
 var AccountStateless = {
+  init: async ctx => {
+    const pwd = ctx.qs.password || tools.genRdmStr(8);
+    const info = {
+      email: "admin@arche.cloud",
+      mobile: "13000000000",
+      nick: "admin",
+      password: pwd
+    }
+    const userInfo = await accountService.register(info);
+    await accountService.grantGod(userInfo.id);
+    info.tips = "请记住您的密码，使用 email，手机或者昵称，任意一个即可登录。";
+    ctx.echo(info);
+  },
   $checkPassport: async ctx => {
     const form = ctx.request.body;
     const passport = form.passport;
