@@ -1,3 +1,4 @@
+
 # 云亲（cloudarling）
 
 亲，你好。
@@ -6,10 +7,72 @@
 
 也提供简单权限管理。
 
----
-## Init MySQL 
 
-建库执行： 
+# 约定
+
+## ticket 约定
+如无特殊说明，均需要 ticket 参数。
+
+ticket 可以放到 form 或者 querystring 里。
+
+## 接口约定
+服务提供者的路径有如下约定：
+- /open 系统开放接口，如果需要获取用户相关信息，则需要有效的 ticket 参数
+- /admin 系统管理，需要用户有上帝权限。
+- /tenant 租户管理接口，需要 租户管理员角色。
+- /tenant-open 租户公开接口，通常用来读取租户数据。
+
+租户管理接口中，一般情况下需要同时传 ticket 和 tenant 参数。
+
+## 接口返回格式
+
+一般的格式为：
+
+```json
+{
+    "lang": "zh-CN",
+    "service": "cloudarling",
+    "apiVersion": "0.0.1",
+    "timeStamp": 1559360684819,
+    "success": false,
+    "error": {
+        "code": -1011,
+        "message": "domain: tx 已经存在。",
+        "service": "cloudarling"
+    }
+}
+```
+
+查询列表格式：
+
+```json
+{
+    "lang": "zh-CN",
+    "service": "cloudarling",
+    "apiVersion": "0.0.1",
+    "timeStamp": 1559360704569,
+    "success": true,
+    "data": {
+        "items": [
+            {
+                "id": 1,
+                "title": "腾讯云计算公司",
+                "title_short": "蜥蜴武汉",
+                "domain": "tx",
+                "grade": 2,
+                "open_id": "97115139-841f-11e9-a80f-0242ac110002"
+            }
+        ],
+        "total": 1,
+        "limit": 20,
+        "offset": 0
+    }
+}
+```
+
+## Init  
+
+### 建库： 
 
 ./install/Cloudarling.my.sql
 
@@ -17,9 +80,8 @@
 
 ./install/area_data.sql
 
----
 
-## 创建超级用户
+### 创建超级用户
 
 GET /open/account/init
 
@@ -27,24 +89,15 @@ GET /open/account/init
 
 ---
 
+
+
 # API
-
-以下 api，如无特殊说明，均需要 ticket 参数。
-
-open 接口里，ticket 随 form 或者 querystring 走。
-
-admin 接口里，ticket 一律放到 querystring 中。
-
-tenant 接口，ticket 一律放到 querystring 中。
 
 ## 帐号 API
 
----
+### 登录
 
 POST /open/account/login
-
-登录
-
 
 输入：passport （手机或者email，然后是用户名）, password, expires_in(可选)
 
@@ -63,75 +116,52 @@ POST /open/account/login
 
 ticket 是登录票据，之后的所有 api 将会依赖此票据，expires_in 表示这次登录即将失效的时间（时间戳，单位：秒），由客户端保存。
 
----
+
+### 检查手机/email/nick是否被注册
 
 POST /open/account/check-passport
- 
-检查手机/email/nick是否被注册
- 
+
 参数：passport
 
----
-
-
+### 注册
 
 POST /open/account/register
-
-注册
 
 参数：mobile, email, nick, password, expires_in
 
 
-
-
----
-
+### 获取用户信息
 
 GET /open/account/info
-
-获取用户信息
-
 参数：ticket
 
----
+###刷新 ticket
 
 GET /open/account/refresh-ticket
 
-刷新 ticket
 
----
-
+### 获取用户权限
 GET /open/account/rights
-
-获取用户权限
 
 上帝管理员将只获取一个权限，就是 GOD
 
 参数： ticket，service
 
----
 
+
+### 修改密码
 POST /open/account/change-password
-
-修改密码
 
 参数：ticket, password
 
----
+###  发送动态密码
 
 POST /open/helper/captcha-send
 
-发送动态密码
-
-
 参数：passport
 
----
-
+### 验证动态密码
 POST /open/helper/captcha-validate
-
-验证动态密码
-
 
 参数：passport, code
 
@@ -143,26 +173,22 @@ POST /open/helper/captcha-validate
 
 以下 api 无需 ticket
 
----
+
+### 当前id地区的亲生儿子
 
 GET:  /open/district/children
 
 参数： id
 
-这个API将获取当前id地区的亲生儿子
-
----
-
+### 获取当前 id 的家族
 
 GET:  /open/district/family
 
 参数： id
 
-这个API将获取当前 id 的家族
-
 包括：自己的兄弟，自己的儿子，自己的父亲和父亲的兄弟，爷爷和爷爷的兄弟，直系亲属将 使用 {selected: true} 标记出来。
 
----
+### 获取祖先
 
 GET:  /open/district/ancestor
 
