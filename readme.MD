@@ -15,14 +15,17 @@
 
 ticket 可以放到 form 或者 querystring 里。
 
+获取一个ticket，需要使用 /open/account/login 接口，具体参加下面的 API 说明。
+
 ## 接口约定
+
 服务提供者的路径有如下约定：
 - /open 系统开放接口，如果需要获取用户相关信息，则需要有效的 ticket 参数
 - /admin 系统管理，需要用户有上帝权限。
 - /tenant 租户管理接口，需要 租户管理员角色。
 - /tenant-open 租户公开接口，通常用来读取租户数据。
 
-租户管理接口中，一般情况下需要同时传 ticket 和 tenant 参数。
+租户接口中，一般情况下需要同时传 ticket 和 tenant 参数。
 
 ## 接口返回格式
 
@@ -117,7 +120,7 @@ POST /open/account/login
 ticket 是登录票据，之后的所有 api 将会依赖此票据，expires_in 表示这次登录即将失效的时间（时间戳，单位：秒），由客户端保存。
 
 
-### 检查手机/email/nick是否被注册
+### 检查 手机/email/nick 是否被注册
 
 POST /open/account/check-passport
 
