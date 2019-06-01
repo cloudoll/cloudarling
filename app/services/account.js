@@ -251,16 +251,12 @@ const me = module.exports = {
   },
   adminList: async (qs) => {
 
-    var skip = qs.skip || 0;
     var limit = qs.limit || 20;
+    var offset = qs.offset || 0;
 
     var where = "1=1", queryParams = [];
 
     var qkey = qs.q;
-    //
-    // var qmb = qs.mobile;
-    // var eml = qs.email;
-    // var nk  = qs.nick;
 
     if (qkey) {
       where += " and ((mobile like ?) or (email like ?) or (nick like ?))";
@@ -268,15 +264,17 @@ const me = module.exports = {
       queryParams.qkey.push('%' + qkey + '%');
       queryParams.qkey.push('%' + qkey + '%');
     }
-
-    return await db.list("account", {
+    const condition = {
       where: where,
       params: queryParams,
       orderBy: "id desc",
-      skip: skip,
+      skip: offset,
       limit: limit,
       cols: ['id', 'mobile', 'email', 'nick', 'open_id', 'avatar', 'account_type']
-    });
+    };
+    const items = await db.list("account", condition);
+    const total = await db.count("account", condition);
+    return { items, total, limit, offset };
   },
   grantGod: async (accountId) => {
     if (!accountId) {

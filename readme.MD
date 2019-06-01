@@ -226,19 +226,17 @@ GET:  /open/address/one
 
 以下的 api 需要 cloudarling 中用户的 GOD_ADMIN 权限。
 
----
+### 帐号列表
 
 GET:  /admin/account/list
 
-帐号列表
-
 输入： q （可选，查询条件，可以对 email nick 和 mobile 进行模糊查询）
 
----
+### 通过 open_id 数组获取用户列表
+
 POST: /admin/account/list-more
 
-通过 open_id 数组获取用户列表。
-
+输入：
 ```json
 {
   "open_ids":[
@@ -248,13 +246,24 @@ POST: /admin/account/list-more
 }
 ```
 
----
+
+### 授权用户/取消为上帝
 
 POST: /admin/account/grant-god
 
----------
+输入 id
+
+如果当前用户已经是上帝，那么取消上帝权限。
+
+此接口仅限在 cloudarling 系统内使用。
+
+
+### 插入/更新 用户
 
 POST: /admin/account/save
+
+
+## 权限和服务相关
 
 ---------
 

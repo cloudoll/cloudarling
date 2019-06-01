@@ -13,11 +13,11 @@ const checkGodAdmin = async (ctx, next) => {
 
   authCode = authCode.toLowerCase();
   if (authCode.indexOf('/admin') == 0 || authCode.indexOf('/tenant') == 0) {
-    const ticket = ctx.qs.ticket || ctx.request.form.ticket;
+    const ticket = ctx.qs.ticket || (ctx.request.form && ctx.request.form.ticket);
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
-    
+
     ctx.user = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
     console.log(ctx.user);
   }
