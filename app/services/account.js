@@ -415,8 +415,19 @@ const me = module.exports = {
     }
     return tAccount;
   },
-  thirdPartRemove: async options => {
-
+  thirdPartCancel: async options => {
+    const map_id = options.map_id;
+    const provider = options.provider;
+    if (!map_id) {
+      throw errors.WHAT_REQUIRE('第三方用户ID');
+    }
+    if (!provider) {
+      throw errors.WHAT_REQUIRE('provider');
+    }
+    return await db.delete("account_map", {
+      where: "provider=? and map_id=?",
+      params: [provider, map_id]
+    });
   },
   thirdPartLogin: async options => {
     const map_id = options.map_id;

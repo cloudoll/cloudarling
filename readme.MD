@@ -149,6 +149,8 @@ GET /open/account/refresh-ticket
 
 ### 绑定第三方用户
 
+** 此接口不允许从用户端发起调用 **
+
 POST /admin/account/third-part
 
 输入参数：
@@ -191,7 +193,9 @@ password 为可选项。如果不填，系统会默认生产一个，下次用�
 }
 ```
 
-### 解除绑定（未提供）
+### 解除绑定
+
+** 此接口不允许从用户端发起调用 **
 
 POST /admin/account/third-part-cancel
 
@@ -199,13 +203,14 @@ POST /admin/account/third-part-cancel
 
 ```json
 {
-  "open_id": "xxx",
   "map_id": "",
   "provider": "wechat"
 }
 ```
 
 ### 使用第三方 id 直接登录
+
+** 此接口不允许从用户端发起调用 **
 
 POST /admin/account/third-part-login
 

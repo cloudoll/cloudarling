@@ -23,7 +23,7 @@ module.exports = {
     const ticket = tools.makeTicket(tAccount.open_id, parseInt(expires), ctx.app.config)
     ctx.echo(ticket);
   },
-  $thirdPartCanel: async ctx => {
+  $thirdPartCancel: async ctx => {
     const form = ctx.request.body;
     ctx.echo(await accountService.thirdPartCancel(form));
   },
