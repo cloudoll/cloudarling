@@ -75,12 +75,17 @@ const me = module.exports = {
 
     var xid = await db.insert('account', regInfo, ['id', 'open_id']);
 
-    delete regInfo.salt;
-    delete regInfo.password;
-    regInfo.id = xid.id;
-    regInfo.open_id = xid.open_id;
+    return await db.load("account", {
+      where: "id=?",
+      params: [xid.id],
+      cols: "id, open_id, mobile, email, nick"
+    });
+    // delete regInfo.salt;
+    // delete regInfo.password;
+    // regInfo.id = xid.id;
+    // regInfo.open_id = xid.open_id;
 
-    return regInfo;
+    // return regInfo;
   },
   loadByPassport: async (passport) => {
     let where = 'nick=?';
@@ -168,7 +173,7 @@ const me = module.exports = {
     return data;
   },
   getInfoByTickets: async (openIds) => {
-    if (!openIds || openIds.length<=0) {
+    if (!openIds || openIds.length <= 0) {
       throw errors.WHAT_REQUIRE("openIds");
     }
 
@@ -335,21 +340,100 @@ const me = module.exports = {
     delete regInfo.open_id;
     // delete regInfo.account_type;
     // delete regInfo.avatar;
-
-
     await db.update('account', regInfo);
-
     // if (!regInfo.id) {
     //   delete regInfo.id;
     // }
-
-
     delete regInfo.salt;
     delete regInfo.password;
-    // regInfo.id = xid.id;
-
     return regInfo;
+  },
+  thirdPartMap: async options => {
+    const mobile = options.mobile;
+    const email = options.email;
+    const map_id = options.map_id;
+    let password = options.password;
+    const provider = options.provider;
+    if (!mobile && !email) {
+      throw errors.WHAT_REQUIRE('手机或者email');
+    }
+    if (mobile && email) {
+      throw errors.CUSTOM('手机和email只能填写一个');
+    }
+    if (!map_id) {
+      throw errors.WHAT_REQUIRE('第三方用户ID');
+    }
+    if (!provider) {
+      throw errors.WHAT_REQUIRE('provider');
+    }
+    if (!password) {
+      password = myTools.genRdmStr(8);
+    }
+
+    const tMapUser = await db.load("v_account_map", {
+      where: "provider=? and map_id=?",
+      params: [provider, map_id]
+    });
+    if (tMapUser) {
+      throw errors.CUSTOM("您已经绑定过，请直接登录。");
+    }
 
 
+    let where = "";
+    let params = [];
+    if (mobile) {
+      where = "mobile=?";
+      params.push(mobile);
+    } else if (email) {
+      where = "email=?";
+      params.push(email);
+    }
+    const cols = "id, open_id, mobile, email, nick"
+    let tAccount = await db.load("account", {
+      where, params, cols
+    });
+
+    if (!tAccount) {
+      //没有找到用户，则注册一个
+      tAccount = await me.register({ mobile, email, password });
+    }
+    const tMapUser2 = await db.load("v_account_map", {
+      where: "provider=? and account_id=?",
+      params: [provider, tAccount.id]
+    });
+    if (tMapUser2) {
+      throw errors.CUSTOM("此手机/email已经被绑定，请更换其他手机/email。");
+    }
+
+    if (!tMapUser) {
+      await db.insert("account_map", {
+        account_id: tAccount.id,
+        open_id: tAccount.open_id,
+        provider: provider,
+        map_id: map_id
+      });
+    }
+    return tAccount;
+  },
+  thirdPartRemove: async options => {
+
+  },
+  thirdPartLogin: async options => {
+    const map_id = options.map_id;
+    const provider = options.provider;
+    if (!map_id) {
+      throw errors.WHAT_REQUIRE('第三方用户ID');
+    }
+    if (!provider) {
+      throw errors.WHAT_REQUIRE('provider');
+    }
+    const tMapUser = await db.load("v_account_map", {
+      where: "provider=? and map_id=?",
+      params: [provider, map_id]
+    });
+    if (!tMapUser) {
+      throw errors.CUSTOM("当前用户未绑定，请绑定手机号或 email。");
+    }
+    return tMapUser;
   }
 };

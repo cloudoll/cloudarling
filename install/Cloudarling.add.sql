@@ -55,3 +55,13 @@ CREATE OR REPLACE VIEW v_tenant_account as
   left join `tenant` on `tenant_account`.`tenant_id` =  `tenant`.`id`
   left join `account` on `tenant_account`.`account_id` =  `account`.`id`
   ;
+
+
+CREATE OR REPLACE VIEW v_account_map as
+  select 
+    `account`.`mobile`, `account`.`email`, `account`.`nick`, `account`.`gender`, 
+    `account`.`avatar`, `account`.`avatar_large`, `account`.`slogan`, `account`.`open_id`,
+    `provider`, `map_id`, `account_map`.`id`, `account_map`.`account_id`
+  from `account_map`
+  left join `account` on `account`.`id` = `account_map`.`account_id`
+  ;

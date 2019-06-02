@@ -155,28 +155,45 @@ POST /admin/account/third-part
 
 ```json
 {
-  "passport": "xxx",
+  "mobile": "xxx",
+  "email": null,
   "password": "....",
   "map_id": "",
   "provider": "wechat"
 }
 ```
 
-passport 只能是手机或者email，请验证之后再调用此 API。
+passport 只能是手机或者email，(手机和email只能填写一个)。
 
-不能使用 昵称 绑定。
+请验证之后再调用此 API。
 
-绑定后，系统会下发此用户的 open_id，需要应用端保存。
+绑定后，系统会下发此用户的 open_id，需要客户端保存。
 
-如果此 passport 已经绑定过，则直接绑定。
+如果此已经绑定过，则略过注册，并直接给出用户登录信息。
 
 否则注册后绑定。
 
-password 为可选项。
+password 为可选项。如果不填，系统会默认生产一个，下次用户如果需要登录，需要找回密码。
 
-### 解除绑定
+返回结果示例：
 
-POST /admin/account/third-part-remove
+```json
+{
+    "lang": "zh-CN",
+    "service": "cloudarling",
+    "apiVersion": "0.0.1",
+    "timeStamp": 1559456541146,
+    "success": true,
+    "data": {
+        "ticket": "eyJvc...",
+        "expires_in": 1562048541
+    }
+}
+```
+
+### 解除绑定（未提供）
+
+POST /admin/account/third-part-cancel
 
 输入参数：
 
@@ -379,6 +396,7 @@ GET /admin/tenant/list-account
 输入参数：
 
 tenant_open_id: 必选
+
 q： 模糊匹配 mobile, email, nick
 
 
