@@ -22,7 +22,7 @@ module.exports = {
   mysql: {
     //mysql host 在我的 fedora 23 里面的 docker 里。
     connectionLimit: 10,
-    host: 'localhost',
+    host: 'test.seeease.com',
     user: 'root',
     password: 'chuchur-cloudbeer',
     database: 'cloudarling'
