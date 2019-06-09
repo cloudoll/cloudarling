@@ -1,5 +1,6 @@
 const doll = require("cloudoll");
 const mysql = doll.orm.mysql;
+const accountService = require("./account");
 
 const table = "tenant";
 const me = module.exports = {
@@ -60,6 +61,54 @@ const me = module.exports = {
 
             return await mysql.insert(table, options);
         }
+    },
+    thirdPartSave: async options => {
+        if (!options.title) {
+            throw doll.errors.WHAT_REQUIRE("title");
+        }
+        let akont;
+        if (options.mobile || options.email) {
+            akont = await accountService.loadByPassport(options.mobile || options.email);
+            if (!akont) {
+                akont = await accountService.register({
+                    mobile: options.mobile,
+                    email: options.email,
+                    password: options.password || "11111111"
+                });
+            }
+        } else {
+            throw doll.errors.WHAT_REQUIRE("mobile 或 email");
+        }
+        let tInfo = {
+            title: options.title,
+            domain: options.domain,
+            fake_name: options.fake_name,
+            open_id: options.tenant_open_id
+        }
+        let tnent;
+        if (tInfo.open_id) {
+            tnent = await mysql.load("tenant", {
+                where: "open_id=?",
+                params: [tInfo.open_id]
+            });
+        }
+        if (!tnent) {
+            tnent = await mysql.insert("tenant", tInfo);
+        }
+
+        let tMap = {
+            account_id: akont.id,
+            tenant_id: tnent.id,
+            account_type: 9
+        }
+        const exists = await mysql.exists("tenant_account", {
+            where: "account_id=? and tenant_id=?",
+            params: [tMap.account_id, tMap.tenant_id]
+        });
+        if (!exists) {
+            await mysql.insert("tenant_account", tMap);
+        }
+        return akont;
     },
     addAccount: async options => {
         if (!options.open_id) {

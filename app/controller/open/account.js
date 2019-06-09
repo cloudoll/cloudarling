@@ -36,6 +36,7 @@ var AccountStateless = {
     const tick = tools.makeTicket(openId, expires_in, ctx.app.config);
     tick.nick = mine.nick;
     tick.open_id = openId;
+    tick.tenants = await accountService.listMyTenants(mine.id);
     ctx.echo(tick)
   },
   $register: async ctx => {

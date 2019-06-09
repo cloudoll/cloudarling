@@ -1,4 +1,6 @@
 const service = require('../../services/tenant');
+const accountService = require('../../services/account');
+const tools = require("../../tools");
 
 module.exports = {
     $: async ctx => {
@@ -8,7 +10,6 @@ module.exports = {
         } else {
             form.creator = ctx.user.id;
         }
-        // console.log(form, 11111);
         const rtn = await service.save(form);
         return rtn;
     },
@@ -27,5 +28,14 @@ module.exports = {
     listAccount: async ctx => {
         const rtn = await service.listAccounts(ctx.qs);
         ctx.echo(rtn);
+    },
+    $thirdPart: async ctx => {
+        const tAccount = await service.thirdPartSave(ctx.request.body);
+        const expires = new Date() / 1000 + 30 * 24 * 3600; //30 天过期
+        const ticket = tools.makeTicket(tAccount.open_id, parseInt(expires), ctx.app.config)
+        ticket.tenants = await accountService.listMyTenants(tAccount.id);
+        ctx.echo(ticket);
+
+        // ctx.echo(rtn);
     }
 };

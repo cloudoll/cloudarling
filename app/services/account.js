@@ -11,6 +11,7 @@ const me = module.exports = {
     regInfo.email = regInfo0.email;
     regInfo.nick = regInfo0.nick;
     regInfo.password = regInfo0.password;
+    regInfo.open_id = regInfo0.open_id;
 
     if (regInfo.mobile == '') {
       delete regInfo.mobile;
@@ -43,6 +44,17 @@ const me = module.exports = {
         throw errors.WHAT_EXISTED("手机");
       }
     }
+
+    if (regInfo.open_id) {
+      var existMobile = await db.load("account", {
+        where: 'open_id=?',
+        params: [regInfo.open_id]
+      });
+      if (existMobile) {
+        throw errors.WHAT_EXISTED("open_id");
+      }
+    }
+
     if (regInfo.email) {
       var existEmail = await db.load("account", {
         where: 'email=?',
@@ -73,7 +85,7 @@ const me = module.exports = {
     regInfo.password = newPassword.password;
     regInfo.salt = newPassword.salt;
 
-    var xid = await db.insert('account', regInfo, ['id', 'open_id']);
+    var xid = await db.insert('account', regInfo);
 
     return await db.load("account", {
       where: "id=?",
@@ -88,6 +100,9 @@ const me = module.exports = {
     // return regInfo;
   },
   loadByPassport: async (passport) => {
+    if (!passport) {
+      throw errors.WHAT_REQUIRE("帐号");
+    }
     let where = 'nick=?';
     if (tools.validateTools.isEmail(passport)) {
       where = 'email=?';
@@ -352,6 +367,7 @@ const me = module.exports = {
     const mobile = options.mobile;
     const email = options.email;
     const map_id = options.map_id;
+    const open_id = options.open_id;
     let password = options.password;
     const provider = options.provider;
     if (!mobile && !email) {
@@ -395,7 +411,7 @@ const me = module.exports = {
 
     if (!tAccount) {
       //没有找到用户，则注册一个
-      tAccount = await me.register({ mobile, email, password });
+      tAccount = await me.register({ mobile, email, password, open_id });
     }
     const tMapUser2 = await db.load("v_account_map", {
       where: "provider=? and account_id=?",
@@ -446,5 +462,13 @@ const me = module.exports = {
       throw errors.CUSTOM("当前用户未绑定，请绑定手机号或 email。");
     }
     return tMapUser;
+  },
+  listMyTenants: async accountId => {
+    return await db.list("v_tenant_account", {
+      where: "account_id=?",
+      cols: "account_type, title, domain, tenant_open_id",
+      limit: 100,
+      params: [accountId]
+    });
   }
 };

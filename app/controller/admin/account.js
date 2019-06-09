@@ -21,6 +21,7 @@ module.exports = {
     const tAccount = await accountService.thirdPartMap(form);
     const expires = new Date() / 1000 + 30 * 24 * 3600; //30 天过期
     const ticket = tools.makeTicket(tAccount.open_id, parseInt(expires), ctx.app.config)
+    ticket.tenants = await accountService.listMyTenants(tAccount.account_id);
     ctx.echo(ticket);
   },
   $thirdPartCancel: async ctx => {
@@ -32,6 +33,15 @@ module.exports = {
     const mapUser = (await accountService.thirdPartLogin(form));
     const expires = new Date() / 1000 + 30 * 24 * 3600; //30 天过期
     const ticket = tools.makeTicket(mapUser.open_id, parseInt(expires), ctx.app.config)
+    ticket.tenants = await accountService.listMyTenants(mapUser.account_id);
     ctx.echo(ticket);
   },
+  getTicket: async ctx => {
+    const passport = ctx.qs.passport;
+    const mapUser = await accountService.loadByPassport(passport);
+    const expires = new Date() / 1000 + 30 * 24 * 3600; //30 天过期
+    const ticket = tools.makeTicket(mapUser.open_id, parseInt(expires), ctx.app.config)
+    ticket.tenants = await accountService.listMyTenants(mapUser.id);
+    ctx.echo(ticket);
+  }
 };

@@ -36,3 +36,4 @@ module.exports = {
     dynamic_password_expire_in: 60000 //默认过期时间
   }
 };
+""

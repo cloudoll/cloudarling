@@ -101,6 +101,7 @@ GET /open/account/init
 
 # API
 
+
 ## 帐号 API
 
 ### 登录
@@ -498,5 +499,100 @@ POST: /admin/role/edit-rights
 ---------
 
 
+## 对接相关
 
+用户注册
+POST /admin/account/third-part
+
+输入参数：
+
+```json
+{
+  "mobile": "xxx",
+  "email": null,
+  "password": "....",
+  "map_id": "union_id",
+  "open_id": "user_uuid",
+  "provider": "wechat"
+}
+```
+
+passport 只能是手机或者email，(手机和email只能填写一个)。有效性由微信商城验证。
+如果此用户已经绑定过，则略过注册，并直接给出用户登录信息。
+否则注册新用户后绑定。
+password 为可选项。如果不填，系统会默认生产一个，下次用户如果需要登录，需要找回密码。
+
+商户注册
+POST /admin/tenant/third-part
+
+输入参数：
+
+```json
+{
+  "mobile": "xxx",
+  "email": null,
+  "domain": "aliyun",
+  "fake_name": "隐匿商户",
+  "password": "....",
+  "title": "商户名称",
+  "tenant_open_id": "tenant_uuid"
+}
+```
+这个用户会直接注册成商户的管理员
+
+登录：使用 unoin_id
+POST /admin/account/third-part-login
+
+输入参数：
+
+```json
+{
+  "map_id": "xxxx",
+  "provider": "wechat"
+}
+```
+
+登录：使用手机和密码
+POST /open/account/login
+
+输入：passport （手机或者email，然后是用户名）, password, expires_in(可选)
+
+```json
+{
+  "passport": "手机/email/昵称",
+  "password": "P@assw0rd",
+  "expires_in": 21321321321
+}
+```
+
+登录：使用passport直接获取登录信息
+GET /admin/account/get-ticket?passport=13000000003
+
+passport 支持 手机 和 email
+
+上面的几个接口返回结果：
+
+```json
+{
+    "lang": "zh-CN",
+    "service": "cloudarling",
+    "apiVersion": "0.0.1",
+    "timeStamp": 1559456541146,
+    "success": true,
+    "data": {
+        "ticket": "eyJvc...",
+        "tenants":[
+          {
+            "tenant_open_id": "uuid",
+            "title": "商户名称",
+            "account_type": 9,
+            "domain": "hehe"
+          }
+        ],
+        "expires_in": 1562048541
+    }
+}
+```
+
+account_type & 8 == 8 则表示当前用户是商户管理员
 
