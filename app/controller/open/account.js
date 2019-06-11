@@ -36,6 +36,8 @@ var AccountStateless = {
     const tick = tools.makeTicket(openId, expires_in, ctx.app.config);
     tick.nick = mine.nick;
     tick.open_id = openId;
+    tick.accout_type = mine.account_type;
+    tick.avatar = mine.avatar;
     tick.tenants = await accountService.listMyTenants(mine.id);
     ctx.echo(tick)
   },
