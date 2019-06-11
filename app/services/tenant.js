@@ -11,7 +11,7 @@ const me = module.exports = {
         const conditions = {
             limit: limit,
             skip: offset,
-            cols: "id, title, title2,  title_short, fake_name, domain, grade, open_id",
+            cols: "id, title, title2,  title_short, fake_name, domain, grade, open_id, address, area_id",
             orderBy: "id desc"
         }
         const params = [];

@@ -392,8 +392,8 @@
           <RenderType>TextBox</RenderType>
           <EnumType />
           <ResourceType />
-          <CssClass />
-          <CssClassLength />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w100</CssClassLength>
           <ValidateRegex />
           <UIColType />
           <WidthPx>0</WidthPx>
@@ -4019,6 +4019,58 @@
           <CssClassLength>w1</CssClassLength>
           <ValidateRegex />
           <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>address</Name>
+          <DataType>VarChar</DataType>
+          <Length>500</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>µØÖ·</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>area_id</Name>
+          <DataType>Int</DataType>
+          <Length />
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default>0</Default>
+          <Title>µØÇø</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType>Queryable Editable Listable Detailable</UIColType>
           <WidthPx>0</WidthPx>
         </Col>
       </Cols>
