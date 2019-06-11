@@ -221,7 +221,7 @@ const me = module.exports = {
         conditions.where = where;
         conditions.params = params;
 
-        conditions.cols = "mobile, email, nick, avatar, avatar_large, slogan, permission";
+        conditions.cols = "mobile, email, nick, avatar, avatar_large, slogan, permission, open_id, title";
 
         const items = await mysql.list("v_tenant_account", conditions);
         const total = await mysql.count("v_tenant_account", conditions);
