@@ -111,6 +111,7 @@ const me = module.exports = {
         return akont;
     },
     addAccount: async options => {
+        //系统后台增加的用户一定是 租户管理员
         if (!options.open_id) {
             throw doll.errors.WHAT_REQUIRE("open_id");
         }
@@ -138,7 +139,8 @@ const me = module.exports = {
         const tAccount = {
             account_id: cAccount.id,
             tenant_id: cTenant.id,
-            permission: options.permission
+            permission: options.permission,
+            account_type: 9
         };
 
         const exists = await mysql.exists("tenant_account", {
