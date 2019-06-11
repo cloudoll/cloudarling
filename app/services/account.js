@@ -280,9 +280,9 @@ const me = module.exports = {
 
     if (qkey) {
       where += " and ((mobile like ?) or (email like ?) or (nick like ?))";
-      queryParams.qkey.push('%' + qkey + '%');
-      queryParams.qkey.push('%' + qkey + '%');
-      queryParams.qkey.push('%' + qkey + '%');
+      queryParams.push('%' + qkey + '%');
+      queryParams.push('%' + qkey + '%');
+      queryParams.push('%' + qkey + '%');
     }
     const condition = {
       where: where,
