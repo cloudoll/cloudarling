@@ -63,24 +63,24 @@ var AccountStateless = {
 
   },
   info: async (ctx) => {
-    var qs = ctx.qs;
-    var ticket = qs.ticket;
+    const qs = ctx.qs;
+    const ticket = qs.ticket;
 
-    var rtn = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
-
+    let rtn = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
+    rtn.tenants = await accountService.listMyTenants(rtn.id);
     ctx.echo(rtn);
   },
   devices: async (ctx) => {
-    var qs = ctx.qs;
-    var ticket = qs.ticket;
-    var rtn = await accountService.getDevicesByTicket(ticket, ctx.app.config.account.public_key);
+    const qs = ctx.qs;
+    const ticket = qs.ticket;
+    const rtn = await accountService.getDevicesByTicket(ticket, ctx.app.config.account.public_key);
     ctx.echo(rtn);
   },
   rights: async (ctx) => {
-    var qs = ctx.qs;
-    var ticket = qs.ticket;
-    var service = qs.service;
-    var rtn = await accountService.getRightsByTicket(ticket, service, ctx.app.config.account.public_key);
+    const qs = ctx.qs;
+    const ticket = qs.ticket;
+    const service = qs.service;
+    const rtn = await accountService.getRightsByTicket(ticket, service, ctx.app.config.account.public_key);
     ctx.echo(rtn);
 
   },
