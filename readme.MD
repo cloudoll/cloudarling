@@ -233,9 +233,10 @@ GET /open/account/rights
 参数： ticket，service
 
 ### 修改密码
+
 POST /open/account/change-password
 
-参数：ticket, password
+参数：passport, password, new_password
 
 ###  发送动态密码
 

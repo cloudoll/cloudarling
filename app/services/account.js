@@ -470,5 +470,19 @@ const me = module.exports = {
       limit: 100,
       params: [accountId]
     });
+  },
+  changePassword: async (passport, oPass, nPass) =>{
+    const nAccount = await me.loginByPassport(passport, oPass);
+    // console.log(nAccount);
+    const regInfo = {
+      id: nAccount.id
+    };
+    var newPassword = tools.stringTools.genPassword(nPass);
+    regInfo.password = newPassword.password;
+    regInfo.salt = newPassword.salt;
+
+    await db.update("account", regInfo);
+    return true;
+
   }
 };

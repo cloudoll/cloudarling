@@ -83,6 +83,11 @@ var AccountStateless = {
     var rtn = await accountService.getRightsByTicket(ticket, service, ctx.app.config.account.public_key);
     ctx.echo(rtn);
 
+  },
+  $changePassword: async (ctx) => {
+    const form = ctx.request.body;
+    const rtn = await accountService.changePassword(form.passport, form.password, form.new_password);
+    ctx.echo(rtn);
   }
 };
 
