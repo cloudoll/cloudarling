@@ -17,7 +17,7 @@ const Address = {
     ctx.echo(await addressService.setDefault(ctx.request.body));
   },
   list: async ctx => {
-    const rtn = await addressService.list(ctx.qs.ticket);
+    const rtn = await addressService.list(ctx.qs.ticket, ctx.app.config.account.public_key);
     ctx.echo(rtn);
   },
   default: async ctx => {

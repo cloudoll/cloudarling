@@ -9,7 +9,7 @@ module.exports = {
   list: async (ticket, publicKey) => {
     var user = await accountService.getInfoByTicket(ticket, publicKey);
 
-    return await db.take("address", {
+    return await db.list("address", {
       where: "account_id=?",
       params: [user.id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
