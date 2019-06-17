@@ -6,12 +6,10 @@ var districtService = require('./district');
 // var config          = require('../config');
 
 module.exports = {
-  list: async (ticket, publicKey) => {
-    var user = await accountService.getInfoByTicket(ticket, publicKey);
-
+  listByAccount: async (account_id) => {
     return await db.list("address", {
       where: "account_id=?",
-      params: [user.id],
+      params: [account_id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
