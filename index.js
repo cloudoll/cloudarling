@@ -13,7 +13,7 @@ const checkGodAdmin = async (ctx, next) => {
   authCode = authCode.toLowerCase();
   const ticket = ctx.qs.ticket || (ctx.request.form && ctx.request.form.ticket);
   const tenant_id = ctx.qs.tenant_id;
-
+  
   if (authCode.indexOf('/admin') == 0 || authCode.indexOf('/tenant') == 0) {
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
