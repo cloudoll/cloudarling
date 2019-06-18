@@ -475,7 +475,7 @@ const me = module.exports = {
     var mine = await me.loadByPassport(passport);
     var cptPassword = tools.stringTools.computePassword(oPass, mine.salt);
     if (cptPassword !== mine.password) {
-      throw errors.LOGIN_ERROR_BECAUSE('原密码不对！如不记得原密码，请联系管理员');
+      throw errors.CUSTOM('原密码不对！如不记得原密码，请联系管理员');
     }
     const regInfo = { id: mine.id };
     
