@@ -56,10 +56,10 @@ module.exports = {
     form.account_id = account_id;
 
     var addStatus = parseInt(form.address_status) || 1;
-    if (addStatus > 2 || addStatus < 1) addStatus = 1;
-    if (form.address_status == 2) {
+    if (addStatus > 1 || addStatus < 0) addStatus = 0;
+    if (form.address_status == 1) {
       //插入默认地址需要将之前的地址置为 1
-      await db.updateBatch("address", { address_status: 1 }, {
+      await db.updateBatch("address", { address_status: 0 }, {
         where: "account_id=?",
         params: [account_id]
       });
@@ -111,11 +111,14 @@ module.exports = {
     if (oriAddress.account_id != account_id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
-    return await db.delById("address", form.id, ["id"]);
+    return await db.delete("address", {
+      where: "id=?",
+      params: [form.id]
+    });
   },
 
-  setDefault: async (account_id, form) => { 
-    delete form.ticket; 
+  setDefault: async (account_id, form) => {
+    delete form.ticket;
 
     if (!form.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
@@ -130,23 +133,22 @@ module.exports = {
     if (oriAddress.account_id != account_id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
-
-    await db.updateBatch("address", { address_status: 1 }, {
+    await db.updateBatch("address", { address_status: 0 }, {
       where: "account_id=?",
       params: [account_id]
     });
 
-    return await db.update("address", { address_status: 2, id: form.id });
+    return await db.update("address", { address_status: 1, id: form.id });
 
   },
-  getDefault: async (account_id,qs) => {
+  getDefault: async (account_id, qs) => {
     return await db.load("address", {
       where: "account_id=? and address_status=2",
       params: [account_id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
-  getAddressById: async (account_id,qs) => {
+  getAddressById: async (account_id, qs) => {
     var id = qs.id;
     if (!qs.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
