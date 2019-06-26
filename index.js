@@ -12,7 +12,7 @@ const checkGodAdmin = async (ctx, next) => {
   let authCode = urls.pathname;
   authCode = authCode.toLowerCase();
 
-  const ticket = ctx.qs.ticket || (ctx.request.form && ctx.request.form.ticket);
+  const ticket = ctx.qs.ticket || (ctx.request.body && ctx.request.body.ticket);
   if (ticket) {
     ctx.user = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
   }

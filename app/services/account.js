@@ -471,12 +471,14 @@ const me = module.exports = {
       params: [accountId]
     });
   },
-  changePassword: async (passport, oPass, nPass) =>{
-    const nAccount = await me.loginByPassport(passport, oPass);
-    // console.log(nAccount);
-    const regInfo = {
-      id: nAccount.id
-    };
+  changePassword: async (passport, oPass, nPass) => {
+    var mine = await me.loadByPassport(passport);
+    var cptPassword = tools.stringTools.computePassword(oPass, mine.salt);
+    if (cptPassword !== mine.password) {
+      throw errors.CUSTOM('原密码不对！如不记得原密码，请联系管理员');
+    }
+    const regInfo = { id: mine.id };
+    
     var newPassword = tools.stringTools.genPassword(nPass);
     regInfo.password = newPassword.password;
     regInfo.salt = newPassword.salt;

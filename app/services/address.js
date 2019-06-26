@@ -13,8 +13,8 @@ module.exports = {
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
-  add: async (form, maxAddressCount, publicKey) => {
-
+  add: async (account_id, form, maxAddressCount, publicKey) => {
+    delete form.ticket;
     if (!form.district_id) {
       throw errors.WHAT_REQUIRE("地区ID【district_id】");
     }
@@ -31,14 +31,9 @@ module.exports = {
     form.cnee = stringTools.htmlEncode(form.cnee);
     form.address = stringTools.htmlEncode(form.address);
 
-    var ticket = form.ticket;
-    delete form.ticket;
-
-    var user = await accountService.getInfoByTicket(ticket, publicKey);
-
     var cnt = await db.count("address", {
       where: "account_id=?",
-      params: [user.id]
+      params: [account_id]
     });
 
     var maxAddressCount = maxAddressCount || 100;
@@ -50,7 +45,6 @@ module.exports = {
       throw errors.WHAT_TOO_MUCH("您的地址");
     }
 
-
     var districtObj = await districtService.getMyAncestor(form.district_id);
 
     if (districtObj) {
@@ -59,36 +53,32 @@ module.exports = {
       }, "");
     }
 
-    form.account_id = user.id;
+    form.account_id = account_id;
 
     var addStatus = parseInt(form.address_status) || 1;
-    if (addStatus > 2 || addStatus < 1) addStatus = 1;
-    if (form.address_status == 2) {
+    if (addStatus > 1 || addStatus < 0) addStatus = 0;
+    if (form.address_status == 1) {
       //插入默认地址需要将之前的地址置为 1
-      await db.updateBatch("address", { address_status: 1 }, {
+      await db.updateBatch("address", { address_status: 0 }, {
         where: "account_id=?",
-        params: [user.id]
+        params: [account_id]
       });
     }
     return await db.insert("address", form, ["id"]);
 
   },
 
-  update: async (form) => {
-    var ticket = form.ticket;
+  update: async (account_id, form) => {
     delete form.ticket;
-
-
     if (!form.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
-    var user = await accountService.getInfoByTicket(ticket);
 
     var oriAddress = await db.loadById("address", form.id, ["id", "account_id"]);
     if (!oriAddress) {
       throw errors.WHAT_NOT_EXISTS("此条地址");
     }
-    if (oriAddress.account_id != user.id) {
+    if (oriAddress.account_id != account_id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
     form.cnee = stringTools.htmlEncode(form.cnee);
@@ -106,14 +96,11 @@ module.exports = {
     return await db.save("address", form, ["id"]);
   },
 
-  delete: async (form) => {
-    var ticket = form.ticket;
+  delete: async (account_id, form) => {
     delete form.ticket;
     if (!form.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
-
-    var user = await accountService.getInfoByTicket(ticket);
 
     var oriAddress = await db.loadById("address", form.id, ["id", "account_id"]);
 
@@ -121,22 +108,21 @@ module.exports = {
       throw errors.WHAT_NOT_EXISTS("此条地址");
     }
 
-    if (oriAddress.account_id != user.id) {
+    if (oriAddress.account_id != account_id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
-    return await db.delById("address", form.id, ["id"]);
+    return await db.delete("address", {
+      where: "id=?",
+      params: [form.id]
+    });
   },
 
-  setDefault: async (form) => {
-    var ticket = form.ticket;
+  setDefault: async (account_id, form) => {
     delete form.ticket;
-
 
     if (!form.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
-
-    var user = await accountService.getInfoByTicket(ticket);
 
     var oriAddress = await db.loadById("address", form.id, ["id", "account_id"]);
 
@@ -144,39 +130,33 @@ module.exports = {
       throw errors.WHAT_NOT_EXISTS("此条地址");
     }
 
-    if (oriAddress.account_id != user.id) {
+    if (oriAddress.account_id != account_id) {
       throw errors.WHAT_NOT_BELONGS_TO_YOU("此条地址");
     }
-
-    await db.updateBatch("address", { address_status: 1 }, {
+    await db.updateBatch("address", { address_status: 0 }, {
       where: "account_id=?",
-      params: [user.id]
+      params: [account_id]
     });
 
-    return await db.update("address", { address_status: 2, id: form.id });
+    return await db.update("address", { address_status: 1, id: form.id });
 
   },
-  getDefault: async (qs) => {
-    var ticket = qs.ticket;
-    var user = await accountService.getInfoByTicket(ticket);
+  getDefault: async (account_id, qs) => {
     return await db.load("address", {
       where: "account_id=? and address_status=2",
-      params: [user.id],
+      params: [account_id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
   },
-  getAddressById: async (qs) => {
-    var ticket = qs.ticket;
-    var user = await accountService.getInfoByTicket(ticket);
+  getAddressById: async (account_id, qs) => {
     var id = qs.id;
-
     if (!qs.id) {
       throw errors.WHAT_REQUIRE("地址ID【id】");
     }
 
     return await db.load("address", {
       where: "account_id=? and id=?",
-      params: [user.id, id],
+      params: [account_id, id],
       cols: ["id", "district_id", "district", "address", "postcode", "cnee", "tel1", "tel2", "im", "address_status"]
     });
 
