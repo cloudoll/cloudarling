@@ -39,6 +39,9 @@ module.exports = {
   getTicket: async ctx => {
     const passport = ctx.qs.passport;
     const mapUser = await accountService.loadByPassport(passport);
+    if (!mapUser) {
+      throw doll.errors.LOGIN_ERROR_BECAUSE('不存在此用户。');
+    }
     const expires = new Date() / 1000 + 30 * 24 * 3600; //30 天过期
     const ticket = tools.makeTicket(mapUser.open_id, parseInt(expires), ctx.app.config)
     ticket.tenants = await accountService.listMyTenants(mapUser.id);
