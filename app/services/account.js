@@ -121,6 +121,16 @@ const me = module.exports = {
       params: [id]
     });
   },
+  loadByOpenId: async (open_id) => {
+    var where = 'open_id=?';
+    let mine = await db.load("account", {
+      where: where,
+      params: [open_id]
+    });
+    delete mine.password;
+    delete mine.salt;
+    return mine;
+  },
   loginByPassport: async (passport, password) => {
     if (!passport) {
       throw errors.WHAT_REQUIRE("帐号");
@@ -478,7 +488,7 @@ const me = module.exports = {
       throw errors.CUSTOM('原密码不对！如不记得原密码，请联系管理员');
     }
     const regInfo = { id: mine.id };
-    
+
     var newPassword = tools.stringTools.genPassword(nPass);
     regInfo.password = newPassword.password;
     regInfo.salt = newPassword.salt;

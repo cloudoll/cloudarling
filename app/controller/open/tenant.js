@@ -2,6 +2,7 @@ const doll = require("cloudoll");
 const accountService = require('../../services/account');
 const mysql = doll.orm.mysql;
 const errors = doll.errors;
+const service = require('../../services/tenant');
 
 module.exports = {
     $login: async ctx => {
@@ -12,7 +13,7 @@ module.exports = {
         const expires_in = form.expires_in;
 
         const mine = await accountService.loginByPassport(passport, password);
-        
+
 
         const conditions = {
             limit: 20,
@@ -26,5 +27,15 @@ module.exports = {
         }
 
         ctx.echo(loginUser);
+    },
+    info: async ctx => {
+        const info = await service.info(ctx.qs)
+        return ctx.echo(info)
+    },
+    $save: async ctx => {
+        let data = ctx.request.body
+        delete data.ticket
+        const result = await service.save(data)
+        return ctx.echo(result)
     }
 }

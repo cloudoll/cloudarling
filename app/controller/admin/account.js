@@ -1,5 +1,6 @@
 const accountService = require('../../services/account');
 const tools = require("../../tools");
+var errors = require('cloudoll').errors;
 
 module.exports = {
   list: async ctx => {
@@ -11,6 +12,14 @@ module.exports = {
   },
   $save: async ctx => {
     ctx.echo(await accountService.update(ctx.request.body));
+  },
+  info: async ctx => {
+    let open_id = ctx.qs.open_id
+    if (!open_id) {
+      throw errors.CUSTOM("缺少open_id");
+    }
+    let data = await accountService.loadByOpenId(open_id)
+    ctx.echo(data)
   },
   $listMore: async ctx => {
     const form = ctx.request.body;

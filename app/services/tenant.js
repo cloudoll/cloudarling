@@ -11,7 +11,7 @@ const me = module.exports = {
         const conditions = {
             limit: limit,
             skip: offset,
-            cols: "id, title, title2,  title_short, fake_name, domain, grade, open_id, address, area_id",
+            cols: "id, title, title2,  title_short, fake_name, domain, grade, open_id, address, area_id,tel1,tel2,logo",
             orderBy: "id desc"
         }
         const params = [];
@@ -226,6 +226,18 @@ const me = module.exports = {
         const items = await mysql.list("v_tenant_account", conditions);
         const total = await mysql.count("v_tenant_account", conditions);
         return ({ items, total, limit, offset });
+    },
+    info: async qs => {
+        let tenant_id = qs.tenant_id
+        console.log('tenant_id', tenant_id)
+        if (!tenant_id) {
+            throw doll.errors.CUSTOM("缺少tenant_id");
+        }
+        let info = await mysql.load("tenant", {
+            where: "open_id=?",
+            params: [tenant_id]
+        });
+        return info;
     }
 
 }
