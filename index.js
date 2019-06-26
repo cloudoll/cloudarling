@@ -11,18 +11,17 @@ const checkGodAdmin = async (ctx, next) => {
   let urls = url.parse(ctx.url);
   let authCode = urls.pathname;
   authCode = authCode.toLowerCase();
-  const ticket = ctx.qs.ticket || (ctx.request.body && ctx.request.body.ticket);//对的
+
+  const ticket = ctx.qs.ticket || (ctx.request.body && ctx.request.body.ticket);
+  if (ticket) {
+    ctx.user = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
+  }
 
   if (authCode.indexOf('/admin') == 0 || authCode.indexOf('/tenant') == 0) {
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
     }
   }
-  
-  if (ticket) {
-    ctx.user = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
-  }
-
 
   if (authCode.indexOf('/admin') == 0) {
     if ((ctx.user.account_type & 8) == 8) {
