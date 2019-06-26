@@ -4073,6 +4073,136 @@
           <UIColType>Queryable Editable Listable Detailable</UIColType>
           <WidthPx>0</WidthPx>
         </Col>
+        <Col>
+          <Name>logo</Name>
+          <DataType>VarChar</DataType>
+          <Length>300</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>logo</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>contact</Name>
+          <DataType>VarChar</DataType>
+          <Length>100</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>联系人</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tel1</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>电话1</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>tel2</Name>
+          <DataType>VarChar</DataType>
+          <Length>50</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>电话2</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
+        <Col>
+          <Name>remark</Name>
+          <DataType>VarChar</DataType>
+          <Length>1000</Length>
+          <IsPK>false</IsPK>
+          <IsNull>true</IsNull>
+          <Unique>false</Unique>
+          <AutoIncrease>false</AutoIncrease>
+          <IsIndex>false</IsIndex>
+          <Default />
+          <Title>备注</Title>
+          <Remark />
+          <RefTable />
+          <RefCol />
+          <RefColTextField />
+          <FkWithNoCheck>false</FkWithNoCheck>
+          <FkDeleteCascade>false</FkDeleteCascade>
+          <RenderType>TextBox</RenderType>
+          <EnumType />
+          <ResourceType />
+          <CssClass>textBox</CssClass>
+          <CssClassLength>w1</CssClassLength>
+          <ValidateRegex />
+          <UIColType />
+          <WidthPx>0</WidthPx>
+        </Col>
       </Cols>
     </Table>
     <Table>
