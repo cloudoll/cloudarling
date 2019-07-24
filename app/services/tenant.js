@@ -156,6 +156,15 @@ const me = module.exports = {
             return false;
         }
     },
+    deleteById: async id => { //todo：只对于平台，商户要加判断
+        if (!id) {
+            throw doll.errors.WHAT_REQUIRE("id");
+        }
+        return await mysql.delete(table, {
+            where: "id=?",
+            params: [id]
+        })
+    },
     removeAccount: async options => {
         if (!options.open_id) {
             throw doll.errors.WHAT_REQUIRE("open_id");

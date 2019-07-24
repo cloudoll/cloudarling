@@ -17,6 +17,10 @@ const checkGodAdmin = async (ctx, next) => {
     ctx.user = await accountService.getInfoByTicket(ticket, ctx.app.config.account.public_key);
   }
 
+  if (ctx.request.body.ticket) {
+    delete ctx.request.body.ticket
+  }
+
   if (authCode.indexOf('/admin') == 0 || authCode.indexOf('/tenant') == 0) {
     if (!ticket) {
       throw doll.errors.WHAT_REQUIRE("ticket");
