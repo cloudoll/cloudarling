@@ -408,7 +408,7 @@ q： 模糊匹配 mobile, email, nick
 
 ### 通过租户的 open_id 查询租户
 
-POST /admin/
+POST /admin/tenant/list-more
 
 数据格式参考：
 
