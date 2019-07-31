@@ -13,6 +13,10 @@ module.exports = {
         const rtn = await service.save(form);
         return rtn;
     },
+    _: async ctx => {
+        const rtn = await service.deleteById(ctx.request.body.id);
+        ctx.echo(rtn);
+    },
     list: async ctx => {
         const rtn = await service.list(ctx.qs);
         ctx.echo(rtn);
