@@ -30,6 +30,9 @@ const me = module.exports = {
         const total = await mysql.count(table, conditions);
         return { items, total, limit, offset };
     },
+    queryByOpenIds: async options => {
+
+    },
     save: async options => {
         options.domain = options.domain && options.domain.trim();
         if (options.id) {
@@ -228,8 +231,7 @@ const me = module.exports = {
         return ({ items, total, limit, offset });
     },
     info: async qs => {
-        let tenant_id = qs.tenant_id
-        console.log('tenant_id', tenant_id)
+        let tenant_id = qs.tenant_id;
         if (!tenant_id) {
             throw doll.errors.CUSTOM("缺少tenant_id");
         }

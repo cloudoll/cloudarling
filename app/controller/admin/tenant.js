@@ -35,7 +35,5 @@ module.exports = {
         const ticket = tools.makeTicket(tAccount.open_id, parseInt(expires), ctx.app.config)
         ticket.tenants = await accountService.listMyTenants(tAccount.id);
         ctx.echo(ticket);
-
-        // ctx.echo(rtn);
     }
 };
