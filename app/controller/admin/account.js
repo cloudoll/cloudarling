@@ -23,7 +23,7 @@ module.exports = {
   },
   $listMore: async ctx => {
     const form = ctx.request.body;
-    ctx.echo(await accountService.getInfoByTickets(form.open_ids));
+    ctx.echo(await accountService.getInfoByOpenIds(form.open_ids));
   },
   $thirdPart: async ctx => {
     const form = ctx.request.body;

@@ -52,9 +52,9 @@ var mysql = doll.orm.mysql;
 mysql.debug = app.config.debug;
 mysql.connect(app.config.mysql);
 
-app.router.get('/', ctx => {
-  ctx.body = { msg: "亲，你好，我是怕死婆特。" };
-});
+// app.router.get('/', ctx => {
+//   ctx.body = { msg: "亲，你好，我是怕死婆特。" };
+// });
 
 app.startService();
 // console.log(process.env);

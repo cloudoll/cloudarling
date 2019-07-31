@@ -21,6 +21,10 @@ module.exports = {
         const rtn = await service.list(ctx.qs);
         ctx.echo(rtn);
     },
+    $listMore: async ctx => {
+        const rtn = await service.getInfoByOpenIds(ctx.request.body);
+        ctx.echo(rtn);
+    },
     $addAccount: async ctx => {
         const rtn = await service.addAccount(ctx.request.body);
         ctx.echo(rtn);

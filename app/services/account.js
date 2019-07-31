@@ -197,9 +197,9 @@ const me = module.exports = {
     }
     return data;
   },
-  getInfoByTickets: async (openIds) => {
+  getInfoByOpenIds: async (openIds) => {
     if (!openIds || openIds.length <= 0) {
-      throw errors.WHAT_REQUIRE("openIds");
+      throw errors.WHAT_REQUIRE("open_ids");
     }
 
     var data = await db.list("account", {

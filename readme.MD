@@ -406,7 +406,21 @@ tenant_open_id: 必选
 
 q： 模糊匹配 mobile, email, nick
 
+### 通过租户的 open_id 查询租户
 
+POST /admin/
+
+数据格式参考：
+
+```json
+{
+    "open_ids": [
+        "3b50e42b-adff-11e9-8531-0242ac110002",
+        "6e734bba-8c11-11e9-8531-0242ac110002",
+        "be7a0408-8a79-11e9-8531-0242ac110002"
+    ]
+}
+```
 
 
 ## 权限和服务相关

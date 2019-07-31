@@ -1,6 +1,7 @@
 const doll = require("cloudoll");
 const mysql = doll.orm.mysql;
 const accountService = require("./account");
+const errors = doll.errors;
 
 const table = "tenant";
 const me = module.exports = {
@@ -30,7 +31,20 @@ const me = module.exports = {
         const total = await mysql.count(table, conditions);
         return { items, total, limit, offset };
     },
-    queryByOpenIds: async options => {
+    getInfoByOpenIds: async options => {
+        const openIds = options.open_ids;
+        if (!openIds || openIds.length <= 0) {
+            throw errors.WHAT_REQUIRE("open_ids");
+        }
+
+        var data = await mysql.list("tenant", {
+            where: "open_id in (?)",
+            limit: 200,
+            cols: "id, title, title2,  title_short, fake_name, domain, grade, open_id, address, area_id,tel1,tel2,logo",
+            params: [openIds]
+        });
+        return data;
+
 
     },
     save: async options => {
