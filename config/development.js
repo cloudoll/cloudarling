@@ -20,7 +20,6 @@ module.exports = {
   //   // conString: "postgres://cloudbeer:zhwell@127.0.0.1:5432/cloudark"
   // },
   mysql: {
-    //mysql host 在我的 fedora 23 里面的 docker 里。
     connectionLimit: 10,
     host: 'test.seeease.com',
     user: 'root',
@@ -36,4 +35,3 @@ module.exports = {
     dynamic_password_expire_in: 60000 //默认过期时间
   }
 };
-""
