@@ -134,9 +134,9 @@ var tools = {
     return Math.round(new Date().getTime() / 1000);
   },
   makeTicket: function (open_id, expires_in, config) {
-    var xtick = {};
+    var xtick = {}, xtoken = {}; //token 是临时令牌
     //pires_in = expires_in || tools.getTimeStamp() + 24 * 3600; //默认保存一天
-    xtick.open_id = open_id;
+    xtick.open_id = open_id; xtoken.open_id = open_id;
     var intExpires = 0;
     if (expires_in) {
       intExpires = parseInt(expires_in);
@@ -144,11 +144,13 @@ var tools = {
       intExpires = tools.getTimeStamp() + config.account.expire_in;
     }
     xtick.expires_in = intExpires;
-    var xtickStr = JSON.stringify(xtick);
+    xtoken.expire_in = tools.getTimeStamp() + 10; //10秒过期
+    const xtickStr = JSON.stringify(xtick), xtokenStr = JSON.stringify(xtoken);
     xtick.sign = tools.sha256(xtickStr + config.account.public_key);
-    var xtickStrLast = tools.base64Encode(xtick);
+    xtoken.sign = tools.sha256(xtokenStr + config.account.public_key);
+    const xtickStrLast = tools.base64Encode(xtick), xtokenStrLast = tools.base64Encode(xtoken);
 
-    return { ticket: xtickStrLast, expires_in: intExpires };
+    return { ticket: xtickStrLast, expires_in: intExpires, token: xtokenStrLast };
   },
   getOpenId: function (ticket, pubKey) {
     ticket = querystring.unescape(ticket);
