@@ -34,5 +34,6 @@ data
 # Config of project
 config/development.js
 config/product.js
+config/product-inner.js
 
 trash
