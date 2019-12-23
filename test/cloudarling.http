@@ -1,9 +1,15 @@
 ## 账号系统
 
 ### 账号注册
-POST http://localhost:7301/open/account/register  HTTP/1.1
+POST http://www.youbug.cn:7301/open/account/register  HTTP/1.1
 Content-Type: application/json
 
+{
+    "nick":"demo",
+    "password": "ibaiqiang"
+}
+
+###
 {
     "mobile": "15820468866",
     "nick":"啤酒云",
@@ -11,9 +17,18 @@ Content-Type: application/json
     "password": "zhwell"
 }
 
+### 上帝授权
+POST http://www.youbug.cn:7301/admin/account/grant-god  HTTP/1.1
+Content-Type: application/json
+
+{
+    "id":2,
+    "ticket": "eyJvcGVuX2lkIjoiMDMyYmUzYmMtZDZkOC0xMWU5LTgzNWMtMjQ2ZTk2NGIxZTgwIiwiZXhwaXJlc19pbiI6MTU2NjIwODIzMDAsInNpZ24iOiIwNTA2YzJhODRhNTVhYjhkODJkNmNiNzU2M2RkMDE3MjBiZDNmYTgyNWZlMTE3ZGFkZTVhMGE5OTU5ZTE3MjU0In0="
+}
+
 
 ### 登陆 cloudarling 获取 ticket
-POST http://localhost:7301/open/account/login  HTTP/1.1
+POST http://www.youbug.cn:7301/open/account/login  HTTP/1.1
 Content-Type: application/json
 
 {
