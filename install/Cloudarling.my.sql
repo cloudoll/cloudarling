@@ -206,8 +206,14 @@ CREATE TABLE `tenant` (
 	`domain` VARCHAR (100) NULL ,
 	`grade` BIGINT NULL DEFAULT 0 ,
 	`fake_name` VARCHAR (100) NULL ,
+	`address` VARCHAR(500) NULL,
 	`open_id` CHAR (36) NULL ,
-	`title_short` VARCHAR (50) NULL 
+	`title_short` VARCHAR (50) NULL ,
+	`area_id` INT NULL DEFAULT 0,
+	`tel1` VARCHAR(20) NULL,
+	`tel2` VARCHAR(20) NULL,
+	`logo` VARCHAR(200) NULL,
+
 );
 
 DROP TABLE IF EXISTS `tenant_account`;
