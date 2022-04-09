@@ -15,7 +15,7 @@
   "dependencies": {
     "commander": "^2.19.0",
     "common-tools": "^0.0.9",
-    "moment": "^2.22.2",
+    "moment": "^2.29.2",
     "request": "^2.88.0",
     "sha256": "^0.2.0",
     "uuid": "^3.3.2"
